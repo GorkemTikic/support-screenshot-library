@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Customer Support Screenshot Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+    }
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+    .item {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+      width: 220px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .item img {
+      max-width: 200px;
+      height: auto;
+      border-radius: 3px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Customer Support Screenshot Library</h1>
+  <div class="filters">
+    <select id="languageFilter">
+      <option value="All">All Languages</option>
+      <option value="English">English</option>
+      <option value="Russian">Russian</option>
+      <option value="Arabic">Arabic</option>
+      <option value="Vietnamese">Vietnamese</option>
+    </select>
+    <select id="topicFilter">
+      <option value="All">All Topics</option>
+      <option value="Funding Fee History">Funding Fee History</option>
+      <option value="Reset Password">Reset Password</option>
+      <option value="Refund Process">Refund Process</option>
+      <option value="General Navigation">General Navigation</option>
+    </select>
+  </div>
+  <div class="gallery">
+    <!-- Screenshot 1 -->
+    <div class="item" data-language="English" data-topic="Funding Fee History">
+      <a href="https://drive.google.com/file/d/15dDALBCfXJWZqbVW1wblbCf7SujGx20U/view?usp=sharing" target="_blank">
+        <img src="https://drive.google.com/uc?export=view&id=15dDALBCfXJWZqbVW1wblbCf7SujGx20U" alt="Screenshot 1">
+      </a>
+      <p><strong>Funding Fee History</strong></p>
+      <p>Language: English</p>
+    </div>
+    <!-- Screenshot 2 -->
+    <div class="item" data-language="English" data-topic="Funding Fee History">
+      <a href="https://drive.google.com/file/d/1XMsFtmMsJpIRLM3FwBS9fsdhjDJwluUs/view?usp=sharing" target="_blank">
+        <img src="https://drive.google.com/uc?export=view&id=1XMsFtmMsJpIRLM3FwBS9fsdhjDJwluUs" alt="Screenshot 2">
+      </a>
+      <p><strong>Funding Fee History</strong></p>
+      <p>Language: English</p>
+    </div>
+    <!-- Screenshot 3 -->
+    <div class="item" data-language="English" data-topic="Funding Fee History">
+      <a href="https://drive.google.com/file/d/1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x/view?usp=sharing" target="_blank">
+        <img src="https://drive.google.com/uc?export=view&id=1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x" alt="Screenshot_
