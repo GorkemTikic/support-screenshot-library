@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Binance Customer Support Screenshot Library</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f7f8fa;
+      color: #1e2329;
+    }
+    header {
+      background: #ffffff;
+      padding: 20px;
+      border-bottom: 2px solid #f0f0f0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #1e2329;
+    }
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 15px;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    select {
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+    .item {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      width: 220px;
+      height: 150px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 0 3px #FCD535, 0 4px 14px rgba(0,0,0,0.2);
+      border-color: #FCD535;
+    }
+    .item .label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e2329;
+      margin-bottom: 5px;
+    }
+    .item .meta {
+      font-size: 13px;
+      color: #555;
+    }
+    .hidden {
+      display: none;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Binance Customer Support Screenshot Library</h1>
+  </header>
+  <div class="filters">
+    <select id="languageFilter">
+      <option value="All">All Languages</option>
+      <option value="English">English</option>
+    </select>
+    <select id="topicFilter">
+      <option value="All">All Topics</option>
+      <option value="Funding Fee History">Funding Fee History</option>
+      <option value="Mock Trading">Mock Trading</option>
+      <option value="Cooling Off Period">Cooling Off Period</option>
+    </select>
+  </div>
+  <div class="gallery">
+    <!-- Cooling Off Period -->
+    <div class="item" data-language="English" data-topic="Cooling Off Period" onclick="window.open('https://drive.google.com/file/d/1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x/view?usp=sharing','_blank')">
+      <div class="label">Cooling Off Period (Eng)</div>
+      <div class="meta">Topic: Cooling Off Period</div>
+      <div class="meta">Language: English</div>
+    </div>
+    <!-- Mock Trading -->
+    <div class="item" data-language="English" data-topic="Mock Trading" onclick="window.open('https://drive.google.com/file/d/1XMsFtmMsJpIRLM3FwBS9fsdhjDJwluUs/view?usp=sharing','_blank')">
+      <div class="label">Mock Trading (Eng)</div>
+      <div class="meta">Topic: Mock Trading</div>
+      <div class="meta">Language: English</div>
+    </div>
+    <!-- Funding Fee History -->
+    <div class="item" data-language="English" data-topic="Funding Fee History" onclick="window.open('https://drive.google.com/file/d/15dDALBCfXJWZqbVW1wblbCf7SujGx20U/view?usp=sharing','_blank')">
+      <div class="label">Funding Fee History (Eng)</div>
+      <div class="meta">Topic: Funding Fee History</div>
+      <div class="meta">Language: English</div>
+    </div>
+  </div>
+  <footer>
+    Binance Support Resource – Internal Use Only
+  </footer>
+  <script>
+    const languageFilter = document.getElementById('languageFilter');
+    const topicFilter = document.getElementById('topicFilter');
+    const items = document.querySelectorAll('.item');
+
+    function filterItems() {
+      const language = languageFilter.value;
+      const topic = topicFilter.value;
+
+      items.forEach(item => {
+        const matchesLanguage = (language === 'All' || item.dataset.language === language);
+        const matchesTopic = (topic === 'All' || item.dataset.topic === topic);
+        if (matchesLanguage && matchesTopic) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    languageFilter.addEventListener('change', filterItems);
+    topicFilter.addEventListener('change', filterItems);
+  </script>
+</body>
+</html>
