@@ -49,29 +49,30 @@
       border: 1px solid #e0e0e0;
       border-radius: 8px;
       width: 220px;
+      height: 150px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
       text-align: center;
-      padding-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10px;
+      cursor: pointer;
     }
     .item:hover {
       transform: translateY(-5px);
       box-shadow: 0 0 0 3px #FCD535, 0 4px 14px rgba(0,0,0,0.2);
       border-color: #FCD535;
     }
-    .item img {
-      width: 100%;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-      display: block;
-    }
-    .item p {
-      margin: 5px 0;
-      font-size: 13px;
-    }
-    .item p strong {
-      color: #FCD535;
+    .item .label {
+      font-size: 16px;
       font-weight: 600;
+      color: #1e2329;
+      margin-bottom: 5px;
+    }
+    .item .meta {
+      font-size: 13px;
+      color: #555;
     }
     .hidden {
       display: none;
@@ -92,42 +93,32 @@
     <select id="languageFilter">
       <option value="All">All Languages</option>
       <option value="English">English</option>
-      <option value="Russian">Russian</option>
-      <option value="Arabic">Arabic</option>
-      <option value="Vietnamese">Vietnamese</option>
     </select>
     <select id="topicFilter">
       <option value="All">All Topics</option>
       <option value="Funding Fee History">Funding Fee History</option>
-      <option value="Reset Password">Reset Password</option>
-      <option value="Refund Process">Refund Process</option>
-      <option value="General Navigation">General Navigation</option>
+      <option value="Mock Trading">Mock Trading</option>
+      <option value="Cooling Off Period">Cooling Off Period</option>
     </select>
   </div>
   <div class="gallery">
-    <!-- Screenshot 1 -->
-    <div class="item" data-language="English" data-topic="Funding Fee History">
-      <a href="https://drive.google.com/file/d/15dDALBCfXJWZqbVW1wblbCf7SujGx20U/view?usp=sharing" target="_blank">
-        <img src="https://drive.google.com/uc?export=view&id=15dDALBCfXJWZqbVW1wblbCf7SujGx20U" alt="Screenshot 1">
-      </a>
-      <p><strong>Funding Fee History</strong></p>
-      <p>Language: English</p>
+    <!-- Funding Fee History -->
+    <div class="item" data-language="English" data-topic="Funding Fee History" onclick="window.open('https://drive.google.com/file/d/15dDALBCfXJWZqbVW1wblbCf7SujGx20U/view?usp=sharing','_blank')">
+      <div class="label">Funding Fee (Eng)</div>
+      <div class="meta">Topic: Funding Fee History</div>
+      <div class="meta">Language: English</div>
     </div>
-    <!-- Screenshot 2 -->
-    <div class="item" data-language="English" data-topic="Funding Fee History">
-      <a href="https://drive.google.com/file/d/1XMsFtmMsJpIRLM3FwBS9fsdhjDJwluUs/view?usp=sharing" target="_blank">
-        <img src="https://drive.google.com/uc?export=view&id=1XMsFtmMsJpIRLM3FwBS9fsdhjDJwluUs" alt="Screenshot 2">
-      </a>
-      <p><strong>Funding Fee History</strong></p>
-      <p>Language: English</p>
+    <!-- Mock Trading -->
+    <div class="item" data-language="English" data-topic="Mock Trading" onclick="window.open('https://drive.google.com/file/d/1XMsFtmMsJpIRLM3FwBS9fsdhjDJwluUs/view?usp=sharing','_blank')">
+      <div class="label">Mock Trading (Eng)</div>
+      <div class="meta">Topic: Mock Trading</div>
+      <div class="meta">Language: English</div>
     </div>
-    <!-- Screenshot 3 -->
-    <div class="item" data-language="English" data-topic="Funding Fee History">
-      <a href="https://drive.google.com/file/d/1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x/view?usp=sharing" target="_blank">
-        <img src="https://drive.google.com/uc?export=view&id=1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x" alt="Screenshot 3">
-      </a>
-      <p><strong>Funding Fee History</strong></p>
-      <p>Language: English</p>
+    <!-- Cooling Off Period -->
+    <div class="item" data-language="English" data-topic="Cooling Off Period" onclick="window.open('https://drive.google.com/file/d/1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x/view?usp=sharing','_blank')">
+      <div class="label">Cooling Off Period (Eng)</div>
+      <div class="meta">Topic: Cooling Off Period</div>
+      <div class="meta">Language: English</div>
     </div>
   </div>
   <footer>
