@@ -5,46 +5,89 @@
   <title>Customer Support Screenshot Library</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f4f4f4;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f7f8fa;
+      color: #1e2329;
     }
-    h1 {
+    header {
+      background: #ffffff;
+      padding: 20px;
+      border-bottom: 2px solid #f0f0f0;
       text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #1e2329;
     }
     .filters {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-bottom: 20px;
+      gap: 15px;
+      padding: 15px;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    select {
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      background-color: #ffffff;
+      cursor: pointer;
     }
     .gallery {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 20px;
       justify-content: center;
+      padding: 20px;
     }
     .item {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 10px;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
       width: 220px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
       text-align: center;
+      padding-bottom: 10px;
+    }
+    .item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-color: #FCD535;
     }
     .item img {
-      max-width: 200px;
-      height: auto;
-      border-radius: 3px;
+      width: 100%;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      display: block;
+    }
+    .item p {
+      margin: 5px 0;
+      font-size: 13px;
     }
     .hidden {
       display: none;
     }
+    .item strong {
+      color: #1e2329;
+      font-size: 14px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #888;
+    }
   </style>
 </head>
 <body>
-  <h1>Customer Support Screenshot Library</h1>
+  <header>
+    <h1>Binance Customer Support Screenshot Library</h1>
+  </header>
   <div class="filters">
     <select id="languageFilter">
       <option value="All">All Languages</option>
@@ -81,4 +124,37 @@
     <!-- Screenshot 3 -->
     <div class="item" data-language="English" data-topic="Funding Fee History">
       <a href="https://drive.google.com/file/d/1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x/view?usp=sharing" target="_blank">
-        <img src="https://drive.google.com/uc?export=view&id=1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x" alt="Screenshot_
+        <img src="https://drive.google.com/uc?export=view&id=1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x" alt="Screenshot 3">
+      </a>
+      <p><strong>Funding Fee History</strong></p>
+      <p>Language: English</p>
+    </div>
+  </div>
+  <footer>
+    Binance Support Resource – Internal Use Only
+  </footer>
+  <script>
+    const languageFilter = document.getElementById('languageFilter');
+    const topicFilter = document.getElementById('topicFilter');
+    const items = document.querySelectorAll('.item');
+
+    function filterItems() {
+      const language = languageFilter.value;
+      const topic = topicFilter.value;
+
+      items.forEach(item => {
+        const matchesLanguage = (language === 'All' || item.dataset.language === language);
+        const matchesTopic = (topic === 'All' || item.dataset.topic === topic);
+        if (matchesLanguage && matchesTopic) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    languageFilter.addEventListener('change', filterItems);
+    topicFilter.addEventListener('change', filterItems);
+  </script>
+</body>
+</html>
