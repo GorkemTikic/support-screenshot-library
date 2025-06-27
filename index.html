@@ -24,12 +24,13 @@
     .filters {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 10px;
       padding: 15px;
       background: #ffffff;
       border-bottom: 1px solid #e0e0e0;
+      flex-wrap: wrap;
     }
-    select {
+    select, input[type="text"] {
       padding: 8px 12px;
       font-size: 14px;
       border: 1px solid #d0d0d0;
@@ -123,9 +124,15 @@
     <h1>Binance Customer Support Screenshot Library</h1>
   </header>
   <div class="filters">
+    <input type="text" id="searchInput" placeholder="Search by keyword...">
     <select id="languageFilter">
       <option value="All">All Languages</option>
       <option value="English">English</option>
+      <option value="Arabic">Arabic</option>
+      <option value="Russian">Russian</option>
+      <option value="Vietnamese">Vietnamese</option>
+      <option value="Spanish">Spanish</option>
+      <option value="Portuguese">Portuguese</option>
     </select>
     <select id="topicFilter">
       <option value="All">All Topics</option>
@@ -135,57 +142,43 @@
     </select>
   </div>
   <div class="gallery">
-    <!-- Cooling Off Period -->
+    <!-- Example: Cooling Off Period English -->
     <div class="item" data-language="English" data-topic="Cooling Off Period">
-      <div class="label">Cooling Off Period (Eng)</div>
+      <div class="label">Cooling Off Period (English)</div>
       <div class="meta">Topic: Cooling Off Period</div>
       <div class="meta">Language: English</div>
       <div class="button-container">
         <button class="btn" onclick="window.open('https://drive.google.com/file/d/1oEUvg52ftSbcr1_a-e3RCs0SQM9PYE5x/view?usp=sharing','_blank')">View Screenshot</button>
         <button class="btn" onclick="copyText('coolingText')">Copy Text</button>
       </div>
-      <div class="tooltip">Click to copy instructions to clipboard</div>
       <textarea id="coolingText" class="hidden">
-You can disable your Futures Trading on your account. You have cooling off function for this:
-
-Please click on the '...' icon on Futures Trading page and click on 'Cooling-Off Period'.
-
-Then you can select the cooling off period such as:
-
-1 Day
-1 Week
-1 Month
-Indefinite (This will restrict the futures trading forever).
-
-Once you activate the cooling off period, you won't be able to trade Futures so you will disable the futures.
+Cooling Off instructions here.
       </textarea>
     </div>
-    <!-- Mock Trading -->
+    <!-- Example: Mock Trading Arabic -->
+    <div class="item" data-language="Arabic" data-topic="Mock Trading">
+      <div class="label">Mock Trading (Arabic)</div>
+      <div class="meta">Topic: Mock Trading</div>
+      <div class="meta">Language: Arabic</div>
+      <div class="button-container">
+        <button class="btn" onclick="window.open('https://example.com','_blank')">View Screenshot</button>
+        <button class="btn" onclick="copyText('mockArabic')">Copy Text</button>
+      </div>
+      <textarea id="mockArabic" class="hidden">
+Mock Trading Arabic instructions here.
+      </textarea>
+    </div>
+    <!-- Example: Mock Trading English -->
     <div class="item" data-language="English" data-topic="Mock Trading">
-      <div class="label">Mock Trading (Eng)</div>
+      <div class="label">Mock Trading (English)</div>
       <div class="meta">Topic: Mock Trading</div>
       <div class="meta">Language: English</div>
       <div class="button-container">
         <button class="btn" onclick="window.open('https://drive.google.com/file/d/1XMsFtmMsJpIRLM3FwBS9fsdhjDJwluUs/view?usp=sharing','_blank')">View Screenshot</button>
-        <button class="btn" onclick="copyText('mockText')">Copy Text</button>
+        <button class="btn" onclick="copyText('mockEnglish')">Copy Text</button>
       </div>
-      <div class="tooltip">Click to copy instructions to clipboard</div>
-      <textarea id="mockText" class="hidden">
-This is a placeholder text for Mock Trading instructions. You can replace this with detailed steps.
-      </textarea>
-    </div>
-    <!-- Funding Fee History -->
-    <div class="item" data-language="English" data-topic="Funding Fee History">
-      <div class="label">Funding Fee History (Eng)</div>
-      <div class="meta">Topic: Funding Fee History</div>
-      <div class="meta">Language: English</div>
-      <div class="button-container">
-        <button class="btn" onclick="window.open('https://drive.google.com/file/d/15dDALBCfXJWZqbVW1wblbCf7SujGx20U/view?usp=sharing','_blank')">View Screenshot</button>
-        <button class="btn" onclick="copyText('fundingText')">Copy Text</button>
-      </div>
-      <div class="tooltip">Click to copy instructions to clipboard</div>
-      <textarea id="fundingText" class="hidden">
-This is a placeholder text for Funding Fee History instructions. You can replace this with detailed steps.
+      <textarea id="mockEnglish" class="hidden">
+Mock Trading English instructions here.
       </textarea>
     </div>
   </div>
@@ -202,18 +195,22 @@ This is a placeholder text for Funding Fee History instructions. You can replace
       alert('Text copied to clipboard!');
     }
 
+    const searchInput = document.getElementById('searchInput');
     const languageFilter = document.getElementById('languageFilter');
     const topicFilter = document.getElementById('topicFilter');
     const items = document.querySelectorAll('.item');
 
     function filterItems() {
+      const search = searchInput.value.toLowerCase();
       const language = languageFilter.value;
       const topic = topicFilter.value;
 
       items.forEach(item => {
+        const label = item.querySelector('.label').textContent.toLowerCase();
+        const matchesSearch = label.includes(search);
         const matchesLanguage = (language === 'All' || item.dataset.language === language);
         const matchesTopic = (topic === 'All' || item.dataset.topic === topic);
-        if (matchesLanguage && matchesTopic) {
+        if (matchesSearch && matchesLanguage && matchesTopic) {
           item.classList.remove('hidden');
         } else {
           item.classList.add('hidden');
@@ -221,6 +218,7 @@ This is a placeholder text for Funding Fee History instructions. You can replace
       });
     }
 
+    searchInput.addEventListener('input', filterItems);
     languageFilter.addEventListener('change', filterItems);
     topicFilter.addEventListener('change', filterItems);
   </script>
