@@ -104,6 +104,10 @@
       font-size: 12px;
       color: #888;
     }
+    footer a {
+      color: #1e2329;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -125,7 +129,7 @@
       <div class="meta">Topic: Cooling Off Period</div>
       <div class="meta">Language: English</div>
       <div class="button-container">
-        <button class="btn" onclick="copyText('coolingText')">Copy Text</button>
+        <button class="btn" onclick="copyText('coolingText', this)">Copy Text</button>
       </div>
       <textarea id="coolingText" class="hidden">
 You can disable your Futures Trading on your account. You have cooling off function for this:
@@ -151,7 +155,7 @@ Once you activate the cooling off period, you won't be able to trade Futures so 
       <div class="meta">Topic: Mock Trading</div>
       <div class="meta">Language: English</div>
       <div class="button-container">
-        <button class="btn" onclick="copyText('mockText')">Copy Text</button>
+        <button class="btn" onclick="copyText('mockText', this)">Copy Text</button>
       </div>
       <textarea id="mockText" class="hidden">
 Mock Trading instructions here.
@@ -166,25 +170,39 @@ Mock Trading instructions here.
       <div class="meta">Topic: Funding Fee History</div>
       <div class="meta">Language: English</div>
       <div class="button-container">
-        <button class="btn" onclick="copyText('fundingText')">Copy Text</button>
+        <button class="btn" onclick="copyText('fundingText', this)">Copy Text</button>
       </div>
       <textarea id="fundingText" class="hidden">
 Funding Fee History instructions here.
       </textarea>
     </div>
   </div>
-<footer>
-  Binance Support Resource – Internal Use Only<br>
-  For any feedback or detected issues, contact: <a href="mailto:gorkem.tikic@binance.com">gorkem.tikic@binance.com</a>
-</footer>
+  <footer>
+    Binance Support Resource – Internal Use Only<br>
+    For any feedback or detected issues, contact:
+    <a href="mailto:gorkem.tikic@binance.com">gorkem.tikic@binance.com</a>
+  </footer>
   <script>
-    function copyText(id) {
+    function copyText(id, button) {
       const textArea = document.getElementById(id);
       textArea.style.display = 'block';
       textArea.select();
       document.execCommand('copy');
       textArea.style.display = 'none';
-      alert('✅ Text copied to clipboard!');
+
+      const originalText = button.textContent;
+      const originalBg = button.style.backgroundColor;
+      const originalColor = button.style.color;
+
+      button.textContent = '✅ Copied!';
+      button.style.backgroundColor = '#28a745'; // green
+      button.style.color = '#fff';
+
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.style.backgroundColor = '#FCD535';
+        button.style.color = '#000';
+      }, 2000);
     }
 
     const searchInput = document.getElementById('searchInput');
