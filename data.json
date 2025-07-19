@@ -16,5 +16,11 @@
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Futures%20Swap%20Button%20(Mostly%20for%20BNFCR)%20-%20EN.jpg?raw=true",
     "text": "You can't directly transfer the BNFCR back to spot wallet so you need to swap it BNB - BTC or ETH to transfer it back to spot wallet.\n\nTo do that, you can follow the steps in the screenshot:\n\n1 -) Click on Assets\n2 -) Click on Futures\n3 -) Click on USDS-M Futures\n4 -) Click on SWAP\n\nIn the SWAP page, you can select the BNFCR and Swap it to one of the supported coins (ETH-BNB or BTC)\n\nThen once you have one these assets can transfer it back to spot wallet as well."
- }
+ },
+{
+  "title": "System Feedback - EN",
+  "language": "English",
+  "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/System%20Feedback%20-%20EN.jpg?raw=true",
+  "text": "To send the System Feedback from Binance Mobile App, please follow the steps on the screenshot: \n\n1 -) Click on the Home \n2 -) Click on the Menu \n3 -) Click on the Settings\n4 -) Click on ''Help & Support'' tab \n5 -) Click on ''System Feedback''\n6 -) Click on ''SEND'' \n7 -) Wait for Success notification to pop-ups. \n\nAfter you follow the related steps which I also provided as screenshot then please let me know so I can tell tech team that you completed the System Feedback."
+}
 ]
