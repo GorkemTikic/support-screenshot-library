@@ -16,11 +16,47 @@
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Futures%20Swap%20Button%20(Mostly%20for%20BNFCR)%20-%20EN.jpg?raw=true",
     "text": "You can't directly transfer the BNFCR back to spot wallet so you need to swap it BNB - BTC or ETH to transfer it back to spot wallet.\n\nTo do that, you can follow the steps in the screenshot:\n\n1 -) Click on Assets\n2 -) Click on Futures\n3 -) Click on USDS-M Futures\n4 -) Click on SWAP\n\nIn the SWAP page, you can select the BNFCR and Swap it to one of the supported coins (ETH-BNB or BTC)\n\nThen once you have one these assets can transfer it back to spot wallet as well."
- },
-{
+  },
+  {
   "title": "System Feedback - EN",
   "language": "English",
   "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/System%20Feedback%20-%20EN.jpg?raw=true",
   "text": "To send the System Feedback from Binance Mobile App, please follow the steps on the screenshot: \n\n1 -) Click on the Home \n2 -) Click on the Menu \n3 -) Click on the Settings\n4 -) Click on ''Help & Support'' tab \n5 -) Click on ''System Feedback''\n6 -) Click on ''SEND'' \n7 -) Wait for Success notification to pop-ups. \n\nAfter you follow the related steps which I also provided as screenshot then please let me know so I can tell tech team that you completed the System Feedback."
+  },
+  {
+  "title": "Futures Transaction History (Export) - EN",
+  "language": "English",
+  "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/5f61188c499b2206b10f80f57d17e5c8ad71436f/images/Futures%20Transaction%20History%20(Export)%20-%20EN.jpg",
+  "text": "Please click on Futures and then the ''history icon'' like I marked. \n\nThen go to ''Transaction History'' tab an click on ''Export'' button on top right corner. \n\nYou will see the Export tab, in there: \n\n Select: Beyond 90 Days\n\nThe timeline can be 12 months only so if you are looking for the last 2-5 years, you can simply create yearly transaction history such as:\n\n2020-01-01 to 2020-12-31\n2021-01-01 to 2021-12-31\n2022-01-01 to 2022-12-31\n2023-01-01 to 2023-12-31\n2024-01-01 to 2024-12-31\n\nThis way you can create transaction history files for each year separately ."
+  },
+  {
+  "title": "Transfer From Cross Margin To Spot - EN",
+  "language": "English",
+  "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/5f61188c499b2206b10f80f57d17e5c8ad71436f/images/Transfer%20From%20Cross%20Margin%20To%20Spot%20-%20EN.jpg",
+  "text": "1 -) Click on Asset\n2 -) Click on Spot\n3 -) Click on Cross Margin\n4 -) Click on Transfer\n\nYou will see the Transfer page like this... In here you need to click on the arrows on right. \n\n5 -) Click on Arrows\n\n6 -) Correct Pathway: \n\nFrom: Cross Margin\nTo: Spot Wallet\n\nSelect Your Coin, the amount and and confirm the transfer. \n\nWith this steps, you can transfer all your assets from Cross Margin to Spot Wallet."
+  },
+  {
+  "title": "Cooling-Off Period - EN",
+  "language": "English",
+  "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/5f61188c499b2206b10f80f57d17e5c8ad71436f/images/Cooling-Off%20Period%20-%20EN.jpg",
+  "text": "You can disable your Futures Trading on your account. You have cooling off function for this: \n\n1 -) Please click on the ''...'' icon on Futures Trading page \n\n2 -) Click on ''Cooling-Off Period'' \n\n3 -) Click on the Enable button. \n\n4 -) Then you can select the cooling off period such as: \n\n1 Day\n1 Week \n1 Month\nIndefinite (This will restrict the futures trading forever) \n\nOnce you activate the cooling off period. You won't be able to trade Futures so you will disable the futures trading. \n\nPlease note that once you activated Cooling Off Period, we can't assist you to disable it. \n\nWhat Is the Cooling Period Function and How to Use It?\nhttps://www.binance.com/en/support/faq/detail/ad7fd07f63a64954a6d6e9257d16adcc "
+  },
+  {
+  "title": "Mark Price Chart - EN",
+  "language": "English",
+  "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/5f61188c499b2206b10f80f57d17e5c8ad71436f/images/Mark%20Price%20Chart%20-%20EN.jpg",
+  "text": "To see the Mark Price chart, please follow the steps in the screenshot: \n\n1 -) Click On Futures \n\n2 -) Click On the Chart Icon\n\n3 -) Click on Last Price button above the chart\n\n4 -) Select Mark Price \n\nThis way you can see the real-time mark price chart.\n\nTo Learn More about the difference between Mark Price and Last Price, you can check this official guide as well: \n\nWhat Is the Difference Between a Futures Contract’s Last Price and Mark Price?\nhttps://www.binance.com/en/blog/futures/5704082076024731087 "
+  },
+  {
+  "title": "Funding Fee History - EN",
+  "language": "English",
+  "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/5f61188c499b2206b10f80f57d17e5c8ad71436f/images/Funding%20Fee%20History%20-%20EN.jpg",
+  "text": "To see the Funding Fee History on your Mobile App, please follow the steps in the screenshot: \n\n1 -) Click On Futures\n\n2 -) Click on the History Icon\n\n3 -) Scroll on the right on upper menu and click on Funding Fee \n\nIn this page you can see how much funding fee you received or paid in details."
+  },
+  {
+  "title": "Mock Trading - EN",
+  "language": "English",
+  "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/5f61188c499b2206b10f80f57d17e5c8ad71436f/images/Mock%20Trading%20-%20EN.jpg",
+  "text": "To reach the Mock Trading/Demo Trading page, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' icon on top right corner\n\n3 -) On the pop-up menu click on ''Mock Trading'' \n\nThis way you can access to the Mock Trading page."
   }
 ]
