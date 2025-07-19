@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Screenshot Entry Generator</title>
+</head>
+<body>
+  <h2>Create New Screenshot Entry</h2>
+  <form id="entryForm">
+    <label>Title: <input type="text" id="title" required></label><br><br>
+    <label>Language: <input type="text" id="language" required></label><br><br>
+    <label>Image URL: <input type="text" id="image" required></label><br><br>
+    <label>Macro Text:<br>
+    <textarea id="text" rows="6" cols="50" required></textarea></label><br><br>
+    <button type="submit">Generate Entry</button>
+    <button type="button" onclick="copyCode()">📋 Copy to Clipboard</button>
+  </form>
+  <h3>Generated Code:</h3>
+  <pre id="output"></pre>
+
+  <script>
+    document.getElementById('entryForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const language = document.getElementById('language').value;
+      const image = document.getElementById('image').value;
+      const text = document.getElementById('text').value.replace(/\n/g, '\\n').replace(/"/g, '\"');
+
+      const output = {
+        title: title,
+        language: language,
+        image: image,
+        text: text
+      };
+
+      document.getElementById('output').textContent = JSON.stringify(output, null, 2) + ",";
+    });
+
+    function copyCode() {
+      const code = document.getElementById('output').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("✅ Copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
