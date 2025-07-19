@@ -49,7 +49,7 @@
       background: #ffffff;
       border: 1px solid #e0e0e0;
       border-radius: 8px;
-      width: 240px;
+      width: 260px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
       text-align: center;
@@ -110,73 +110,108 @@
   <header>
     <h1>FD Screenshot Library</h1>
   </header>
+
   <div class="filters">
     <input type="text" id="searchInput" placeholder="Search by keyword...">
     <select id="languageFilter"></select>
     <select id="topicFilter"></select>
   </div>
+
   <div class="gallery">
-    <!-- Cooling Off Period -->
-    <div class="item" data-language="English" data-topic="Cooling Off Period">
-      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/cooling-off.jpg?raw=true" target="_blank">
-        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/cooling-off.jpg?raw=true" alt="Cooling Off Screenshot">
+
+    <!-- Screenshot 1 -->
+    <div class="item" data-language="English" data-topic="Clear Caches">
+      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Clear%20Caches%20-%20EN.jpg?raw=true" target="_blank">
+        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Clear%20Caches%20-%20EN.jpg?raw=true" alt="Clear Caches EN">
       </a>
-      <div class="label">Cooling Off Period (English)</div>
-      <div class="meta">Topic: Cooling Off Period</div>
+      <div class="label">Clear Caches - EN</div>
       <div class="meta">Language: English</div>
       <div class="button-container">
-        <button class="btn" onclick="copyText('coolingText', this)">Copy Text</button>
+        <button class="btn" onclick="copyText('clearCacheText', this)">Copy Text</button>
       </div>
-      <textarea id="coolingText" class="hidden">
-You can disable your Futures Trading on your account. You have cooling off function for this:
+      <textarea id="clearCacheText" class="hidden">
+1 -) Click on Home
+2 -) Click on Menu
+3 -) Click on Settings
+4 -) Click on Clear Cache button
 
-Please click on the '...' icon on Futures Trading page and click on 'Cooling-Off Period'.
-
-Then you can select the cooling off period such as:
-
-1 Day
-1 Week
-1 Month
-Indefinite (This will restrict the futures trading forever).
-
-Once you activate the cooling off period, you won't be able to trade Futures so you will disable the futures.
+This helps remove temporary files and can make your app run faster and smoother!
       </textarea>
     </div>
-    <!-- Mock Trading -->
-    <div class="item" data-language="English" data-topic="Mock Trading">
-      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/mock-trading.jpg?raw=true" target="_blank">
-        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/mock-trading.jpg?raw=true" alt="Mock Trading Screenshot">
+
+    <!-- Screenshot 2 -->
+    <div class="item" data-language="English" data-topic="Copy Trading History">
+      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Copy%20Trading%20History%20-%20EN.jpg?raw=true" target="_blank">
+        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Copy%20Trading%20History%20-%20EN.jpg?raw=true" alt="Copy Trading History EN">
       </a>
-      <div class="label">Mock Trading (English)</div>
-      <div class="meta">Topic: Mock Trading</div>
+      <div class="label">Copy Trading History - EN</div>
       <div class="meta">Language: English</div>
       <div class="button-container">
-        <button class="btn" onclick="copyText('mockText', this)">Copy Text</button>
+        <button class="btn" onclick="copyText('copyTradingText', this)">Copy Text</button>
       </div>
-      <textarea id="mockText" class="hidden">
-Mock Trading instructions here.
+      <textarea id="copyTradingText" class="hidden">
+1 -) Click on Futures
+2 -) Click on Copy button
+3 -) Click on Copy on right bottom corner
+4 -) You can see the ''Ongoing - Closed'' Copy Portfolios in this page.
       </textarea>
     </div>
-    <!-- Funding Fee History -->
-    <div class="item" data-language="English" data-topic="Funding Fee History">
-      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/funding-fee-history.jpg?raw=true" target="_blank">
-        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/funding-fee-history.jpg?raw=true" alt="Funding Fee History Screenshot">
+
+    <!-- Screenshot 3 -->
+    <div class="item" data-language="English" data-topic="Futures Swap BNFCR">
+      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Futures%20Swap%20Button%20(Mostly%20for%20BNFCR)%20-%20EN.jpg?raw=true" target="_blank">
+        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Futures%20Swap%20Button%20(Mostly%20for%20BNFCR)%20-%20EN.jpg?raw=true" alt="Futures Swap Button">
       </a>
-      <div class="label">Funding Fee History (English)</div>
-      <div class="meta">Topic: Funding Fee History</div>
+      <div class="label">Futures Swap Button (BNFCR) - EN</div>
       <div class="meta">Language: English</div>
       <div class="button-container">
-        <button class="btn" onclick="copyText('fundingText', this)">Copy Text</button>
+        <button class="btn" onclick="copyText('futuresSwapText', this)">Copy Text</button>
       </div>
-      <textarea id="fundingText" class="hidden">
-Funding Fee History instructions here.
+      <textarea id="futuresSwapText" class="hidden">
+You can't directly transfer the BNFCR back to spot wallet so you need to swap it BNB - BTC or ETH to transfer it back to spot wallet.
+
+To do that, you can follow the steps in the screenshot:
+
+1 -) Click on Assets
+2 -) Click on Futures
+3 -) Click on USDS-M Futures
+4 -) Click on SWAP
+
+In the SWAP page, you can select the BNFCR and Swap it to one of the supported coins (ETH-BNB or BTC)
+
+Then once you have one these assets can transfer it back to spot wallet as well.
+      </textarea>
+    </div>
+
+    <!-- Screenshot 4 -->
+    <div class="item" data-language="English" data-topic="System Feedback">
+      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/System%20Feedback%20-%20EN.jpg?raw=true" target="_blank">
+        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/System%20Feedback%20-%20EN.jpg?raw=true" alt="System Feedback EN">
+      </a>
+      <div class="label">System Feedback - EN</div>
+      <div class="meta">Language: English</div>
+      <div class="button-container">
+        <button class="btn" onclick="copyText('systemFeedbackText', this)">Copy Text</button>
+      </div>
+      <textarea id="systemFeedbackText" class="hidden">
+1 -) Click on the Home
+2 -) Click on the Menu
+3 -) Click on the Settings
+4 -) Click on ''Help & Support'' tab
+5 -) Click on ''System Feedback''
+6 -) Click on ''SEND''
+7 -) Wait for Success notification to pop-ups.
+
+After you follow the related steps which I also provided as screenshot then please let me know so I can tell tech team that you completed the System Feedback.
       </textarea>
     </div>
   </div>
+
   <footer>
     FD Screenshot Library – Internal Use Only<br>
     For any feedback or detected issues, DM the project owner.
   </footer>
+
   <script>
     function copyText(id, button) {
       const textArea = document.getElementById(id);
