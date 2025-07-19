@@ -2,44 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Admin Screenshot Entry Generator</title>
+  <title>FD Screenshot Admin</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; background: #f7f8fa; }
+    label { display: block; margin-top: 20px; font-weight: bold; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    button { margin-top: 20px; padding: 10px 20px; background-color: #FCD535; border: none; border-radius: 4px; cursor: pointer; }
+    pre { background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 4px; white-space: pre-wrap; }
+  </style>
 </head>
 <body>
-  <h2>Create New Screenshot Entry</h2>
-  <form id="entryForm">
-    <label>Title: <input type="text" id="title" required></label><br><br>
-    <label>Language: <input type="text" id="language" required></label><br><br>
-    <label>Image URL: <input type="text" id="image" required></label><br><br>
-    <label>Macro Text:<br>
-    <textarea id="text" rows="6" cols="50" required></textarea></label><br><br>
-    <button type="submit">Generate Entry</button>
-    <button type="button" onclick="copyCode()">📋 Copy to Clipboard</button>
-  </form>
-  <h3>Generated Code:</h3>
+  <h1>FD Screenshot Admin Generator</h1>
+
+  <label for="title">Title:</label>
+  <input type="text" id="title" placeholder="e.g. Clear Caches - EN">
+
+  <label for="language">Language:</label>
+  <input type="text" id="language" placeholder="e.g. English">
+
+  <label for="image">Image URL:</label>
+  <input type="text" id="image" placeholder="Paste your image URL here">
+
+  <label for="text">Macro Text:</label>
+  <textarea id="text" rows="8" placeholder="Paste the macro steps here..."></textarea>
+
+  <button onclick="generate()">Generate JSON</button>
+  <button onclick="copyToClipboard()">Copy JSON</button>
+
   <pre id="output"></pre>
 
   <script>
-    document.getElementById('entryForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const title = document.getElementById('title').value;
-      const language = document.getElementById('language').value;
-      const image = document.getElementById('image').value;
-      const text = document.getElementById('text').value.replace(/\n/g, '\\n').replace(/"/g, '\"');
+    function escapeJsonString(str) {
+      return str.replace(/\\/g, '\\\\')
+                .replace(/\n/g, '\\n')
+                .replace(/"/g, '\\"');
+    }
 
-      const output = {
-        title: title,
-        language: language,
-        image: image,
-        text: text
-      };
+    function generate() {
+      const title = document.getElementById("title").value;
+      const language = document.getElementById("language").value;
+      const image = document.getElementById("image").value;
+      const text = escapeJsonString(document.getElementById("text").value);
 
-      document.getElementById('output').textContent = JSON.stringify(output, null, 2) + ",";
-    });
+      const json = `{
+  "title": "${title}",
+  "language": "${language}",
+  "image": "${image}",
+  "text": "${text}"
+}`;
+      document.getElementById("output").textContent = json;
+    }
 
-    function copyCode() {
-      const code = document.getElementById('output').textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        alert("✅ Copied to clipboard!");
+    function copyToClipboard() {
+      const output = document.getElementById("output").textContent;
+      navigator.clipboard.writeText(output).then(() => {
+        alert("✅ JSON copied to clipboard!");
+      }, () => {
+        alert("❌ Failed to copy.");
       });
     }
   </script>
