@@ -21,6 +21,23 @@
       font-size: 24px;
       color: #1e2329;
     }
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      flex-wrap: wrap;
+    }
+    select, input[type="text"] {
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -82,31 +99,47 @@
   <header>
     <h1>FD Screenshot Library</h1>
   </header>
+  <div class="filters">
+    <input type="text" id="searchInput" placeholder="Search by keyword...">
+    <select id="languageFilter"></select>
+    <select id="topicFilter"></select>
+  </div>
   <div class="gallery" id="gallery"></div>
   <footer>
     FD Screenshot Library – Internal Use Only<br>
     For any feedback or detected issues, DM the project owner.
   </footer>
   <script>
+    let allScreenshots = [];
+
     fetch('data.json')
       .then(response => response.json())
-      .then(screenshots => {
-        const gallery = document.getElementById("gallery");
-        screenshots.forEach((shot, index) => {
-          const item = document.createElement("div");
-          item.className = "item";
-          item.innerHTML = `
-            <a href="${shot.image}" target="_blank">
-              <img src="${shot.image}" alt="${shot.title}">
-            </a>
-            <div class="label">${shot.title}</div>
-            <div class="meta">Language: ${shot.language}</div>
-            <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
-            <textarea id="text${index}" class="hidden">${shot.text}</textarea>
-          `;
-          gallery.appendChild(item);
-        });
+      .then(data => {
+        allScreenshots = data;
+        renderGallery(data);
+        populateFilters(data);
       });
+
+    function renderGallery(screenshots) {
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
+      screenshots.forEach((shot, index) => {
+        const item = document.createElement("div");
+        item.className = "item";
+        item.dataset.language = shot.language;
+        item.dataset.topic = shot.title;
+        item.innerHTML = `
+          <a href="${shot.image}" target="_blank">
+            <img src="${shot.image}" alt="${shot.title}">
+          </a>
+          <div class="label">${shot.title}</div>
+          <div class="meta">Language: ${shot.language}</div>
+          <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
+          <textarea id="text${index}" class="hidden">${shot.text}</textarea>
+        `;
+        gallery.appendChild(item);
+      });
+    }
 
     function copyText(id, button) {
       const textArea = document.getElementById(id);
@@ -123,6 +156,35 @@
         button.style.backgroundColor = '#FCD535';
         button.style.color = '#000';
       }, 2000);
+    }
+
+    function populateFilters(data) {
+      const languageFilter = document.getElementById("languageFilter");
+      const topicFilter = document.getElementById("topicFilter");
+      const languages = [...new Set(data.map(item => item.language))];
+      const topics = [...new Set(data.map(item => item.title))];
+
+      languageFilter.innerHTML = '<option value="All">All Languages</option>' + languages.map(lang => `<option value="${lang}">${lang}</option>`).join("");
+      topicFilter.innerHTML = '<option value="All">All Topics</option>' + topics.map(topic => `<option value="${topic}">${topic}</option>`).join("");
+
+      document.getElementById("searchInput").addEventListener("input", filterItems);
+      languageFilter.addEventListener("change", filterItems);
+      topicFilter.addEventListener("change", filterItems);
+    }
+
+    function filterItems() {
+      const search = document.getElementById("searchInput").value.toLowerCase();
+      const language = document.getElementById("languageFilter").value;
+      const topic = document.getElementById("topicFilter").value;
+
+      const filtered = allScreenshots.filter(item => {
+        const matchesSearch = item.title.toLowerCase().includes(search);
+        const matchesLanguage = language === "All" || item.language === language;
+        const matchesTopic = topic === "All" || item.title === topic;
+        return matchesSearch && matchesLanguage && matchesTopic;
+      });
+
+      renderGallery(filtered);
     }
   </script>
 </body>
