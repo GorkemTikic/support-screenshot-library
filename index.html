@@ -70,9 +70,12 @@
     .item .meta {
       font-size: 13px;
       color: #555;
+      margin-bottom: 10px;
     }
     .item img {
       width: 100%;
+      height: 200px;
+      object-fit: cover;
       border-radius: 4px;
       margin-bottom: 8px;
       cursor: pointer;
@@ -110,123 +113,76 @@
   <header>
     <h1>FD Screenshot Library</h1>
   </header>
-
   <div class="filters">
     <input type="text" id="searchInput" placeholder="Search by keyword...">
     <select id="languageFilter"></select>
     <select id="topicFilter"></select>
   </div>
-
-  <div class="gallery">
-
-    <!-- Screenshot 1 -->
-    <div class="item" data-language="English" data-topic="Clear Caches">
-      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Clear%20Caches%20-%20EN.jpg?raw=true" target="_blank">
-        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Clear%20Caches%20-%20EN.jpg?raw=true" alt="Clear Caches EN">
-      </a>
-      <div class="label">Clear Caches - EN</div>
-      <div class="meta">Language: English</div>
-      <div class="button-container">
-        <button class="btn" onclick="copyText('clearCacheText', this)">Copy Text</button>
-      </div>
-      <textarea id="clearCacheText" class="hidden">
-1 -) Click on Home
-2 -) Click on Menu
-3 -) Click on Settings
-4 -) Click on Clear Cache button
-
-This helps remove temporary files and can make your app run faster and smoother!
-      </textarea>
-    </div>
-
-    <!-- Screenshot 2 -->
-    <div class="item" data-language="English" data-topic="Copy Trading History">
-      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Copy%20Trading%20History%20-%20EN.jpg?raw=true" target="_blank">
-        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Copy%20Trading%20History%20-%20EN.jpg?raw=true" alt="Copy Trading History EN">
-      </a>
-      <div class="label">Copy Trading History - EN</div>
-      <div class="meta">Language: English</div>
-      <div class="button-container">
-        <button class="btn" onclick="copyText('copyTradingText', this)">Copy Text</button>
-      </div>
-      <textarea id="copyTradingText" class="hidden">
-1 -) Click on Futures
-2 -) Click on Copy button
-3 -) Click on Copy on right bottom corner
-4 -) You can see the ''Ongoing - Closed'' Copy Portfolios in this page.
-      </textarea>
-    </div>
-
-    <!-- Screenshot 3 -->
-    <div class="item" data-language="English" data-topic="Futures Swap BNFCR">
-      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Futures%20Swap%20Button%20(Mostly%20for%20BNFCR)%20-%20EN.jpg?raw=true" target="_blank">
-        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Futures%20Swap%20Button%20(Mostly%20for%20BNFCR)%20-%20EN.jpg?raw=true" alt="Futures Swap Button">
-      </a>
-      <div class="label">Futures Swap Button (BNFCR) - EN</div>
-      <div class="meta">Language: English</div>
-      <div class="button-container">
-        <button class="btn" onclick="copyText('futuresSwapText', this)">Copy Text</button>
-      </div>
-      <textarea id="futuresSwapText" class="hidden">
-You can't directly transfer the BNFCR back to spot wallet so you need to swap it BNB - BTC or ETH to transfer it back to spot wallet.
-
-To do that, you can follow the steps in the screenshot:
-
-1 -) Click on Assets
-2 -) Click on Futures
-3 -) Click on USDS-M Futures
-4 -) Click on SWAP
-
-In the SWAP page, you can select the BNFCR and Swap it to one of the supported coins (ETH-BNB or BTC)
-
-Then once you have one these assets can transfer it back to spot wallet as well.
-      </textarea>
-    </div>
-
-    <!-- Screenshot 4 -->
-    <div class="item" data-language="English" data-topic="System Feedback">
-      <a href="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/System%20Feedback%20-%20EN.jpg?raw=true" target="_blank">
-        <img src="https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/System%20Feedback%20-%20EN.jpg?raw=true" alt="System Feedback EN">
-      </a>
-      <div class="label">System Feedback - EN</div>
-      <div class="meta">Language: English</div>
-      <div class="button-container">
-        <button class="btn" onclick="copyText('systemFeedbackText', this)">Copy Text</button>
-      </div>
-      <textarea id="systemFeedbackText" class="hidden">
-1 -) Click on the Home
-2 -) Click on the Menu
-3 -) Click on the Settings
-4 -) Click on ''Help & Support'' tab
-5 -) Click on ''System Feedback''
-6 -) Click on ''SEND''
-7 -) Wait for Success notification to pop-ups.
-
-After you follow the related steps which I also provided as screenshot then please let me know so I can tell tech team that you completed the System Feedback.
-      </textarea>
-    </div>
-  </div>
-
+  <div class="gallery" id="gallery"></div>
   <footer>
     FD Screenshot Library – Internal Use Only<br>
     For any feedback or detected issues, DM the project owner.
   </footer>
-
   <script>
+    const screenshots = [
+      {
+        title: "Clear Caches - EN",
+        language: "English",
+        image: "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Clear%20Caches%20-%20EN.jpg?raw=true",
+        text: `1 -) Click on Home\n2 -) Click on Menu\n3 -) Click on Settings\n4 -) Click on Clear Cache button\n\nThis helps remove temporary files and can make your app run faster and smoother!`
+      },
+      {
+        title: "Copy Trading History - EN",
+        language: "English",
+        image: "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Copy%20Trading%20History%20-%20EN.jpg?raw=true",
+        text: `1 -) Click on Futures\n2 -) Click on Copy button\n3 -) Click on Copy on right bottom corner\n4 -) You can see the 'Ongoing - Closed' Copy Portfolios in this page.`
+      },
+      {
+        title: "Futures Swap Button (BNFCR) - EN",
+        language: "English",
+        image: "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Futures%20Swap%20Button%20(Mostly%20for%20BNFCR)%20-%20EN.jpg?raw=true",
+        text: `You can't directly transfer the BNFCR back to spot wallet so you need to swap it BNB - BTC or ETH to transfer it back to spot wallet.\n\nTo do that, you can follow the steps in the screenshot:\n\n1 -) Click on Assets\n2 -) Click on Futures\n3 -) Click on USDS-M Futures\n4 -) Click on SWAP\n\nIn the SWAP page, you can select the BNFCR and Swap it to one of the supported coins (ETH-BNB or BTC)\n\nThen once you have one these assets can transfer it back to spot wallet as well.`
+      },
+      {
+        title: "System Feedback - EN",
+        language: "English",
+        image: "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/System%20Feedback%20-%20EN.jpg?raw=true",
+        text: `1 -) Click on the Home\n2 -) Click on the Menu\n3 -) Click on the Settings\n4 -) Click on 'Help & Support' tab\n5 -) Click on 'System Feedback'\n6 -) Click on 'SEND'\n7 -) Wait for Success notification to pop-ups.\n\nAfter you follow the related steps which I also provided as screenshot then please let me know so I can tell tech team that you completed the System Feedback.`
+      }
+    ];
+
+    const gallery = document.getElementById("gallery");
+    screenshots.forEach((shot, index) => {
+      const item = document.createElement("div");
+      item.className = "item";
+      item.dataset.language = shot.language;
+      item.dataset.topic = shot.title;
+      item.innerHTML = `
+        <a href="${shot.image}" target="_blank">
+          <img src="${shot.image}" alt="${shot.title}">
+        </a>
+        <div class="label">${shot.title}</div>
+        <div class="meta">Language: ${shot.language}</div>
+        <div class="button-container">
+          <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
+        </div>
+        <textarea id="text${index}" class="hidden">${shot.text}</textarea>
+      `;
+      gallery.appendChild(item);
+    });
+
     function copyText(id, button) {
       const textArea = document.getElementById(id);
       textArea.style.display = 'block';
       textArea.select();
       document.execCommand('copy');
       textArea.style.display = 'none';
-
-      const originalText = button.textContent;
+      const original = button.textContent;
       button.textContent = '✅ Copied!';
       button.style.backgroundColor = '#28a745';
       button.style.color = '#fff';
-
       setTimeout(() => {
-        button.textContent = originalText;
+        button.textContent = original;
         button.style.backgroundColor = '#FCD535';
         button.style.color = '#000';
       }, 2000);
@@ -236,7 +192,6 @@ After you follow the related steps which I also provided as screenshot then plea
     const languageFilter = document.getElementById('languageFilter');
     const topicFilter = document.getElementById('topicFilter');
     const items = document.querySelectorAll('.item');
-
     const languages = new Set();
     const topics = new Set();
     items.forEach(item => {
@@ -245,24 +200,18 @@ After you follow the related steps which I also provided as screenshot then plea
     });
     languageFilter.innerHTML = `<option value="All">All Languages</option>` + Array.from(languages).sort().map(lang => `<option value="${lang}">${lang}</option>`).join("");
     topicFilter.innerHTML = `<option value="All">All Topics</option>` + Array.from(topics).sort().map(topic => `<option value="${topic}">${topic}</option>`).join("");
-
     function filterItems() {
       const search = searchInput.value.toLowerCase();
       const language = languageFilter.value;
       const topic = topicFilter.value;
       items.forEach(item => {
         const label = item.querySelector('.label').textContent.toLowerCase();
-        const matchesSearch = label.includes(search);
-        const matchesLanguage = (language === 'All' || item.dataset.language === language);
-        const matchesTopic = (topic === 'All' || item.dataset.topic === topic);
-        if (matchesSearch && matchesLanguage && matchesTopic) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
+        const matchSearch = label.includes(search);
+        const matchLang = language === 'All' || item.dataset.language === language;
+        const matchTopic = topic === 'All' || item.dataset.topic === topic;
+        item.classList.toggle('hidden', !(matchSearch && matchLang && matchTopic));
       });
     }
-
     searchInput.addEventListener('input', filterItems);
     languageFilter.addEventListener('change', filterItems);
     topicFilter.addEventListener('change', filterItems);
