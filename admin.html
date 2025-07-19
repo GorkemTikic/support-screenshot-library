@@ -2,13 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>FD Screenshot Admin</title>
+  <title>FD Screenshot Admin (Multi)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 40px; background: #f7f8fa; }
     label { display: block; margin-top: 20px; font-weight: bold; }
-    input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
-    button { margin-top: 20px; padding: 10px 20px; background-color: #FCD535; border: none; border-radius: 4px; cursor: pointer; }
-    pre { background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 4px; white-space: pre-wrap; }
+    input, textarea, select {
+      width: 100%; padding: 10px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      margin-top: 20px; padding: 10px 20px;
+      background-color: #FCD535; border: none;
+      border-radius: 4px; cursor: pointer;
+      margin-right: 10px;
+    }
+    pre {
+      background: #fff; padding: 20px;
+      border: 1px solid #ddd; border-radius: 4px;
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
@@ -18,7 +30,23 @@
   <input type="text" id="title" placeholder="e.g. Clear Caches - EN">
 
   <label for="language">Language:</label>
-  <input type="text" id="language" placeholder="e.g. English">
+  <select id="language">
+    <option value="">Select a language</option>
+    <option>English</option>
+    <option>Arabic</option>
+    <option>Vietnamese</option>
+    <option>Russian</option>
+    <option>Bahasa</option>
+    <option>Turkish</option>
+    <option>Spanish</option>
+    <option>Portuguese</option>
+    <option>French</option>
+    <option>German</option>
+    <option>Italian</option>
+    <option>Chinese</option>
+    <option>Japanese</option>
+    <option>Korean</option>
+  </select>
 
   <label for="image">Image URL:</label>
   <input type="text" id="image" placeholder="Paste your image URL here">
@@ -26,40 +54,45 @@
   <label for="text">Macro Text:</label>
   <textarea id="text" rows="8" placeholder="Paste the macro steps here..."></textarea>
 
-  <button onclick="generate()">Generate JSON</button>
-  <button onclick="copyToClipboard()">Copy JSON</button>
+  <button onclick="addAnother()">+ Add Another</button>
+  <button onclick="copyAll()">📋 Copy JSON Array</button>
 
-  <pre id="output"></pre>
+  <pre id="output">[ ]</pre>
 
   <script>
+    const entries = [];
+
     function escapeJsonString(str) {
       return str.replace(/\\/g, '\\\\')
                 .replace(/\n/g, '\\n')
                 .replace(/"/g, '\\"');
     }
 
-    function generate() {
-      const title = document.getElementById("title").value;
-      const language = document.getElementById("language").value;
-      const image = document.getElementById("image").value;
-      const text = escapeJsonString(document.getElementById("text").value);
+    function addAnother() {
+      const title = document.getElementById("title").value.trim();
+      const language = document.getElementById("language").value.trim();
+      const image = document.getElementById("image").value.trim();
+      const text = escapeJsonString(document.getElementById("text").value.trim());
 
-      const json = `{
-  "title": "${title}",
-  "language": "${language}",
-  "image": "${image}",
-  "text": "${text}"
-}`;
-      document.getElementById("output").textContent = json;
+      if (!title || !language || !image || !text) {
+        alert("Please fill out all fields before adding.");
+        return;
+      }
+
+      entries.push({ title, language, image, text });
+      document.getElementById("output").textContent = JSON.stringify(entries, null, 2);
+
+      // Reset fields
+      document.getElementById("title").value = "";
+      document.getElementById("language").selectedIndex = 0;
+      document.getElementById("image").value = "";
+      document.getElementById("text").value = "";
     }
 
-    function copyToClipboard() {
-      const output = document.getElementById("output").textContent;
-      navigator.clipboard.writeText(output).then(() => {
-        alert("✅ JSON copied to clipboard!");
-      }, () => {
-        alert("❌ Failed to copy.");
-      });
+    function copyAll() {
+      navigator.clipboard.writeText(document.getElementById("output").textContent)
+        .then(() => alert("✅ JSON array copied!"))
+        .catch(() => alert("❌ Failed to copy."));
     }
   </script>
 </body>
