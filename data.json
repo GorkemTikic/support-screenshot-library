@@ -58,5 +58,17 @@
   "language": "English",
   "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/Mock%20Trading%20-%20EN.jpg?raw=true",
   "text": "To reach the Mock Trading/Demo Trading page, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' icon on top right corner\n\n3 -) On the pop-up menu click on ''Mock Trading'' \n\nThis way you can access to the Mock Trading page."
- }
+ },
+  {
+    "title": "LOAN HISTORY (ONGOING LOANS) - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/LOAN_HISTORY_(ONGOING_LOANS)_-_EN.jpg",
+    "text": "To see your ongoing Loan orders or your Loan history, you can follow the steps in the screenshot: \\n\\n1 -) Click on Home button \\n\\n2 -) Click on ''More'' \\n\\n3 -) Scroll Down on that page and find ''Loans'' under Finance. \\n\\n4 -) Click on The History Icon on Top Right Corner\\n\\nIn that page you can see your ongoing Loans and your Loan history."
+ },
+  {
+    "title": "LOAN HISTORY (ONGOING LOANS) - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/LOAN_HISTORY_(ONGOING_LOANS)_-_EN.jpg",
+    "text": "To see your ongoing Loan orders or your Loan history, you can follow the steps in the screenshot: \n\n1 -) Click on Home button \n\n2 -) Click on ''More'' \n\n3 -) Scroll Down on that page and find ''Loans'' under Finance. \n\n4 -) Click on The History Icon on Top Right Corner\n\nIn that page you can see your ongoing Loans and your Loan history."
+  }
 ]
