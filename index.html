@@ -67,14 +67,6 @@
       font-weight: 600;
       margin-bottom: 5px;
     }
-    .badge {
-      font-size: 11px;
-      background: #ff4757;
-      color: #fff;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: 6px;
-    }
     .meta {
       font-size: 13px;
       color: #555;
@@ -124,31 +116,13 @@
     <input type="text" id="searchInput" placeholder="Search by keyword...">
     <select id="languageFilter"></select>
     <select id="topicFilter"></select>
-    <select id="sortOrder">
-      <option value="default">Sort By</option>
-      <option value="az">Title A-Z</option>
-      <option value="za">Title Z-A</option>
-      <option value="newest">Newest First</option>
-    </select>
   </div>
   <div class="gallery" id="gallery"></div>
   <footer>
     FD Screenshot Library – Internal Use Only<br>
     For any feedback or detected issues, DM the project owner.
   </footer>
-
   <script>
-    const FLAG_MAP = {
-      "English": "🇬🇧",
-      "Arabic": "🇸🇦",
-      "Vietnamese": "🇻🇳",
-      "Russian": "🇷🇺",
-      "Bahasa": "🇮🇩",
-      "Turkish": "🇹🇷",
-      "Spanish": "🇪🇸",
-      "French": "🇫🇷"
-    };
-
     fetch('data.json')
       .then(response => response.json())
       .then(screenshots => {
@@ -156,93 +130,57 @@
         const languages = new Set();
         const topics = new Set();
 
-        let sortedData = [...screenshots];
+        screenshots.forEach((shot, index) => {
+          languages.add(shot.language);
+          topics.add(shot.title);
 
-        const render = () => {
-          gallery.innerHTML = '';
-          sortedData.forEach((shot, index) => {
-            const item = document.createElement("div");
-            item.className = "item";
-            item.dataset.language = shot.language;
-            item.dataset.topic = shot.title;
+          const item = document.createElement("div");
+          item.className = "item";
+          item.dataset.language = shot.language;
+          item.dataset.topic = shot.title;
 
-            const isNew = shot.new === true;
+          item.innerHTML = `
+            <a href="${shot.image}" target="_blank">
+              <img src="${shot.image}" alt="${shot.title}">
+            </a>
+            <div class="label">${shot.title}</div>
+            <div class="meta">Language: ${shot.language}</div>
+            <div class="btn-group">
+              <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
+              <button class="btn" onclick="togglePreview('preview${index}', this)">👁️</button>
+            </div>
+            <textarea id="text${index}" class="hidden">${shot.text}</textarea>
+            <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
+          `;
+          gallery.appendChild(item);
+        });
 
-            item.innerHTML = `
-              <a href="${shot.image}" target="_blank">
-                <img src="${shot.image}" alt="${shot.title}">
-              </a>
-              <div class="label">
-                ${shot.title}
-                ${isNew ? '<span class="badge">NEW</span>' : ''}
-              </div>
-              <div class="meta">${FLAG_MAP[shot.language] || ""} ${shot.language}</div>
-              <div class="btn-group">
-                <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
-                <button class="btn" onclick="togglePreview('preview${index}', this)">👁️</button>
-              </div>
-              <textarea id="text${index}" class="hidden">${shot.text}</textarea>
-              <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
-            `;
-            gallery.appendChild(item);
-          });
-
-          populateFilters();
-        };
-
-        const populateFilters = () => {
-          const languageFilter = document.getElementById("languageFilter");
-          const topicFilter = document.getElementById("topicFilter");
-          sortedData.forEach(item => {
-            languages.add(item.language);
-            topics.add(item.title);
-          });
-          languageFilter.innerHTML = `<option value="All">All Languages</option>` +
-            Array.from(languages).sort().map(lang => `<option value="${lang}">${lang}</option>`).join("");
-          topicFilter.innerHTML = `<option value="All">All Topics</option>` +
-            Array.from(topics).sort().map(topic => `<option value="${topic}">${topic}</option>`).join("");
-        };
-
-        const searchInput = document.getElementById("searchInput");
+        // Populate filters
         const languageFilter = document.getElementById("languageFilter");
         const topicFilter = document.getElementById("topicFilter");
-        const sortOrder = document.getElementById("sortOrder");
+        languageFilter.innerHTML = `<option value="All">All Languages</option>` +
+          Array.from(languages).sort().map(lang => `<option value="${lang}">${lang}</option>`).join("");
+        topicFilter.innerHTML = `<option value="All">All Topics</option>` +
+          Array.from(topics).sort().map(topic => `<option value="${topic}">${topic}</option>`).join("");
+
+        // Filter logic
+        const searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("input", filterItems);
+        languageFilter.addEventListener("change", filterItems);
+        topicFilter.addEventListener("change", filterItems);
 
         function filterItems() {
           const search = searchInput.value.toLowerCase();
-          const lang = languageFilter.value;
+          const language = languageFilter.value;
           const topic = topicFilter.value;
-
           document.querySelectorAll(".item").forEach(item => {
             const label = item.querySelector(".label").textContent.toLowerCase();
             const matchSearch = label.includes(search);
-            const matchLang = lang === "All" || item.dataset.language === lang;
+            const matchLang = language === "All" || item.dataset.language === language;
             const matchTopic = topic === "All" || item.dataset.topic === topic;
             item.style.display = (matchSearch && matchLang && matchTopic) ? "block" : "none";
           });
         }
-
-        function sortItems() {
-          const sortVal = sortOrder.value;
-          if (sortVal === "az") {
-            sortedData.sort((a, b) => a.title.localeCompare(b.title));
-          } else if (sortVal === "za") {
-            sortedData.sort((a, b) => b.title.localeCompare(a.title));
-          } else if (sortVal === "newest") {
-            sortedData.sort((a, b) => (b.new === true ? 1 : 0) - (a.new === true ? 1 : 0));
-          } else {
-            sortedData = [...screenshots];
-          }
-          render();
-          filterItems();
-        }
-
-        searchInput.addEventListener("input", filterItems);
-        languageFilter.addEventListener("change", filterItems);
-        topicFilter.addEventListener("change", filterItems);
-        sortOrder.addEventListener("change", sortItems);
-
-        render();
       });
 
     function copyText(id, button) {
