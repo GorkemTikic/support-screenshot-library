@@ -19,7 +19,6 @@
     header h1 {
       margin: 0;
       font-size: 24px;
-      color: #1e2329;
     }
     .filters {
       display: flex;
@@ -73,6 +72,11 @@
       color: #555;
       margin-bottom: 10px;
     }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
     .btn {
       padding: 6px 10px;
       font-size: 13px;
@@ -87,14 +91,14 @@
     .hidden {
       display: none;
     }
-    .preview-text {
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-      padding: 8px;
-      margin-top: 8px;
+    .text-preview {
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
       font-size: 13px;
-      text-align: left;
       white-space: pre-wrap;
+      text-align: left;
     }
     footer {
       text-align: center;
@@ -135,41 +139,46 @@
           item.dataset.language = shot.language;
           item.dataset.topic = shot.title;
 
-          item.innerHTML = \`
-            <a href="\${shot.image}" target="_blank">
-              <img src="\${shot.image}" alt="\${shot.title}">
+          item.innerHTML = `
+            <a href="${shot.image}" target="_blank">
+              <img src="${shot.image}" alt="${shot.title}">
             </a>
-            <div class="label">\${shot.title}</div>
-            <div class="meta">Language: \${shot.language}</div>
-            <button class="btn" onclick="copyText('text\${index}', this)">Copy Text</button>
-            <button class="btn" onclick="togglePreview('preview\${index}', this)">👁️ Preview</button>
-            <textarea id="text\${index}" class="hidden">\${shot.text}</textarea>
-            <div id="preview\${index}" class="preview-text hidden">\${shot.text}</div>
-          \`;
+            <div class="label">${shot.title}</div>
+            <div class="meta">Language: ${shot.language}</div>
+            <div class="btn-group">
+              <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
+              <button class="btn" onclick="togglePreview('preview${index}', this)">👁️</button>
+            </div>
+            <textarea id="text${index}" class="hidden">${shot.text}</textarea>
+            <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
+          `;
           gallery.appendChild(item);
         });
 
+        // Populate filters
         const languageFilter = document.getElementById("languageFilter");
         const topicFilter = document.getElementById("topicFilter");
+        languageFilter.innerHTML = `<option value="All">All Languages</option>` +
+          Array.from(languages).sort().map(lang => `<option value="${lang}">${lang}</option>`).join("");
+        topicFilter.innerHTML = `<option value="All">All Topics</option>` +
+          Array.from(topics).sort().map(topic => `<option value="${topic}">${topic}</option>`).join("");
 
-        languageFilter.innerHTML = '<option value="All">All Languages</option>' + 
-          Array.from(languages).sort().map(lang => \`<option value="\${lang}">\${lang}</option>\`).join("");
-        topicFilter.innerHTML = '<option value="All">All Topics</option>' +
-          Array.from(topics).sort().map(topic => \`<option value="\${topic}">\${topic}</option>\`).join("");
-
-        document.getElementById('searchInput').addEventListener('input', filterItems);
-        languageFilter.addEventListener('change', filterItems);
-        topicFilter.addEventListener('change', filterItems);
+        // Filter logic
+        const searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("input", filterItems);
+        languageFilter.addEventListener("change", filterItems);
+        topicFilter.addEventListener("change", filterItems);
 
         function filterItems() {
-          const search = document.getElementById('searchInput').value.toLowerCase();
+          const search = searchInput.value.toLowerCase();
           const language = languageFilter.value;
           const topic = topicFilter.value;
-          document.querySelectorAll('.item').forEach(item => {
-            const matchesSearch = item.querySelector('.label').textContent.toLowerCase().includes(search);
-            const matchesLang = language === "All" || item.dataset.language === language;
-            const matchesTopic = topic === "All" || item.dataset.topic === topic;
-            item.style.display = (matchesSearch && matchesLang && matchesTopic) ? "block" : "none";
+          document.querySelectorAll(".item").forEach(item => {
+            const label = item.querySelector(".label").textContent.toLowerCase();
+            const matchSearch = label.includes(search);
+            const matchLang = language === "All" || item.dataset.language === language;
+            const matchTopic = topic === "All" || item.dataset.topic === topic;
+            item.style.display = (matchSearch && matchLang && matchTopic) ? "block" : "none";
           });
         }
       });
@@ -193,14 +202,9 @@
 
     function togglePreview(id, button) {
       const preview = document.getElementById(id);
-      const isVisible = !preview.classList.contains('hidden');
-      if (isVisible) {
-        preview.classList.add('hidden');
-        button.innerHTML = "👁️ Preview";
-      } else {
-        preview.classList.remove('hidden');
-        button.innerHTML = "🙈 Hide";
-      }
+      const isVisible = !preview.classList.contains("hidden");
+      preview.classList.toggle("hidden");
+      button.textContent = isVisible ? "👁️" : "🙈";
     }
   </script>
 </body>
