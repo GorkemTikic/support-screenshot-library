@@ -64,5 +64,29 @@
     "language": "English",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/LOAN_HISTORY_(ONGOING_LOANS)_-_EN.jpg",
     "text": "To see your ongoing Loan orders or your Loan history, you can follow the steps in the screenshot: \n\n1 -) Click on Home button \n\n2 -) Click on ''More'' \n\n3 -) Scroll Down on that page and find ''Loans'' under Finance. \n\n4 -) Click on The History Icon on Top Right Corner\n\nIn that page you can see your ongoing Loans and your Loan history."
+  },
+  {
+    "title": "Transfer From Spot Wallet to Isolated Margin - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Spot_Wallet_to_Isolated_Margin_-_EN.jpg",
+    "text": "To Transfer assets from Spot Wallet to Isolated Margin, please follow the steps in the above screenshot: \n\n1 -) Click on Assets\n2 -) Click on Spot \n3 -) Click On Isolated Margin\n4 -) Click On Transfer \n\nThe correct pathway: \n\nFrom: Spot Wallet\nTo: Isolated Margin \n\n5 -) Select the Pair you want to transfer into by clicking the pair name. \n\n6 -) Click on the Asset you want to transfer \n\nSelect the Amount and Confirm transfer. \n\nThis is how you transfer into the Isolated Margin."
+  },
+  {
+    "title": "Transfer From Isolated Margin to Spot Wallet - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Isolated_Margin_to_Spot_Wallet_-_EN.jpg",
+    "text": "To Transfer assets from Isolated Margin to Spot Wallet, please follow the steps in the above screenshot: \n\n1 -) Click on Assets\n2 -) Click on Spot \n3 -) Click On Isolated Margin\n4 -) Click On Transfer \n5 -) Click on the Arrows to change the pathway, the correct pathway: \n\nFrom: Isolated Margin\nTo: Spot Wallet\n\n6 -) Select the Pair you want to transfer into by clicking the pair name. \n\n7 -) Click on the Asset you want to transfer \n\nSelect the Amount and Confirm transfer. \n\nThis is how you transfer from Isolated Margin to Spot Wallet."
+  },
+  {
+    "title": "Transfer From Spot Wallet to Cross Margin - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Spot_Wallet_to_Cross_Margin_-_EN.jpg",
+    "text": "To Transfer From Spot Wallet to Cross Margin, please follow the steps in the screenshot: \n\n1 -) Click on Assets\n2 -) Click on Spot\n3 -) Click on Cross Margin\n4 -) Click on Transfer\n\n5 -) The Correct path: \n\nFrom: Spot Wallet\nTo: Cross Margin \n\n6 -) Select the Asset you want to transfer\n\nSelect the amount and confirm the transfer. \n\nThis is how you transfer assets from spot wallet to cross margin."
+  },
+  {
+    "title": "Mark Price Chart - RU",
+    "language": "Russian",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Mark_Price_Chart_-_RU.jpg",
+    "text": "Чтобы изменить вид графика цен с Последняя цена на Цена маркировки, выполните следующие действия, изображённые на снимке экрана:\n\n1) Нажмите на «Фьючерсы»\n\n2) Нажмите на значок «График»\n\n3) Нажмите на кнопку «Последняя цена» над графиком\n\n4) В меню ниже нажмите на «Цена маркировки»\n\nВот как изменить вид графика на «Цена маркировки», чтобы увидеть график Цена маркировки."
   }
 ]
