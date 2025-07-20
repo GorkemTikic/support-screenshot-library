@@ -62,17 +62,11 @@
   <script>
     const entries = [];
 
-    function escapeJsonString(str) {
-      return str.replace(/\\/g, '\\\\')
-                .replace(/\n/g, '\\n')
-                .replace(/"/g, '\\"');
-    }
-
     function addAnother() {
       const title = document.getElementById("title").value.trim();
       const language = document.getElementById("language").value.trim();
       const image = document.getElementById("image").value.trim();
-      const text = escapeJsonString(document.getElementById("text").value.trim());
+      const text = document.getElementById("text").value.trim();
 
       if (!title || !language || !image || !text) {
         alert("Please fill out all fields before adding.");
