@@ -3,120 +3,140 @@
     "title": "Clear Caches - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/Clear%20Caches%20-%20EN.jpg?raw=true",
-    "text": "1 -) Click on Home\n2 -) Click on Menu\n3 -) Click on Settings\n4 -) Click on Clear Cache button\n\nThis helps remove temporary files and can make your app run faster and smoother!"
+    "text": "1 -) Click on Home\n2 -) Click on Menu\n3 -) Click on Settings\n4 -) Click on Clear Cache button\n\nThis helps remove temporary files and can make your app run faster and smoother!",
+    "topic": "General / Settings"
   },
   {
     "title": "Copy Trading History - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/Copy%20Trading%20History%20-%20EN.jpg?raw=true",
-    "text": "1 -) Click on Futures\n2 -) Click on Copy button\n3 -) Click on Copy on right bottom corner\n4 -) You can see the 'Ongoing - Closed' Copy Portfolios in this page."
+    "text": "1 -) Click on Futures\n2 -) Click on Copy button\n3 -) Click on Copy on right bottom corner\n4 -) You can see the 'Ongoing - Closed' Copy Portfolios in this page.",
+    "topic": "Copy Trading"
   },
   {
     "title": "Futures Swap Button (BNFCR) - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/Futures%20Swap%20Button%20(Mostly%20for%20BNFCR)%20-%20EN.jpg?raw=true",
-    "text": "You can't directly transfer the BNFCR back to spot wallet so you need to swap it BNB - BTC or ETH to transfer it back to spot wallet.\n\nTo do that, you can follow the steps in the screenshot:\n\n1 -) Click on Assets\n2 -) Click on Futures\n3 -) Click on USDS-M Futures\n4 -) Click on SWAP\n\nIn the SWAP page, you can select the BNFCR and Swap it to one of the supported coins (ETH-BNB or BTC)\n\nThen once you have one these assets can transfer it back to spot wallet as well."
+    "text": "You can't directly transfer the BNFCR back to spot wallet so you need to swap it BNB - BTC or ETH to transfer it back to spot wallet.\n\nTo do that, you can follow the steps in the screenshot:\n\n1 -) Click on Assets\n2 -) Click on Futures\n3 -) Click on USDS-M Futures\n4 -) Click on SWAP\n\nIn the SWAP page, you can select the BNFCR and Swap it to one of the supported coins (ETH-BNB or BTC)\n\nThen once you have one these assets can transfer it back to spot wallet as well.",
+    "topic": "Futures Trading"
   },
   {
     "title": "System Feedback - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/35a09846ff73857b2a751883ba8879dd22ab5242/images/System%20Feedback%20-%20EN.jpg?raw=true",
-    "text": "To send the System Feedback from Binance Mobile App, please follow the steps on the screenshot: \n\n1 -) Click on the Home \n2 -) Click on the Menu \n3 -) Click on the Settings\n4 -) Click on ''Help & Support'' tab \n5 -) Click on ''System Feedback''\n6 -) Click on ''SEND'' \n7 -) Wait for Success notification to pop-ups. \n\nAfter you follow the related steps which I also provided as screenshot then please let me know so I can tell tech team that you completed the System Feedback."
+    "text": "To send the System Feedback from Binance Mobile App, please follow the steps on the screenshot: \n\n1 -) Click on the Home \n2 -) Click on the Menu \n3 -) Click on the Settings\n4 -) Click on ''Help & Support'' tab \n5 -) Click on ''System Feedback''\n6 -) Click on ''SEND'' \n7 -) Wait for Success notification to pop-ups. \n\nAfter you follow the related steps which I also provided as screenshot then please let me know so I can tell tech team that you completed the System Feedback.",
+    "topic": "General / Settings"
   },
   {
     "title": "Futures Transaction History (Export) - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/Futures%20Transaction%20History%20(Export)%20-%20EN.jpg?raw=true",
-    "text": "Please click on Futures and then the ''history icon'' like I marked. \n\nThen go to ''Transaction History'' tab an click on ''Export'' button on top right corner. \n\nYou will see the Export tab, in there: \n\n Select: Beyond 90 Days\n\nThe timeline can be 12 months only so if you are looking for the last 2-5 years, you can simply create yearly transaction history such as:\n\n2020-01-01 to 2020-12-31\n2021-01-01 to 2021-12-31\n2022-01-01 to 2022-12-31\n2023-01-01 to 2023-12-31\n2024-01-01 to 2024-12-31\n\nThis way you can create transaction history files for each year separately ."
+    "text": "Please click on Futures and then the ''history icon'' like I marked. \n\nThen go to ''Transaction History'' tab an click on ''Export'' button on top right corner. \n\nYou will see the Export tab, in there: \n\n Select: Beyond 90 Days\n\nThe timeline can be 12 months only so if you are looking for the last 2-5 years, you can simply create yearly transaction history such as:\n\n2020-01-01 to 2020-12-31\n2021-01-01 to 2021-12-31\n2022-01-01 to 2022-12-31\n2023-01-01 to 2023-12-31\n2024-01-01 to 2024-12-31\n\nThis way you can create transaction history files for each year separately .",
+    "topic": "Futures Trading"
   },
   {
     "title": "Transfer From Cross Margin To Spot - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/Transfer%20From%20Cross%20Margin%20To%20Spot%20-%20EN.jpg?raw=true",
-    "text": "1 -) Click on Asset\n2 -) Click on Spot\n3 -) Click on Cross Margin\n4 -) Click on Transfer\n\nYou will see the Transfer page like this... In here you need to click on the arrows on right. \n\n5 -) Click on Arrows\n\n6 -) Correct Pathway: \n\nFrom: Cross Margin\nTo: Spot Wallet\n\nSelect Your Coin, the amount and and confirm the transfer. \n\nWith this steps, you can transfer all your assets from Cross Margin to Spot Wallet."
+    "text": "1 -) Click on Asset\n2 -) Click on Spot\n3 -) Click on Cross Margin\n4 -) Click on Transfer\n\nYou will see the Transfer page like this... In here you need to click on the arrows on right. \n\n5 -) Click on Arrows\n\n6 -) Correct Pathway: \n\nFrom: Cross Margin\nTo: Spot Wallet\n\nSelect Your Coin, the amount and and confirm the transfer. \n\nWith this steps, you can transfer all your assets from Cross Margin to Spot Wallet.",
+    "topic": "Margin Trading"
   },
   {
     "title": "Cooling-Off Period - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/Cooling-Off%20Period%20-%20EN.jpg?raw=true",
-    "text": "You can disable your Futures Trading on your account. You have cooling off function for this: \n\n1 -) Please click on the ''...'' icon on Futures Trading page \n\n2 -) Click on ''Cooling-Off Period'' \n\n3 -) Click on the Enable button. \n\n4 -) Then you can select the cooling off period such as: \n\n1 Day\n1 Week \n1 Month\nIndefinite (This will restrict the futures trading forever) \n\nOnce you activate the cooling off period. You won't be able to trade Futures so you will disable the futures trading. \n\nPlease note that once you activated Cooling Off Period, we can't assist you to disable it. \n\nWhat Is the Cooling Period Function and How to Use It?\nhttps://www.binance.com/en/support/faq/detail/ad7fd07f63a64954a6d6e9257d16adcc "
+    "text": "You can disable your Futures Trading on your account. You have cooling off function for this: \n\n1 -) Please click on the ''...'' icon on Futures Trading page \n\n2 -) Click on ''Cooling-Off Period'' \n\n3 -) Click on the Enable button. \n\n4 -) Then you can select the cooling off period such as: \n\n1 Day\n1 Week \n1 Month\nIndefinite (This will restrict the futures trading forever) \n\nOnce you activate the cooling off period. You won't be able to trade Futures so you will disable the futures trading. \n\nPlease note that once you activated Cooling Off Period, we can't assist you to disable it. \n\nWhat Is the Cooling Period Function and How to Use It?\nhttps://www.binance.com/en/support/faq/detail/ad7fd07f63a64954a6d6e9257d16adcc ",
+    "topic": "Futures Trading"
   },
   {
     "title": "Mark Price Chart - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/Mark%20Price%20Chart%20-%20EN.jpg?raw=true",
-    "text": "To see the Mark Price chart, please follow the steps in the screenshot: \n\n1 -) Click On Futures \n\n2 -) Click On the Chart Icon\n\n3 -) Click on Last Price button above the chart\n\n4 -) Select Mark Price \n\nThis way you can see the real-time mark price chart.\n\nTo Learn More about the difference between Mark Price and Last Price, you can check this official guide as well: \n\nWhat Is the Difference Between a Futures Contract’s Last Price and Mark Price?\nhttps://www.binance.com/en/blog/futures/5704082076024731087 "
+    "text": "To see the Mark Price chart, please follow the steps in the screenshot: \n\n1 -) Click On Futures \n\n2 -) Click On the Chart Icon\n\n3 -) Click on Last Price button above the chart\n\n4 -) Select Mark Price \n\nThis way you can see the real-time mark price chart.\n\nTo Learn More about the difference between Mark Price and Last Price, you can check this official guide as well: \n\nWhat Is the Difference Between a Futures Contract’s Last Price and Mark Price?\nhttps://www.binance.com/en/blog/futures/5704082076024731087 ",
+    "topic": "Futures Trading"
   },
   {
     "title": "Funding Fee History - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/Funding%20Fee%20History%20-%20EN.jpg?raw=true",
-    "text": "To see the Funding Fee History on your Mobile App, please follow the steps in the screenshot: \n\n1 -) Click On Futures\n\n2 -) Click on the History Icon\n\n3 -) Scroll on the right on upper menu and click on Funding Fee \n\nIn this page you can see how much funding fee you received or paid in details."
+    "text": "To see the Funding Fee History on your Mobile App, please follow the steps in the screenshot: \n\n1 -) Click On Futures\n\n2 -) Click on the History Icon\n\n3 -) Scroll on the right on upper menu and click on Funding Fee \n\nIn this page you can see how much funding fee you received or paid in details.",
+    "topic": "Futures Trading"
   },
   {
     "title": "Mock Trading - EN",
     "language": "English",
     "image": "https://github.com/GorkemTikic/support-screenshot-library/blob/main/images/Mock%20Trading%20-%20EN.jpg?raw=true",
-    "text": "To reach the Mock Trading/Demo Trading page, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' icon on top right corner\n\n3 -) On the pop-up menu click on ''Mock Trading'' \n\nThis way you can access to the Mock Trading page."
+    "text": "To reach the Mock Trading/Demo Trading page, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' icon on top right corner\n\n3 -) On the pop-up menu click on ''Mock Trading'' \n\nThis way you can access to the Mock Trading page.",
+    "topic": "Futures Trading"
   },
   {
     "title": "LOAN HISTORY (ONGOING LOANS) - EN",
     "language": "English",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/LOAN_HISTORY_(ONGOING_LOANS)_-_EN.jpg",
-    "text": "To see your ongoing Loan orders or your Loan history, you can follow the steps in the screenshot: \n\n1 -) Click on Home button \n\n2 -) Click on ''More'' \n\n3 -) Scroll Down on that page and find ''Loans'' under Finance. \n\n4 -) Click on The History Icon on Top Right Corner\n\nIn that page you can see your ongoing Loans and your Loan history."
+    "text": "To see your ongoing Loan orders or your Loan history, you can follow the steps in the screenshot: \n\n1 -) Click on Home button \n\n2 -) Click on ''More'' \n\n3 -) Scroll Down on that page and find ''Loans'' under Finance. \n\n4 -) Click on The History Icon on Top Right Corner\n\nIn that page you can see your ongoing Loans and your Loan history.",
+    "topic": "Binance LOAN"
   },
   {
     "title": "Transfer From Spot Wallet to Isolated Margin - EN",
     "language": "English",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Spot_Wallet_to_Isolated_Margin_-_EN.jpg",
-    "text": "To Transfer assets from Spot Wallet to Isolated Margin, please follow the steps in the above screenshot: \n\n1 -) Click on Assets\n2 -) Click on Spot \n3 -) Click On Isolated Margin\n4 -) Click On Transfer \n\nThe correct pathway: \n\nFrom: Spot Wallet\nTo: Isolated Margin \n\n5 -) Select the Pair you want to transfer into by clicking the pair name. \n\n6 -) Click on the Asset you want to transfer \n\nSelect the Amount and Confirm transfer. \n\nThis is how you transfer into the Isolated Margin."
+    "text": "To Transfer assets from Spot Wallet to Isolated Margin, please follow the steps in the above screenshot: \n\n1 -) Click on Assets\n2 -) Click on Spot \n3 -) Click On Isolated Margin\n4 -) Click On Transfer \n\nThe correct pathway: \n\nFrom: Spot Wallet\nTo: Isolated Margin \n\n5 -) Select the Pair you want to transfer into by clicking the pair name. \n\n6 -) Click on the Asset you want to transfer \n\nSelect the Amount and Confirm transfer. \n\nThis is how you transfer into the Isolated Margin.",
+    "topic": "Margin Trading"
   },
   {
     "title": "Transfer From Isolated Margin to Spot Wallet - EN",
     "language": "English",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Isolated_Margin_to_Spot_Wallet_-_EN.jpg",
-    "text": "To Transfer assets from Isolated Margin to Spot Wallet, please follow the steps in the above screenshot: \n\n1 -) Click on Assets\n2 -) Click on Spot \n3 -) Click On Isolated Margin\n4 -) Click On Transfer \n5 -) Click on the Arrows to change the pathway, the correct pathway: \n\nFrom: Isolated Margin\nTo: Spot Wallet\n\n6 -) Select the Pair you want to transfer into by clicking the pair name. \n\n7 -) Click on the Asset you want to transfer \n\nSelect the Amount and Confirm transfer. \n\nThis is how you transfer from Isolated Margin to Spot Wallet."
+    "text": "To Transfer assets from Isolated Margin to Spot Wallet, please follow the steps in the above screenshot: \n\n1 -) Click on Assets\n2 -) Click on Spot \n3 -) Click On Isolated Margin\n4 -) Click On Transfer \n5 -) Click on the Arrows to change the pathway, the correct pathway: \n\nFrom: Isolated Margin\nTo: Spot Wallet\n\n6 -) Select the Pair you want to transfer into by clicking the pair name. \n\n7 -) Click on the Asset you want to transfer \n\nSelect the Amount and Confirm transfer. \n\nThis is how you transfer from Isolated Margin to Spot Wallet.",
+    "topic": "Margin Trading"
   },
   {
     "title": "Transfer From Spot Wallet to Cross Margin - EN",
     "language": "English",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Spot_Wallet_to_Cross_Margin_-_EN.jpg",
-    "text": "To Transfer From Spot Wallet to Cross Margin, please follow the steps in the screenshot: \n\n1 -) Click on Assets\n2 -) Click on Spot\n3 -) Click on Cross Margin\n4 -) Click on Transfer\n\n5 -) The Correct path: \n\nFrom: Spot Wallet\nTo: Cross Margin \n\n6 -) Select the Asset you want to transfer\n\nSelect the amount and confirm the transfer. \n\nThis is how you transfer assets from spot wallet to cross margin."
+    "text": "To Transfer From Spot Wallet to Cross Margin, please follow the steps in the screenshot: \n\n1 -) Click on Assets\n2 -) Click on Spot\n3 -) Click on Cross Margin\n4 -) Click on Transfer\n\n5 -) The Correct path: \n\nFrom: Spot Wallet\nTo: Cross Margin \n\n6 -) Select the Asset you want to transfer\n\nSelect the amount and confirm the transfer. \n\nThis is how you transfer assets from spot wallet to cross margin.",
+    "topic": "Margin Trading"
   },
   {
     "title": "Mark Price Chart - RU",
     "language": "Russian",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Mark_Price_Chart_-_RU.jpg",
-    "text": "Чтобы изменить вид графика цен с Последняя цена на Цена маркировки, выполните следующие действия, изображённые на снимке экрана:\n\n1) Нажмите на «Фьючерсы»\n\n2) Нажмите на значок «График»\n\n3) Нажмите на кнопку «Последняя цена» над графиком\n\n4) В меню ниже нажмите на «Цена маркировки»\n\nВот как изменить вид графика на «Цена маркировки», чтобы увидеть график Цена маркировки."
+    "text": "Чтобы изменить вид графика цен с Последняя цена на Цена маркировки, выполните следующие действия, изображённые на снимке экрана:\n\n1) Нажмите на «Фьючерсы»\n\n2) Нажмите на значок «График»\n\n3) Нажмите на кнопку «Последняя цена» над графиком\n\n4) В меню ниже нажмите на «Цена маркировки»\n\nВот как изменить вид графика на «Цена маркировки», чтобы увидеть график Цена маркировки.",
+    "topic": "Futures Trading"
   },
   {
     "title": "Mark Price Chart - VI",
     "language": "Vietnamese",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Mark_Price_Chart_-_VI.jpg",
-    "text": "Để thay đổi biểu đồ giá từ '' Giá gàn nhất '' sang '' Giá đánh dấu '', vui lòng làm theo các bước trong ảnh chụp màn hình:\n\n1 -) Nhấp vào '' Futures ''\n\n2 -) Nhấp vào ''Biểu tượng biểu đồ''\n\n3 -) Nhấp vào nút '' Giá gàn nhất\n '' phía trên biểu đồ\n\n4 -) Trong menu bật lên bên dưới, nhấp vào '' Giá đánh dấu ''\n\nĐây là cách bạn thay đổi biểu đồ thành '' Giá đánh dấu '' để xem biểu đồ Giá đánh dấu."
+    "text": "Để thay đổi biểu đồ giá từ '' Giá gàn nhất '' sang '' Giá đánh dấu '', vui lòng làm theo các bước trong ảnh chụp màn hình:\n\n1 -) Nhấp vào '' Futures ''\n\n2 -) Nhấp vào ''Biểu tượng biểu đồ''\n\n3 -) Nhấp vào nút '' Giá gàn nhất\n '' phía trên biểu đồ\n\n4 -) Trong menu bật lên bên dưới, nhấp vào '' Giá đánh dấu ''\n\nĐây là cách bạn thay đổi biểu đồ thành '' Giá đánh dấu '' để xem biểu đồ Giá đánh dấu.",
+    "topic": "Futures Trading"
   },
   {
     "title": "Mark Price Chart - AR",
     "language": "Arabic",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Mark_Price_Chart_-_AR.jpg",
-    "text": "لتغيير مخطط أسعارك من اخر سعر إلى السعر العادل، يُرجى اتباع الخطوات الموضحة في لقطة الشاشة:\n\n‎1-)‎ انقر على \"العقود الآجلة\"\n\n‎2-)‎ انقر على \"أيقونة المخطط\"\n\n‎3-)‎ انقر على زر \"اخر سعر\" أعلى المخطط.\n\n‎4-)‎ من القائمة المنبثقة أدناه، انقر على \"السعر العادل\".\n\nهكذا يمكنك تغيير مخططك إلى \"السعر العادل\" لعرض مخطط السعر العادل."
+    "text": "لتغيير مخطط أسعارك من اخر سعر إلى السعر العادل، يُرجى اتباع الخطوات الموضحة في لقطة الشاشة:\n\n‎1-)‎ انقر على \"العقود الآجلة\"\n\n‎2-)‎ انقر على \"أيقونة المخطط\"\n\n‎3-)‎ انقر على زر \"اخر سعر\" أعلى المخطط.\n\n‎4-)‎ من القائمة المنبثقة أدناه، انقر على \"السعر العادل\".\n\nهكذا يمكنك تغيير مخططك إلى \"السعر العادل\" لعرض مخطط السعر العادل.",
+    "topic": "Futures Trading"
   },
   {
     "title": "Change Asset Mode (Single,Multi) - EN",
     "language": "English",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Change_Asset_Mode_(Single%2CMulti)_-_EN.jpg",
-    "text": "To change Asset Mode, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' Icon on top right corner.\n\n3 -) Click on ''Preferences'' on the pop-up menu.\n\n4 -) Click on Asset Mode button.\n\n5 -) In this page you can change your asset mode."
+    "text": "To change Asset Mode, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' Icon on top right corner.\n\n3 -) Click on ''Preferences'' on the pop-up menu.\n\n4 -) Click on Asset Mode button.\n\n5 -) In this page you can change your asset mode.",
+    "topic": "Futures Trading"
   },
   {
     "title": "Change Position Mode (One-Way,Multi) - EN",
     "language": "English",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Change_Position_Mode_(One-Way%2CMulti)_-_EN.jpg",
-    "text": "To Change Asset Mode, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' Icon on top right corner.\n\n3 -) Click on ''Preferences'' on the pop-up menu.\n\n4 -) Click on Position Mode button.\n\n5 -) In this page you can change your Position mode."
+    "text": "To Change Asset Mode, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' Icon on top right corner.\n\n3 -) Click on ''Preferences'' on the pop-up menu.\n\n4 -) Click on Position Mode button.\n\n5 -) In this page you can change your Position mode.",
+    "topic": "Futures Trading"
   },
   {
     "title": "Change Button Settings in Positions - EN",
     "language": "English",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Change_Button_Settings_in_Positions_-_EN.jpg",
-    "text": "To Change Asset Mode, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' Icon on top right corner.\n\n3 -) Click on ''Preferences'' on the pop-up menu.\n\n4 -) Click on Button Settings In Positions.\n\n5 -) In this page you can change your Button settings on the open positions. You can enable or the disable options you prefer."
+    "text": "To Change Asset Mode, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' Icon on top right corner.\n\n3 -) Click on ''Preferences'' on the pop-up menu.\n\n4 -) Click on Button Settings In Positions.\n\n5 -) In this page you can change your Button settings on the open positions. You can enable or the disable options you prefer.",
+    "topic": "Futures Trading"
   }
 ]
