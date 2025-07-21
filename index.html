@@ -83,14 +83,14 @@
       border-radius: 12px;
       margin-bottom: 10px;
     }
-    .Futures\ Trading { background-color: #2563eb; }
-    .Margin\ Trading { background-color: #f97316; }
-    .Binance\ LOAN { background-color: #059669; }
-    .Options\ Trading { background-color: #7c3aed; }
-    .Smart\ Money { background-color: #10b981; }
-    .Arbitrage\ Trading { background-color: #d97706; }
-    .Copy\ Trading { background-color: #9333ea; }
-    .General { background-color: #6b7280; }
+    .tag-FuturesTrading { background-color: #2563eb; }
+    .tag-MarginTrading { background-color: #f97316; }
+    .tag-BinanceLOAN { background-color: #059669; }
+    .tag-OptionsTrading { background-color: #7c3aed; }
+    .tag-SmartMoney { background-color: #10b981; }
+    .tag-ArbitrageTrading { background-color: #d97706; }
+    .tag-CopyTrading { background-color: #9333ea; }
+    .tag-General { background-color: #6b7280; }
     .btn-group {
       display: flex;
       justify-content: center;
@@ -168,7 +168,6 @@
           if (shot.topic) topics.add(shot.topic);
         });
 
-        // Populate filters
         const languageFilter = document.getElementById("languageFilter");
         const topicFilter = document.getElementById("topicFilter");
         languageFilter.innerHTML = `<option value="All">All Languages</option>` +
@@ -176,11 +175,14 @@
         topicFilter.innerHTML = `<option value="All">All Topics</option>` +
           Array.from(topics).sort().map(topic => `<option value="${topic}">${topic}</option>`).join("");
 
-        // Filter logic
         const searchInput = document.getElementById("searchInput");
         searchInput.addEventListener("input", render);
         languageFilter.addEventListener("change", render);
         topicFilter.addEventListener("change", render);
+
+        function sanitizeTopicClass(topic) {
+          return "tag-" + (topic || "Uncategorized").replace(/[^a-zA-Z0-9]/g, "");
+        }
 
         function render() {
           const search = searchInput.value.toLowerCase();
@@ -197,14 +199,14 @@
             if (matchSearch && matchLang && matchTopic) {
               const item = document.createElement("div");
               item.className = "item";
-              const safeClass = (shot.topic || "Uncategorized").replace(/\s/g, " ");
+              const topicClass = sanitizeTopicClass(shot.topic);
               item.innerHTML = `
                 <a href="${shot.image}" target="_blank">
                   <img src="${shot.image}" alt="${shot.title}">
                 </a>
                 <div class="label">${shot.title}</div>
                 <div class="meta">Language: ${shot.language}</div>
-                <div class="tag ${safeClass}">${shot.topic || "Uncategorized"}</div>
+                <div class="tag ${topicClass}">${shot.topic || "Uncategorized"}</div>
                 <div class="btn-group">
                   <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
                   <button class="btn" onclick="togglePreview('preview${index}', this)">👁️</button>
