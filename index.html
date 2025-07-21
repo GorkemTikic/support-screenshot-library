@@ -156,6 +156,13 @@
     For any feedback or detected issues, DM the project owner.
   </footer>
   <script>
+    const TRACKING_URL = "https://script.google.com/macros/s/AKfycby8WRPsdB6-dg0WYu2b6O09fhBuZemWnoQDle1F72siMf0UXTyhXwfZQP3WVoq5oQw/exec";
+
+    function logUsage(eventType, shot) {
+      const url = `${TRACKING_URL}?event=${eventType}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic || '')}`;
+      fetch(url).catch(() => {});
+    }
+
     fetch('data.json')
       .then(response => response.json())
       .then(screenshots => {
@@ -215,6 +222,14 @@
                 <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
               `;
               gallery.appendChild(item);
+
+              // Track image load
+              logUsage("image_load", shot);
+
+              // Track right click
+              item.querySelector("img").addEventListener("contextmenu", () => {
+                logUsage("right_click", shot);
+              });
             }
           });
         }
