@@ -1,93 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>FD Screenshot Admin (Multi)</title>
+  <meta charset="UTF-8">
+  <title>FD Screenshot Admin CMS</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; background: #f7f8fa; }
-    label { display: block; margin-top: 20px; font-weight: bold; }
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f7f8fa; }
+    h1 { margin-bottom: 20px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
     input, textarea, select {
       width: 100%; padding: 10px; margin-top: 5px;
       border: 1px solid #ccc; border-radius: 4px;
     }
     button {
-      margin-top: 20px; padding: 10px 20px;
+      margin-top: 15px; padding: 10px 20px;
       background-color: #FCD535; border: none;
       border-radius: 4px; cursor: pointer;
-      margin-right: 10px;
     }
-    pre {
-      background: #fff; padding: 20px;
-      border: 1px solid #ddd; border-radius: 4px;
-      white-space: pre-wrap;
+    .section {
+      margin-top: 30px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
     }
+    .section summary {
+      padding: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .entry {
+      padding: 10px;
+      border-top: 1px solid #eee;
+    }
+    .entry img { max-width: 100px; display: block; margin-top: 5px; }
+    .entry pre { background: #f4f4f4; padding: 10px; white-space: pre-wrap; border-radius: 4px; }
+    .pagination { margin-top: 10px; text-align: center; }
+    .pagination button { margin: 0 5px; }
   </style>
 </head>
 <body>
-  <h1>FD Screenshot Admin Generator</h1>
+  <h1>FD Screenshot Admin CMS</h1>
 
-  <label for="title">Title:</label>
-  <input type="text" id="title" placeholder="e.g. Clear Caches - EN">
+  <!-- Entry Form -->
+  <div>
+    <h2>Add / Edit Entry</h2>
+    <label for="title">Title:</label>
+    <input type="text" id="title">
 
-  <label for="language">Language:</label>
-  <select id="language">
-    <option value="">Select a language</option>
-    <option>English</option>
-    <option>Arabic</option>
-    <option>Vietnamese</option>
-    <option>Russian</option>
-    <option>Bahasa</option>
-    <option>Turkish</option>
-    <option>Spanish</option>
-    <option>Portuguese</option>
-    <option>French</option>
-    <option>German</option>
-    <option>Italian</option>
-    <option>Chinese</option>
-    <option>Japanese</option>
-    <option>Korean</option>
-  </select>
+    <label for="language">Language:</label>
+    <select id="language">
+      <option>English</option>
+      <option>Arabic</option>
+      <option>Vietnamese</option>
+      <option>Russian</option>
+      <option>Bahasa</option>
+      <option>Turkish</option>
+      <option>Spanish</option>
+      <option>Portuguese</option>
+      <option>French</option>
+      <option>German</option>
+      <option>Italian</option>
+      <option>Chinese</option>
+      <option>Japanese</option>
+      <option>Korean</option>
+    </select>
 
-  <label for="image">Image URL:</label>
-  <input type="text" id="image" placeholder="Paste your image URL here">
+    <label for="topic">Topic:</label>
+    <select id="topic">
+      <option>Futures Trading</option>
+      <option>Margin Trading</option>
+      <option>Binance LOAN</option>
+      <option>Options Trading</option>
+      <option>Smart Money</option>
+      <option>Arbitrage Trading</option>
+      <option>General</option>
+      <option>Copy Trading</option>
+    </select>
 
-  <label for="text">Macro Text:</label>
-  <textarea id="text" rows="8" placeholder="Paste the macro steps here..."></textarea>
+    <label for="image">Image URL:</label>
+    <input type="text" id="image" placeholder="Will auto-fill after upload">
+    <input type="file" id="upload" accept="image/*">
+    <button onclick="uploadImage()">📤 Upload Image</button>
 
-  <button onclick="addAnother()">+ Add Another</button>
-  <button onclick="copyAll()">📋 Copy JSON Array</button>
+    <label for="text">Macro Text:</label>
+    <textarea id="text" rows="8"></textarea>
 
-  <pre id="output">[ ]</pre>
+    <button onclick="addOrUpdateEntry()">💾 Save Entry</button>
+    <button onclick="saveToGitHub()">🚀 Save to GitHub</button>
+  </div>
+
+  <!-- Entry List -->
+  <details class="section">
+    <summary>📚 Saved Entries</summary>
+    <div class="filters">
+      <input type="text" id="search" placeholder="Search by title...">
+      <select id="languageFilter"><option value="All">All Languages</option></select>
+    </div>
+    <div id="entries"></div>
+    <div class="pagination">
+      <button onclick="prevPage()">⬅️ Prev</button>
+      <span id="pageInfo"></span>
+      <button onclick="nextPage()">Next ➡️</button>
+    </div>
+  </details>
+
+  <!-- Raw JSON Output -->
+  <details class="section">
+    <summary>🛠 Raw JSON Preview</summary>
+    <pre id="output">Loading...</pre>
+  </details>
 
   <script>
-    const entries = [];
+    const token = "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";
+    const repo = "GorkemTikic/support-screenshot-library";
+    const filePath = "data.json";
+    let entries = [], editIndex = -1, currentPage = 1, itemsPerPage = 20;
 
-    function addAnother() {
+    const toBase64 = str => btoa(unescape(encodeURIComponent(str)));
+    const decodeBase64 = str => decodeURIComponent(escape(atob(str)));
+
+    async function uploadImage() {
+      const fileInput = document.getElementById("upload");
+      const imageInput = document.getElementById("image");
+      if (!fileInput.files.length) return alert("Please select an image file.");
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        const base64Image = e.target.result.split(',')[1];
+        const filename = file.name.replace(/\s+/g, '_');
+        const apiUrl = `https://api.github.com/repos/${repo}/contents/images/${filename}`;
+
+        const res = await fetch(apiUrl, {
+          method: "PUT",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/vnd.github+json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: `Upload image: ${filename}`,
+            content: base64Image
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          imageInput.value = data.content.download_url;
+          alert("✅ Image uploaded successfully!");
+        } else {
+          alert("❌ Upload failed.");
+          console.error(data);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function loadEntries() {
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`);
+      const data = await res.json();
+      entries = JSON.parse(decodeBase64(data.content));
+      window._sha = data.sha;
+      renderLanguageFilter();
+      renderEntries();
+    }
+
+    function renderLanguageFilter() {
+      const set = new Set(entries.map(e => e.language));
+      const filter = document.getElementById("languageFilter");
+      const options = [...set].sort().map(l => `<option>${l}</option>`);
+      filter.innerHTML = '<option value="All">All Languages</option>' + options.join('');
+    }
+
+    function renderEntries() {
+      const search = document.getElementById("search").value.toLowerCase();
+      const lang = document.getElementById("languageFilter").value;
+      const filtered = entries.filter(e =>
+        (lang === "All" || e.language === lang) && e.title.toLowerCase().includes(search)
+      );
+      const start = (currentPage - 1) * itemsPerPage;
+      const page = filtered.slice(start, start + itemsPerPage);
+      document.getElementById("entries").innerHTML = page.map((e, i) => `
+        <div class="entry">
+          <strong>${e.title}</strong> (${e.language})<br><em>${e.topic || ''}</em>
+          <img src="${e.image}" alt="">
+          <pre>${e.text}</pre>
+          <button onclick="editEntry(${entries.indexOf(e)})">✏️ Edit</button>
+          <button onclick="deleteEntry(${entries.indexOf(e)})">🗑️ Delete</button>
+        </div>`).join('');
+      document.getElementById("pageInfo").textContent = `Page ${currentPage} of ${Math.ceil(filtered.length / itemsPerPage)}`;
+      document.getElementById("output").textContent = JSON.stringify(entries, null, 2);
+    }
+
+    function addOrUpdateEntry() {
       const title = document.getElementById("title").value.trim();
       const language = document.getElementById("language").value.trim();
+      const topic = document.getElementById("topic").value.trim();
       const image = document.getElementById("image").value.trim();
       const text = document.getElementById("text").value.trim();
-
-      if (!title || !language || !image || !text) {
-        alert("Please fill out all fields before adding.");
-        return;
-      }
-
-      entries.push({ title, language, image, text });
-      document.getElementById("output").textContent = JSON.stringify(entries, null, 2);
-
-      // Reset fields
+      if (!title || !language || !image || !text || !topic) return alert("Fill out all fields");
+      const newEntry = { title, language, image, text, topic };
+      if (editIndex >= 0) entries[editIndex] = newEntry;
+      else entries.push(newEntry);
+      editIndex = -1;
       document.getElementById("title").value = "";
       document.getElementById("language").selectedIndex = 0;
+      document.getElementById("topic").selectedIndex = 0;
       document.getElementById("image").value = "";
       document.getElementById("text").value = "";
+      document.getElementById("upload").value = "";
+      renderEntries();
     }
 
-    function copyAll() {
-      navigator.clipboard.writeText(document.getElementById("output").textContent)
-        .then(() => alert("✅ JSON array copied!"))
-        .catch(() => alert("❌ Failed to copy."));
+    function editEntry(index) {
+      const e = entries[index];
+      document.getElementById("title").value = e.title;
+      document.getElementById("language").value = e.language;
+      document.getElementById("topic").value = e.topic || "";
+      document.getElementById("image").value = e.image;
+      document.getElementById("text").value = e.text;
+      editIndex = index;
     }
+
+    function deleteEntry(index) {
+      if (confirm("Are you sure?")) {
+        entries.splice(index, 1);
+        renderEntries();
+      }
+    }
+
+    async function saveToGitHub() {
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github+json"
+        },
+        body: JSON.stringify({
+          message: "Update data.json",
+          content: toBase64(JSON.stringify(entries, null, 2)),
+          sha: window._sha
+        })
+      });
+      if (res.ok) {
+        alert("✅ Successfully updated GitHub.");
+        loadEntries();
+      } else {
+        alert("❌ Failed to update GitHub.");
+      }
+    }
+
+    document.getElementById("search").addEventListener("input", () => { currentPage = 1; renderEntries(); });
+    document.getElementById("languageFilter").addEventListener("change", () => { currentPage = 1; renderEntries(); });
+    function prevPage() { if (currentPage > 1) currentPage--; renderEntries(); }
+    function nextPage() { currentPage++; renderEntries(); }
+
+    loadEntries();
   </script>
 </body>
 </html>
