@@ -138,5 +138,19 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Change_Button_Settings_in_Positions_-_EN.jpg",
     "text": "To Change Asset Mode, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' Icon on top right corner.\n\n3 -) Click on ''Preferences'' on the pop-up menu.\n\n4 -) Click on Button Settings In Positions.\n\n5 -) In this page you can change your Button settings on the open positions. You can enable or the disable options you prefer.",
     "topic": "Futures Trading"
+  },
+  {
+    "title": "Loan Repayment (Collateral) - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Loan_Repayment_(Collateral)_-_EN.jpg",
+    "text": "There are two ways to repay an ongoing loan\n\nBorrowed Coin\nCollateral \n\nSo if you wish to repay an ongoing Loan with the collateral amount, please follow the steps in the screenshot: \n\n1 -) Click on ''Ongoing Orders'' on Loan Orders Page\n2 -) Click on ''Repay'' \n3 -) Click on ''Collateral'' on upper menu\n\nEnter the amount you wish to repay and you will see the LTV after repayment and the amount of collateral will return after the repayment on the details as well. \n\nThis is how you repay an ongoing Loan with Collateral.",
+    "topic": "Binance LOAN"
+  },
+  {
+    "title": "Loan Repayment (Borrowed Coin) - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Loan_Repayment_(Borrowed_Coin)_-_EN.jpg",
+    "text": "There are two ways to repay an ongoing loan\n\nBorrowed Coin\nCollateral \n\nSo if you wish to repay an ongoing Loan with the borrowed coin, please follow the steps in the screenshot: \n\n1 -) Click on ''Ongoing Orders'' on Loan Orders Page\n2 -) Click on ''Repay'' \n3 -) Click on ''Borrowed Coin'' on upper menu\n\nEnter the amount you wish to repay and you will see the LTV after repayment and the amount of collateral will return after the repayment on the details as well. \n\nThis is how you repay an ongoing Loan with Borrowed Coin.",
+    "topic": "Binance LOAN"
   }
 ]
