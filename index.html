@@ -37,12 +37,19 @@
       background-color: #ffffff;
       cursor: pointer;
     }
+    .gallery-section {
+      padding: 20px;
+    }
+    .section-header {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 20px 10px 10px;
+    }
     .gallery {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
-      padding: 20px;
     }
     .item {
       background: #ffffff;
@@ -117,7 +124,7 @@
     <select id="languageFilter"></select>
     <select id="topicFilter"></select>
   </div>
-  <div class="gallery" id="gallery"></div>
+  <div id="gallerySection" class="gallery-section"></div>
   <footer>
     FD Screenshot Library – Internal Use Only<br>
     For any feedback or detected issues, DM the project owner.
@@ -126,33 +133,13 @@
     fetch('data.json')
       .then(response => response.json())
       .then(screenshots => {
-        const gallery = document.getElementById("gallery");
+        const gallerySection = document.getElementById("gallerySection");
         const languages = new Set();
         const topics = new Set();
 
-        screenshots.forEach((shot, index) => {
+        screenshots.forEach(shot => {
           languages.add(shot.language);
-          topics.add(shot.title);
-
-          const item = document.createElement("div");
-          item.className = "item";
-          item.dataset.language = shot.language;
-          item.dataset.topic = shot.title;
-
-          item.innerHTML = `
-            <a href="${shot.image}" target="_blank">
-              <img src="${shot.image}" alt="${shot.title}">
-            </a>
-            <div class="label">${shot.title}</div>
-            <div class="meta">Language: ${shot.language}</div>
-            <div class="btn-group">
-              <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
-              <button class="btn" onclick="togglePreview('preview${index}', this)">👁️</button>
-            </div>
-            <textarea id="text${index}" class="hidden">${shot.text}</textarea>
-            <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
-          `;
-          gallery.appendChild(item);
+          if (shot.topic) topics.add(shot.topic);
         });
 
         // Populate filters
@@ -165,22 +152,61 @@
 
         // Filter logic
         const searchInput = document.getElementById("searchInput");
-        searchInput.addEventListener("input", filterItems);
-        languageFilter.addEventListener("change", filterItems);
-        topicFilter.addEventListener("change", filterItems);
+        searchInput.addEventListener("input", render);
+        languageFilter.addEventListener("change", render);
+        topicFilter.addEventListener("change", render);
 
-        function filterItems() {
+        function render() {
           const search = searchInput.value.toLowerCase();
           const language = languageFilter.value;
-          const topic = topicFilter.value;
-          document.querySelectorAll(".item").forEach(item => {
-            const label = item.querySelector(".label").textContent.toLowerCase();
-            const matchSearch = label.includes(search);
-            const matchLang = language === "All" || item.dataset.language === language;
-            const matchTopic = topic === "All" || item.dataset.topic === topic;
-            item.style.display = (matchSearch && matchLang && matchTopic) ? "block" : "none";
+          const topicFilterVal = topicFilter.value;
+          const grouped = {};
+
+          gallerySection.innerHTML = "";
+
+          screenshots.forEach((shot, index) => {
+            const matchSearch = shot.title.toLowerCase().includes(search);
+            const matchLang = language === "All" || shot.language === language;
+            const matchTopic = topicFilterVal === "All" || shot.topic === topicFilterVal;
+            if (matchSearch && matchLang && matchTopic) {
+              const topic = shot.topic || "Uncategorized";
+              if (!grouped[topic]) grouped[topic] = [];
+              grouped[topic].push({ shot, index });
+            }
           });
+
+          for (const [topic, items] of Object.entries(grouped)) {
+            const sectionTitle = document.createElement("div");
+            sectionTitle.className = "section-header";
+            sectionTitle.textContent = `${topic} (${items.length})`;
+            const gallery = document.createElement("div");
+            gallery.className = "gallery";
+
+            items.forEach(({ shot, index }) => {
+              const item = document.createElement("div");
+              item.className = "item";
+              item.innerHTML = `
+                <a href="${shot.image}" target="_blank">
+                  <img src="${shot.image}" alt="${shot.title}">
+                </a>
+                <div class="label">${shot.title}</div>
+                <div class="meta">Language: ${shot.language}</div>
+                <div class="btn-group">
+                  <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
+                  <button class="btn" onclick="togglePreview('preview${index}', this)">👁️</button>
+                </div>
+                <textarea id="text${index}" class="hidden">${shot.text}</textarea>
+                <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
+              `;
+              gallery.appendChild(item);
+            });
+
+            gallerySection.appendChild(sectionTitle);
+            gallerySection.appendChild(gallery);
+          }
         }
+
+        render();
       });
 
     function copyText(id, button) {
