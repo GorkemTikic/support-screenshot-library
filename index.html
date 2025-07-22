@@ -139,6 +139,7 @@
       font-size: 12px;
       color: #888;
     }
+
     .lightbox-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -184,6 +185,12 @@
       align-items: center;
       justify-content: center;
       z-index: 10000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #feedbackModal.show {
+      display: flex;
+      opacity: 1;
     }
     #feedbackModal .modal-content {
       background: #fff;
@@ -206,6 +213,18 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+    }
+    #feedbackSuccess {
+      color: green;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+    #feedbackError {
+      color: red;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
     }
   </style>
 </head>
@@ -239,6 +258,8 @@
       <input type="text" id="feedbackName" placeholder="Your name">
       <textarea id="feedbackComment" rows="4" placeholder="Your comment..."></textarea>
       <button onclick="submitFeedback()">Send</button>
+      <div id="feedbackSuccess">✅ Feedback submitted!</div>
+      <div id="feedbackError">⚠️ Please fill in all fields.</div>
     </div>
   </div>
 
@@ -264,14 +285,22 @@
 
     function showFeedbackModal(title, lang, topic) {
       feedbackContext = { title, lang, topic };
-      document.getElementById('feedbackModal').style.display = 'flex';
+      document.getElementById("feedbackModal").classList.add("show");
+      document.getElementById("feedbackSuccess").style.display = "none";
+      document.getElementById("feedbackError").style.display = "none";
     }
 
     function submitFeedback() {
       const name = document.getElementById("feedbackName").value.trim();
       const comment = document.getElementById("feedbackComment").value.trim();
+      const success = document.getElementById("feedbackSuccess");
+      const error = document.getElementById("feedbackError");
 
-      if (!name || !comment) return alert("Please fill both fields.");
+      if (!name || !comment) {
+        success.style.display = "none";
+        error.style.display = "block";
+        return;
+      }
 
       const params = new URLSearchParams({
         event: 'feedback',
@@ -282,19 +311,25 @@
         topic: feedbackContext.topic || ''
       });
 
-      fetch(`${TRACKING_URL}?${params.toString()}`).then(() => {
-        alert("✅ Feedback submitted!");
-        document.getElementById("feedbackModal").style.display = "none";
-        document.getElementById("feedbackName").value = "";
-        document.getElementById("feedbackComment").value = "";
-      }).catch(() => {
-        alert("❌ Failed to submit feedback.");
-      });
+      fetch(`${TRACKING_URL}?${params.toString()}`)
+        .then(() => {
+          error.style.display = "none";
+          success.style.display = "block";
+          document.getElementById("feedbackName").value = "";
+          document.getElementById("feedbackComment").value = "";
+          setTimeout(() => {
+            document.getElementById("feedbackModal").classList.remove("show");
+          }, 1500);
+        })
+        .catch(() => {
+          error.textContent = "❌ Failed to send feedback.";
+          error.style.display = "block";
+        });
     }
 
     document.body.addEventListener("keydown", e => {
       if (e.key === "Escape") {
-        document.getElementById("feedbackModal").style.display = "none";
+        document.getElementById("feedbackModal").classList.remove("show");
         document.getElementById("lightboxOverlay").classList.remove("show");
       }
     });
@@ -356,7 +391,6 @@
                 <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
               `;
               gallery.appendChild(item);
-
               logUsage("image_load", shot);
               item.querySelector("img").addEventListener("contextmenu", () => {
                 logUsage("right_click", shot);
