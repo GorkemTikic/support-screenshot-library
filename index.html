@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>FD Screenshot Library</title>
+  <title>FD Screenshot Assistant</title>
   <style>
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -91,6 +91,7 @@
     .tag-ArbitrageTrading { background-color: #d97706; }
     .tag-CopyTrading { background-color: #9333ea; }
     .tag-General { background-color: #6b7280; }
+
     .btn-group {
       display: flex;
       justify-content: center;
@@ -138,29 +139,79 @@
       font-size: 12px;
       color: #888;
     }
+
+    /* Lightbox styles */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .lightbox-overlay.show {
+      display: flex;
+    }
+    .lightbox-overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+    .lightbox-overlay button {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 10001;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>FD Screenshot Library</h1>
+    <h1>FD Screenshot Assistant</h1>
   </header>
+
   <div class="filters">
     <input type="text" id="searchInput" placeholder="Search by keyword...">
     <select id="languageFilter"></select>
     <select id="topicFilter"></select>
   </div>
+
   <div class="gallery" id="gallery"></div>
+
   <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆ Back to Top</button>
+
   <footer>
-    FD Screenshot Library – Internal Use Only<br>
+    FD Screenshot Assistant – Internal Use Only<br>
     For any feedback or detected issues, DM the project owner.
   </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightboxOverlay">
+    <button onclick="document.getElementById('lightboxOverlay').classList.remove('show')">✖</button>
+    <img id="lightboxImage" src="" alt="Preview">
+  </div>
+
   <script>
     const TRACKING_URL = "https://script.google.com/macros/s/AKfycby8WRPsdB6-dg0WYu2b6O09fhBuZemWnoQDle1F72siMf0UXTyhXwfZQP3WVoq5oQw/exec";
 
     function logUsage(eventType, shot) {
       const url = `${TRACKING_URL}?event=${eventType}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic || '')}`;
       fetch(url).catch(() => {});
+    }
+
+    function showLightbox(src) {
+      const overlay = document.getElementById('lightboxOverlay');
+      const image = document.getElementById('lightboxImage');
+      image.src = src;
+      overlay.classList.add('show');
     }
 
     fetch('data.json')
@@ -208,9 +259,7 @@
               item.className = "item";
               const topicClass = sanitizeTopicClass(shot.topic);
               item.innerHTML = `
-                <a href="${shot.image}" target="_blank">
-                  <img src="${shot.image}" alt="${shot.title}">
-                </a>
+                <img src="${shot.image}" alt="${shot.title}" onclick="showLightbox('${shot.image}')">
                 <div class="label">${shot.title}</div>
                 <div class="meta">Language: ${shot.language}</div>
                 <div class="tag ${topicClass}">${shot.topic || "Uncategorized"}</div>
@@ -223,10 +272,7 @@
               `;
               gallery.appendChild(item);
 
-              // Track image load
               logUsage("image_load", shot);
-
-              // Track right click
               item.querySelector("img").addEventListener("contextmenu", () => {
                 logUsage("right_click", shot);
               });
