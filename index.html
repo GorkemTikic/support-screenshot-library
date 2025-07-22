@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>FD Screenshot Assistant</title>
-  <!-- Font Awesome for crisp, styleable icons -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   />
-
   <style>
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -149,7 +147,6 @@
       font-size: 12px;
       color: #888;
     }
-
     .lightbox-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -182,7 +179,6 @@
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
-
     #feedbackModal {
       position: fixed;
       top: 0; left: 0;
@@ -415,13 +411,13 @@
                 <div class="meta">Language: ${shot.language}</div>
                 <div class="tag ${topicClass}">${shot.topic||'Uncategorized'}</div>
                 <div class="btn-group">
-                  <button class="btn" onclick="copyText('text${i}', this)">
+                  <button class="btn" title="Copy Macro Text" onclick="copyText('text${i}', this)">
                     Copy Text
                   </button>
-                  <button class="btn" onclick="togglePreview('preview${i}', this)">
+                  <button class="btn" title="Show or hide text" onclick="togglePreview('preview${i}', this)">
                     <i class="fa-regular fa-eye"></i>
                   </button>
-                  <button class="btn" onclick="showFeedbackModal('${shot.title}','${shot.language}','${shot.topic||''}')">
+                  <button class="btn" title="Send feedback" onclick="showFeedbackModal('${shot.title}','${shot.language}','${shot.topic||''}')">
                     <i class="fa-regular fa-comment"></i>
                   </button>
                 </div>
@@ -462,13 +458,9 @@
       const showing = !prev.classList.contains('hidden');
       prev.classList.toggle('hidden');
 
-      if (showing) {
-        // was visible, now hidden → show eye icon
-        button.innerHTML = `<i class="fa-regular fa-eye"></i>`;
-      } else {
-        // now visible → show eye‑slash icon
-        button.innerHTML = `<i class="fa-regular fa-eye-slash"></i>`;
-      }
+      button.innerHTML = showing
+        ? `<i class="fa-regular fa-eye"></i>`
+        : `<i class="fa-regular fa-eye-slash"></i>`;
     }
 
     window.addEventListener('scroll', () => {
