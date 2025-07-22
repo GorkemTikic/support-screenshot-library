@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>FD Screenshot Assistant</title>
+  <!-- Font Awesome for crisp, styleable icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
   <style>
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -104,6 +110,9 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
     .btn:hover {
       background-color: #e6c200;
@@ -246,36 +255,41 @@
   </div>
 
   <div class="gallery" id="gallery"></div>
-  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">â¬† Back to Top</button>
+
+  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    Back to Top
+  </button>
 
   <footer>
-    FD Screenshot Assistant â€“ Internal Use Only<br>
+    FD Screenshot Assistant – Internal Use Only<br>
     For any feedback or detected issues, DM the project owner.
   </footer>
 
+  <!-- Lightbox -->
   <div class="lightbox-overlay" id="lightboxOverlay" onclick="hideLightbox(event)">
-    <button id="lightboxClose">âœ–</button>
+    <button id="lightboxClose">×</button>
     <img id="lightboxImage" src="" alt="Preview">
   </div>
 
+  <!-- Feedback Modal -->
   <div id="feedbackModal" onclick="closeModalOutside(event)">
     <div class="modal-content">
-      <button class="modal-close" onclick="closeFeedbackModal()">Ã—</button>
+      <button class="modal-close" onclick="closeFeedbackModal()">×</button>
       <h3>Submit Feedback</h3>
       <input type="text" id="feedbackName" placeholder="Your name">
       <textarea id="feedbackComment" rows="4" placeholder="Your comment..."></textarea>
       <button class="submit" onclick="submitFeedback()">Send</button>
-      <div id="feedbackSuccess">âœ… Feedback submitted!</div>
-      <div id="feedbackError">âš ï¸ Please fill in all fields.</div>
+      <div id="feedbackSuccess">&#10004; Feedback submitted!</div>
+      <div id="feedbackError">&#10060; Please fill in all fields.</div>
     </div>
   </div>
 
   <script>
-    const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxGVz0sk0NN4dO3h6qhizf77lE6IK5_I_x5t5SRh0xhqJ_tSIt_go2xrDk0aVP2FeA/exec";
+    const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxTGoQvac7i9KNNkwuVCaLz0tRk-KH1jSjHAsgV97og_4RPIhockUCHA1BlmTqJsyg/exec";
     let feedbackContext = {};
 
     function logUsage(eventType, shot) {
-      const url = `${TRACKING_URL}?event=${eventType}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic || '')}`;
+      const url = `${TRACKING_URL}?event=${eventType}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic||'')}`;
       fetch(url).catch(() => {});
     }
 
@@ -284,132 +298,138 @@
       document.getElementById('lightboxOverlay').classList.add('show');
     }
 
-    function hideLightbox(event) {
-      if (event.target.id === "lightboxOverlay" || event.target.id === "lightboxClose") {
+    function hideLightbox(e) {
+      if (e.target.id === 'lightboxOverlay' || e.target.id === 'lightboxClose') {
         document.getElementById('lightboxOverlay').classList.remove('show');
       }
     }
 
     function showFeedbackModal(title, lang, topic) {
       feedbackContext = { title, lang, topic };
-      document.getElementById("feedbackModal").classList.add("show");
-      document.getElementById("feedbackSuccess").style.display = "none";
-      document.getElementById("feedbackError").style.display = "none";
+      document.getElementById('feedbackModal').classList.add('show');
+      document.getElementById('feedbackSuccess').style.display = 'none';
+      document.getElementById('feedbackError').style.display = 'none';
     }
 
     function closeFeedbackModal() {
-      document.getElementById("feedbackModal").classList.remove("show");
-      document.getElementById("feedbackName").value = "";
-      document.getElementById("feedbackComment").value = "";
+      document.getElementById('feedbackModal').classList.remove('show');
+      document.getElementById('feedbackName').value = '';
+      document.getElementById('feedbackComment').value = '';
     }
 
-    function closeModalOutside(event) {
-      if (event.target.id === "feedbackModal") closeFeedbackModal();
+    function closeModalOutside(e) {
+      if (e.target.id === 'feedbackModal') closeFeedbackModal();
     }
 
     function submitFeedback() {
-      const name = document.getElementById("feedbackName").value.trim();
-      const comment = document.getElementById("feedbackComment").value.trim();
-      const success = document.getElementById("feedbackSuccess");
-      const error = document.getElementById("feedbackError");
+      const name = document.getElementById('feedbackName').value.trim();
+      const comment = document.getElementById('feedbackComment').value.trim();
+      const success = document.getElementById('feedbackSuccess');
+      const error   = document.getElementById('feedbackError');
 
       if (!name || !comment) {
-        success.style.display = "none";
-        error.style.display = "block";
+        success.style.display = 'none';
+        error.innerHTML = '&#10060; Please fill in all fields.';
+        error.style.display = 'block';
         return;
       }
 
       const params = new URLSearchParams({
         event: 'feedback',
-        name,
-        comment,
-        title: feedbackContext.title || '',
-        lang: feedbackContext.lang || '',
-        topic: feedbackContext.topic || ''
+        name, comment,
+        title: feedbackContext.title,
+        lang: feedbackContext.lang,
+        topic: feedbackContext.topic
       });
 
-      fetch(`${TRACKING_URL}?${params.toString()}`)
+      fetch(`${TRACKING_URL}?${params}`)
         .then(() => {
-          error.style.display = "none";
-          success.style.display = "block";
-          document.getElementById("feedbackName").value = "";
-          document.getElementById("feedbackComment").value = "";
+          error.style.display   = 'none';
+          success.innerHTML     = '&#10004; Feedback submitted!';
+          success.style.display = 'block';
+          document.getElementById('feedbackName').value    = '';
+          document.getElementById('feedbackComment').value = '';
           setTimeout(closeFeedbackModal, 1500);
         })
         .catch(() => {
-          error.textContent = "âŒ Failed to send feedback.";
-          error.style.display = "block";
+          success.style.display = 'none';
+          error.innerHTML       = '&#10060; Failed to send feedback.';
+          error.style.display   = 'block';
         });
     }
 
-    document.body.addEventListener("keydown", e => {
-      if (e.key === "Escape") {
+    document.body.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
         closeFeedbackModal();
-        document.getElementById("lightboxOverlay").classList.remove("show");
+        document.getElementById('lightboxOverlay').classList.remove('show');
       }
     });
 
     fetch('data.json')
-      .then(response => response.json())
+      .then(r => r.json())
       .then(screenshots => {
-        const gallery = document.getElementById("gallery");
+        const gallery   = document.getElementById('gallery');
         const languages = new Set();
-        const topics = new Set();
+        const topics    = new Set();
 
-        screenshots.forEach(shot => {
-          languages.add(shot.language);
-          if (shot.topic) topics.add(shot.topic);
+        screenshots.forEach(s => {
+          languages.add(s.language);
+          if (s.topic) topics.add(s.topic);
         });
 
-        const languageFilter = document.getElementById("languageFilter");
-        const topicFilter = document.getElementById("topicFilter");
-        languageFilter.innerHTML = `<option value="All">All Languages</option>` +
-          Array.from(languages).sort().map(lang => `<option value="${lang}">${lang}</option>`).join("");
-        topicFilter.innerHTML = `<option value="All">All Topics</option>` +
-          Array.from(topics).sort().map(topic => `<option value="${topic}">${topic}</option>`).join("");
+        document.getElementById('languageFilter').innerHTML =
+          `<option value="All">All Languages</option>` +
+          [...languages].sort().map(l => `<option>${l}</option>`).join('');
+        document.getElementById('topicFilter').innerHTML =
+          `<option value="All">All Topics</option>` +
+          [...topics].sort().map(t => `<option>${t}</option>`).join('');
 
-        const searchInput = document.getElementById("searchInput");
-        searchInput.addEventListener("input", render);
-        languageFilter.addEventListener("change", render);
-        topicFilter.addEventListener("change", render);
+        document.getElementById('searchInput').addEventListener('input', render);
+        document.getElementById('languageFilter').addEventListener('change', render);
+        document.getElementById('topicFilter').addEventListener('change', render);
 
-        function sanitizeTopicClass(topic) {
-          return "tag-" + (topic || "Uncategorized").replace(/[^a-zA-Z0-9]/g, "");
+        function sanitizeTopicClass(t) {
+          return 'tag-' + (t||'Uncategorized').replace(/[^a-zA-Z0-9]/g, '');
         }
 
         function render() {
-          const search = searchInput.value.toLowerCase();
-          const language = languageFilter.value;
-          const topicFilterVal = topicFilter.value;
-          gallery.innerHTML = "";
+          const q       = document.getElementById('searchInput').value.toLowerCase();
+          const lang    = document.getElementById('languageFilter').value;
+          const topicF  = document.getElementById('topicFilter').value;
+          gallery.innerHTML = '';
 
-          screenshots.forEach((shot, index) => {
-            const matchSearch = shot.title.toLowerCase().includes(search);
-            const matchLang = language === "All" || shot.language === language;
-            const matchTopic = topicFilterVal === "All" || shot.topic === topicFilterVal;
-
-            if (matchSearch && matchLang && matchTopic) {
-              const item = document.createElement("div");
-              item.className = "item";
+          screenshots.forEach((shot,i) => {
+            if (
+              shot.title.toLowerCase().includes(q) &&
+              (lang==='All'||shot.language===lang) &&
+              (topicF==='All'||shot.topic===topicF)
+            ) {
+              const div = document.createElement('div');
+              div.className = 'item';
               const topicClass = sanitizeTopicClass(shot.topic);
-              item.innerHTML = `
+
+              div.innerHTML = `
                 <img src="${shot.image}" alt="${shot.title}" onclick="showLightbox('${shot.image}')">
                 <div class="label">${shot.title}</div>
                 <div class="meta">Language: ${shot.language}</div>
-                <div class="tag ${topicClass}">${shot.topic || "Uncategorized"}</div>
+                <div class="tag ${topicClass}">${shot.topic||'Uncategorized'}</div>
                 <div class="btn-group">
-                  <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
-                  <button class="btn" onclick="togglePreview('preview${index}', this)">ğŸ‘ï¸</button>
-                  <button class="btn" onclick="showFeedbackModal('${shot.title}', '${shot.language}', '${shot.topic || ''}')">ğŸ’¬</button>
+                  <button class="btn" onclick="copyText('text${i}', this)">
+                    Copy Text
+                  </button>
+                  <button class="btn" onclick="togglePreview('preview${i}', this)">
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                  <button class="btn" onclick="showFeedbackModal('${shot.title}','${shot.language}','${shot.topic||''}')">
+                    <i class="fa-regular fa-comment"></i>
+                  </button>
                 </div>
-                <textarea id="text${index}" class="hidden">${shot.text}</textarea>
-                <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
+                <textarea id="text${i}" class="hidden">${shot.text}</textarea>
+                <div id="preview${i}" class="text-preview hidden">${shot.text}</div>
               `;
-              gallery.appendChild(item);
-              logUsage("image_load", shot);
-              item.querySelector("img").addEventListener("contextmenu", () => {
-                logUsage("right_click", shot);
-              });
+              gallery.appendChild(div);
+              logUsage('image_load', shot);
+              div.querySelector('img').addEventListener('contextmenu', () => logUsage('right_click', shot));
             }
           });
         }
@@ -418,32 +438,41 @@
       });
 
     function copyText(id, button) {
-      const textArea = document.getElementById(id);
-      textArea.style.display = 'block';
-      textArea.select();
+      const ta = document.getElementById(id);
+      ta.style.display = 'block';
+      ta.select();
       document.execCommand('copy');
-      textArea.style.display = 'none';
-      const original = button.textContent;
-      button.textContent = 'âœ… Copied!';
+      ta.style.display = 'none';
+
+      const originalHTML = button.innerHTML;
+      button.innerHTML   = `<i class="fa-solid fa-check"></i> Copied!`;
       button.style.backgroundColor = '#28a745';
       button.style.color = '#fff';
+
       setTimeout(() => {
-        button.textContent = original;
+        button.innerHTML   = originalHTML;
         button.style.backgroundColor = '#FCD535';
         button.style.color = '#000';
       }, 2000);
     }
 
     function togglePreview(id, button) {
-      const preview = document.getElementById(id);
-      const isVisible = !preview.classList.contains("hidden");
-      preview.classList.toggle("hidden");
-      button.textContent = isVisible ? "ğŸ‘ï¸" : "ğŸ™ˆ";
+      const prev = document.getElementById(id);
+      const showing = !prev.classList.contains('hidden');
+      prev.classList.toggle('hidden');
+
+      if (showing) {
+        // was visible, now hidden → show eye icon
+        button.innerHTML = `<i class="fa-regular fa-eye"></i>`;
+      } else {
+        // now visible → show eye‑slash icon
+        button.innerHTML = `<i class="fa-regular fa-eye-slash"></i>`;
+      }
     }
 
     window.addEventListener('scroll', () => {
-      const scrollTopBtn = document.getElementById("backToTop");
-      scrollTopBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
+      document.getElementById('backToTop').style.display =
+        window.scrollY > 400 ? 'block' : 'none';
     });
   </script>
 </body>
