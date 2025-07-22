@@ -4,85 +4,18 @@
   <meta charset="UTF-8" />
   <title>FD Screenshot Assistant</title>
   <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background-color: #f7f8fa;
-      color: #1e2329;
-    }
-    header {
-      background: #ffffff;
-      padding: 20px;
-      border-bottom: 2px solid #f0f0f0;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-    .filters {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px;
-      background: #ffffff;
-      border-bottom: 1px solid #e0e0e0;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-    select, input[type="text"] {
-      padding: 8px 12px;
-      font-size: 14px;
-      border: 1px solid #d0d0d0;
-      border-radius: 4px;
-      background-color: #ffffff;
-      cursor: pointer;
-    }
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      padding: 20px;
-    }
-    .item {
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      width: 260px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      text-align: center;
-      padding: 10px;
-      position: relative;
-    }
-    .item img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 4px;
-      margin-bottom: 8px;
-      cursor: pointer;
-    }
-    .label {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-    .meta {
-      font-size: 13px;
-      color: #555;
-      margin-bottom: 5px;
-    }
-    .tag {
-      font-size: 12px;
-      display: inline-block;
-      color: white;
-      padding: 3px 8px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-    }
+    /* — your existing styles below — */
+    body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f7f8fa; color: #1e2329; }
+    header { background: #ffffff; padding: 20px; border-bottom: 2px solid #f0f0f0; text-align: center; }
+    header h1 { margin: 0; font-size: 24px; }
+    .filters { display: flex; justify-content: center; gap: 10px; padding: 15px; background: #ffffff; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap; position: sticky; top: 0; z-index: 999; }
+    select, input[type="text"] { padding: 8px 12px; font-size: 14px; border: 1px solid #d0d0d0; border-radius: 4px; background-color: #ffffff; cursor: pointer; }
+    .gallery { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
+    .item { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; width: 260px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); text-align: center; padding: 10px; position: relative; }
+    .item img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; cursor: pointer; }
+    .label { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+    .meta { font-size: 13px; color: #555; margin-bottom: 5px; }
+    .tag { font-size: 12px; display: inline-block; color: white; padding: 3px 8px; border-radius: 12px; margin-bottom: 10px; }
     .tag-FuturesTrading { background-color: #2563eb; }
     .tag-MarginTrading { background-color: #f97316; }
     .tag-BinanceLOAN { background-color: #059669; }
@@ -91,109 +24,25 @@
     .tag-ArbitrageTrading { background-color: #d97706; }
     .tag-CopyTrading { background-color: #9333ea; }
     .tag-General { background-color: #6b7280; }
-
-    .btn-group {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-    }
-    .btn {
-      padding: 6px 10px;
-      font-size: 13px;
-      background-color: #FCD535;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .btn:hover {
-      background-color: #e6c200;
-    }
+    .btn-group { display: flex; justify-content: center; gap: 6px; }
+    .btn { padding: 6px 10px; font-size: 13px; background-color: #FCD535; border: none; border-radius: 4px; cursor: pointer; }
+    .btn:hover { background-color: #e6c200; }
     .hidden { display: none; }
-    .text-preview {
-      background: #f0f0f0;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 13px;
-      white-space: pre-wrap;
-      text-align: left;
-    }
-    #backToTop {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      padding: 10px 15px;
-      background-color: #333;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      display: none;
-      z-index: 1000;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 12px;
-      color: #888;
-    }
-    /* lightbox */
-    .lightbox-overlay {
-      position: fixed; top:0; left:0;
-      width:100vw; height:100vh;
-      background: rgba(0,0,0,0.85);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+    .text-preview { background: #f0f0f0; border: 1px solid #ccc; padding: 10px; margin-top: 10px; font-size: 13px; white-space: pre-wrap; text-align: left; }
+    #backToTop { position: fixed; bottom: 30px; right: 30px; padding: 10px 15px; background-color: #333; color: white; border: none; border-radius: 4px; cursor: pointer; display: none; z-index: 1000; }
+    footer { text-align: center; padding: 20px; font-size: 12px; color: #888; }
+    .lightbox-overlay { position: fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 9999; }
     .lightbox-overlay.show { display:flex; }
-    .lightbox-overlay img {
-      max-width:90%; max-height:90%; border-radius:8px;
-    }
-    .lightbox-overlay button {
-      position:absolute; top:20px; right:30px;
-      background:#FCD535; color:#000; border:none;
-      padding:6px 12px; border-radius:6px;
-      font-size:18px; font-weight:bold;
-      cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.3);
-    }
-    /* feedback modal */
-    #feedbackModal {
-      position: fixed; top:0; left:0;
-      width:100vw; height:100vh;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-    }
+    .lightbox-overlay img { max-width:90%; max-height:90%; border-radius:8px; }
+    .lightbox-overlay button { position:absolute; top:20px; right:30px; background:#FCD535; color:#000; border:none; padding:6px 12px; border-radius:6px; font-size:18px; font-weight:bold; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.3); }
+    #feedbackModal { position: fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 10000; }
     #feedbackModal.show { display:flex; }
-    #feedbackModal .modal-content {
-      background:#fff; padding:25px 20px 20px;
-      border-radius:8px; width:320px; text-align:center;
-      box-shadow:0 4px 18px rgba(0,0,0,0.15);
-      position:relative;
-    }
-    #feedbackModal .modal-close {
-      position:absolute; top:10px; right:15px;
-      background:none; border:none; font-size:20px;
-      font-weight:bold; cursor:pointer; color:#999;
-    }
+    #feedbackModal .modal-content { background:#fff; padding:25px 20px 20px; border-radius:8px; width:320px; text-align:center; box-shadow:0 4px 18px rgba(0,0,0,0.15); position:relative; }
+    #feedbackModal .modal-close { position:absolute; top:10px; right:15px; background:none; border:none; font-size:20px; font-weight:bold; cursor:pointer; color:#999; }
     #feedbackModal .modal-close:hover { color:#000; }
-    #feedbackModal input, #feedbackModal textarea {
-      width:100%; margin-top:10px; padding:8px;
-      border:1px solid #ccc; border-radius:4px;
-      font-family:inherit;
-    }
-    #feedbackModal button.submit {
-      margin-top:15px; padding:8px 14px;
-      background:#FCD535; border:none;
-      border-radius:4px; cursor:pointer;
-    }
-    #feedbackSuccess, #feedbackError {
-      margin-top:10px; font-size:13px; display:none;
-    }
+    #feedbackModal input, #feedbackModal textarea { width:100%; margin-top:10px; padding:8px; border:1px solid #ccc; border-radius:4px; font-family:inherit; }
+    #feedbackModal button.submit { margin-top:15px; padding:8px 14px; background:#FCD535; border:none; border-radius:4px; cursor:pointer; }
+    #feedbackSuccess, #feedbackError { margin-top:10px; font-size:13px; display:none; }
     #feedbackSuccess { color:green; }
     #feedbackError   { color:red; }
   </style>
@@ -245,100 +94,84 @@
   <script>
     const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxTGoQvac7i9KNNkwuVCaLz0tRk-KH1jSjHAsgV97og_4RPIhockUCHA1BlmTqJsyg/exec";
 
-    // State
-    let screenshots     = [];
-    let usageSummary    = {};   // { title: { views, clicks, lastUsed, … } }
-
-    // DOM refs (script at bottom → elements exist)
+    let screenshots  = [];
+    let usageSummary = {};   // { title: { views, clicks, lastUsed, … } }
     const gallery        = document.getElementById("gallery");
     const searchInput    = document.getElementById("searchInput");
     const languageFilter = document.getElementById("languageFilter");
     const topicFilter    = document.getElementById("topicFilter");
     const sortFilter     = document.getElementById("sortFilter");
 
-    // 1) Load data.json, init filters, initial render, kick off summary fetch
-    fetch('data.json')
-      .then(res => res.json())
-      .then(data => {
-        screenshots = data;
-        initFilters();
-        render();               // immediate paint
-        fetchUsageSummary();    // background
-      })
-      .catch(console.error);
-
-    // 2) Fetch summary; re-render if currently sorted by views/clicks/recent
-    function fetchUsageSummary() {
-      fetch(`${TRACKING_URL}?action=summary`)
+    // 1) Load data.json and summary in parallel
+    Promise.all([
+      fetch('data.json').then(r => r.json()),
+      fetch(`${TRACKING_URL}?action=summary`).then(r => r.json())
+    ])
+    .then(([data, summary]) => {
+      screenshots = data;
+      console.log("[Summary] fetched", summary.length, "items");
+      usageSummary = summary.reduce((m, it) => { m[it.title] = it; return m; }, {});
+      initFilters();
+      render();
+    })
+    .catch(err => {
+      console.error("[Init] error loading data or summary:", err);
+      // fallback: at least load data.json for default view
+      fetch('data.json')
         .then(r => r.json())
         .then(data => {
-          usageSummary = data.reduce((map, item) => {
-            map[item.title] = item;
-            return map;
-          }, {});
-          // if user already chose a non-default sort, re-render
-          if (sortFilter.value !== 'default') render();
-        })
-        .catch(console.error);
-    }
+          screenshots = data;
+          initFilters();
+          render();
+        });
+    });
 
-    // 3) Set up filter controls
     function initFilters() {
       const langs = new Set(), tops = new Set();
-      screenshots.forEach(s => {
-        langs.add(s.language);
-        if (s.topic) tops.add(s.topic);
-      });
+      screenshots.forEach(s => { langs.add(s.language); if (s.topic) tops.add(s.topic); });
 
-      languageFilter.innerHTML = `<option value="All">All Languages</option>` +
-        [...langs].sort().map(l => `<option value="${l}">${l}</option>`).join('');
-      topicFilter.innerHTML = `<option value="All">All Topics</option>` +
-        [...tops].sort().map(t => `<option value="${t}">${t}</option>`).join('');
+      languageFilter.innerHTML = `<option value="All">All Languages</option>`
+        + [...langs].sort().map(l => `<option value="${l}">${l}</option>`).join('');
+      topicFilter.innerHTML = `<option value="All">All Topics</option>`
+        + [...tops].sort().map(t => `<option value="${t}">${t}</option>`).join('');
 
-      // Wire up events
       searchInput.addEventListener("input", render);
       languageFilter.addEventListener("change", render);
       topicFilter.addEventListener("change", render);
-
-      // Sort needs special handling if summary isn't yet loaded
-      sortFilter.addEventListener("change", () => {
-        if (sortFilter.value !== 'default' && Object.keys(usageSummary).length === 0) {
-          // we haven't got summary yet → fetch and then render
-          fetchUsageSummary();
-        } else {
-          render();
-        }
-      });
+      sortFilter.addEventListener("change", render);
     }
 
-    // 4) Main render: filter → sort → batch‐append
     function render() {
       const q    = searchInput.value.toLowerCase();
       const lang = languageFilter.value;
       const top  = topicFilter.value;
       const sort = sortFilter.value;
 
-      // filter
       let list = screenshots.filter(s =>
         s.title.toLowerCase().includes(q) &&
-        (lang === 'All' || s.language === lang) &&
-        (top  === 'All' || s.topic    === top)
+        (lang==="All"  || s.language===lang) &&
+        (top==="All"   || s.topic===top)
       );
 
-      // sort
       if (sort === 'views') {
-        list.sort((a,b) => (usageSummary[b.title]?.views  || 0)
-                         - (usageSummary[a.title]?.views  || 0));
+        list.sort((a,b) =>
+          (usageSummary[b.title]?.views  || 0) -
+          (usageSummary[a.title]?.views  || 0)
+        );
       } else if (sort === 'clicks') {
-        list.sort((a,b) => (usageSummary[b.title]?.clicks || 0)
-                         - (usageSummary[a.title]?.clicks || 0));
+        list.sort((a,b) =>
+          (usageSummary[b.title]?.clicks || 0) -
+          (usageSummary[a.title]?.clicks || 0)
+        );
       } else if (sort === 'recent') {
-        list.sort((a,b) => new Date(usageSummary[b.title]?.lastUsed || 0)
-                         - new Date(usageSummary[a.title]?.lastUsed || 0));
+        list.sort((a,b) =>
+          new Date(usageSummary[b.title]?.lastUsed||0) -
+          new Date(usageSummary[a.title]?.lastUsed||0)
+        );
       }
-      // default = original data.json order
 
-      // build DOM in one shot
+      console.log(`[Render] sort=${sort}, list.length=${list.length}, usageSummaryKeys=${Object.keys(usageSummary).length}`);
+
       gallery.innerHTML = '';
       const frag = document.createDocumentFragment();
 
@@ -346,63 +179,58 @@
         const item = document.createElement("div");
         item.className = "item";
 
-        // title/meta
         const lbl = document.createElement("div");
         lbl.className = "label";
         lbl.textContent = shot.title;
-        item.appendChild(lbl);
+        item.append(lbl);
 
         const meta = document.createElement("div");
         meta.className = "meta";
         meta.textContent = "Language: " + shot.language;
-        item.appendChild(meta);
+        item.append(meta);
 
-        // image (lazy + onload logging)
         const img = document.createElement("img");
         img.loading = "lazy";
         img.alt     = shot.title;
         img.src     = shot.image;
-        img.addEventListener("load",  () => logUsage("image_load", shot));
         img.addEventListener("click", () => showLightbox(shot.image));
+        img.addEventListener("load",  () => logUsage("image_load", shot));
         img.addEventListener("contextmenu", () => logUsage("right_click", shot));
-        item.appendChild(img);
+        item.append(img);
 
-        // topic tag
         const tag = document.createElement("div");
         const clean = (shot.topic||"Uncategorized").replace(/[^a-zA-Z0-9]/g,'');
         tag.className = `tag tag-${clean}`;
         tag.textContent = shot.topic || "Uncategorized";
-        item.appendChild(tag);
+        item.append(tag);
 
-        // buttons + hidden preview
         const btns = document.createElement("div");
         btns.className = "btn-group";
         btns.innerHTML = `
-          <button class="btn" onclick="copyText('text${i}', this)">Copy Text</button>
-          <button class="btn" onclick="togglePreview('preview${i}', this)">👁️</button>
+          <button class="btn" onclick="copyText('text${i}',this)">Copy Text</button>
+          <button class="btn" onclick="togglePreview('preview${i}',this)">👁️</button>
           <button class="btn" onclick="showFeedbackModal('${shot.title}','${shot.language}','${shot.topic||''}')">💬</button>
         `;
-        item.appendChild(btns);
+        item.append(btns);
 
         const ta = document.createElement("textarea");
         ta.id = `text${i}`;
         ta.className = "hidden";
         ta.textContent = shot.text;
-        item.appendChild(ta);
+        item.append(ta);
 
         const pv = document.createElement("div");
         pv.id = `preview${i}`;
         pv.className = "text-preview hidden";
         pv.textContent = shot.text;
-        item.appendChild(pv);
+        item.append(pv);
 
-        frag.appendChild(item);
+        frag.append(item);
       });
 
-      gallery.appendChild(frag);
+      gallery.append(frag);
     }
 
-    // 5) Utilities (logging, lightbox, feedback, copy/preview)
     function logUsage(evt, shot) {
       fetch(`${TRACKING_URL}?event=${evt}`
             + `&title=${encodeURIComponent(shot.title)}`
@@ -411,78 +239,56 @@
       .catch(()=>{});
     }
     function showLightbox(src) {
-      const over = document.getElementById('lightboxOverlay');
       document.getElementById('lightboxImage').src = src;
-      over.classList.add('show');
+      document.getElementById('lightboxOverlay').classList.add('show');
     }
     function hideLightbox(e) {
-      if (e.target.id === "lightboxOverlay" || e.target.id === "lightboxClose") {
+      if (e.target.id==="lightboxOverlay"||e.target.id==="lightboxClose")
         document.getElementById('lightboxOverlay').classList.remove('show');
-      }
     }
+
     let feedbackContext = {};
     function showFeedbackModal(t,l,tp) {
-      feedbackContext = { title: t, lang: l, topic: tp };
+      feedbackContext = { title:t,lang:l,topic:tp };
       document.getElementById("feedbackModal").classList.add("show");
-      document.getElementById("feedbackSuccess").style.display = "none";
-      document.getElementById("feedbackError").style.display   = "none";
+      document.getElementById("feedbackSuccess").style.display="none";
+      document.getElementById("feedbackError").style.display="none";
     }
     function closeFeedbackModal() {
       document.getElementById("feedbackModal").classList.remove("show");
-      document.getElementById("feedbackName").value    = "";
-      document.getElementById("feedbackComment").value = "";
+      document.getElementById("feedbackName").value="";
+      document.getElementById("feedbackComment").value="";
     }
     function closeModalOutside(e) {
-      if (e.target.id === "feedbackModal") closeFeedbackModal();
+      if (e.target.id==="feedbackModal") closeFeedbackModal();
     }
-    function submitFeedback(){
-      const name    = document.getElementById("feedbackName").value.trim();
-      const comment = document.getElementById("feedbackComment").value.trim();
-      const succ    = document.getElementById("feedbackSuccess");
-      const err     = document.getElementById("feedbackError");
-      if (!name || !comment) {
-        succ.style.display = "none";
-        err.style.display  = "block";
-        return;
-      }
-      const p = new URLSearchParams({
-        event:'feedback', name, comment,
-        title:feedbackContext.title,
-        lang:feedbackContext.lang,
-        topic:feedbackContext.topic
+    function submitFeedback() {
+      const n = document.getElementById("feedbackName").value.trim();
+      const c = document.getElementById("feedbackComment").value.trim();
+      const s = document.getElementById("feedbackSuccess");
+      const e = document.getElementById("feedbackError");
+      if (!n || !c) { s.style.display="none"; e.style.display="block"; return; }
+      const p = new URLSearchParams({ event:'feedback', name:n, comment:c,
+        title:feedbackContext.title, lang:feedbackContext.lang, topic:feedbackContext.topic
       });
       fetch(`${TRACKING_URL}?${p}`)
-        .then(()=>{
-          err.style.display = "none";
-          succ.style.display= "block";
-          setTimeout(closeFeedbackModal, 1500);
-        })
-        .catch(()=>{
-          err.textContent   = "❌ Failed to send feedback.";
-          err.style.display = "block";
-        });
+        .then(() => { e.style.display="none"; s.style.display="block"; setTimeout(closeFeedbackModal,1500); })
+        .catch(() => { e.textContent="❌ Failed to send feedback."; e.style.display="block"; });
     }
-    function copyText(id, btn) {
+    function copyText(id,btn) {
       const ta = document.getElementById(id);
-      ta.style.display = 'block';
-      ta.select();
+      ta.style.display='block'; ta.select();
       document.execCommand('copy');
-      ta.style.display = 'none';
-      const orig = btn.textContent;
-      btn.textContent  = '✅ Copied!';
-      btn.style.backgroundColor = '#28a745';
-      btn.style.color           = '#fff';
-      setTimeout(()=>{
-        btn.textContent          = orig;
-        btn.style.backgroundColor= '#FCD535';
-        btn.style.color          = '#000';
-      }, 2000);
+      ta.style.display='none';
+      const o = btn.textContent;
+      btn.textContent='✅ Copied!'; btn.style.backgroundColor='#28a745'; btn.style.color='#fff';
+      setTimeout(() => { btn.textContent=o; btn.style.backgroundColor='#FCD535'; btn.style.color='#000'; }, 2000);
     }
-    function togglePreview(id, btn) {
+    function togglePreview(id,btn) {
       const pv = document.getElementById(id);
-      const vis = !pv.classList.contains("hidden");
+      const v = !pv.classList.contains("hidden");
       pv.classList.toggle("hidden");
-      btn.textContent = vis ? "👁️" : "🙈";
+      btn.textContent = v ? "👁️" : "🙈";
     }
     document.body.addEventListener("keydown", e => {
       if (e.key === "Escape") {
