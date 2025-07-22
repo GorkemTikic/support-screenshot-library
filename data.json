@@ -180,5 +180,12 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Spot_Wallet_to_USDS-M_Futures_-_EN.jpg",
     "text": "To Transfer assets from Spot to Futures Wallet, please follow the steps in the screenshot:\n\n1 -) Click on ''Assets''\n\n2 -) Click on ''Futures''\n\n3 -) Click on ''USDS-M button''\n\n4 -) Click on ''Transfer'' \n\n5 -) Make sure the path is: \n\nFrom: Spot Wallet\nTo: USDS-M Futures\n\n6 -) Select The Asset/Coin\n\nInput the amount of assets you want to transfer and confirm the transfer. \n\nThis is how you do transfers from Spot to Futures USDS-M Wallet.",
     "topic": "Futures Trading"
+  },
+  {
+    "title": "How To Close The Grid Position When The Grid is Stop",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/How_To_Close_The_Grid_Position_When_The_Grid_is_Stop.jpg",
+    "text": "To Close the open position in a stopped grid, please follow the steps in the screenshot: \n\n1 -) Click on Futures button\n\n2 -) Click on Bots button\n\n3 -) Click on ''All Orders'' on the right corner\n\n4 -) You will see ''Position'' button on your stopped grid. \n\n5 -) Then you will see a second ''Position'' button on running order detail page. \n\n6 -) In this page you can see the open positions to close by clicking Close buttons.",
+    "topic": "Grid Bot"
   }
 ]
