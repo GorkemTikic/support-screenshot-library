@@ -245,25 +245,29 @@
   <script>
     const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxTGoQvac7i9KNNkwuVCaLz0tRk-KH1jSjHAsgV97og_4RPIhockUCHA1BlmTqJsyg/exec";
 
-    let screenshots = [];
-    let usageSummary = {};
-    const gallery       = document.getElementById("gallery");
-    const searchInput   = document.getElementById("searchInput");
-    const languageFilter= document.getElementById("languageFilter");
-    const topicFilter   = document.getElementById("topicFilter");
-    const sortFilter    = document.getElementById("sortFilter");
+    // State
+    let screenshots     = [];
+    let usageSummary    = {};   // { title: { views, clicks, lastUsed, … } }
 
-    // 1) Initialize app
+    // DOM refs (script at bottom → elements exist)
+    const gallery        = document.getElementById("gallery");
+    const searchInput    = document.getElementById("searchInput");
+    const languageFilter = document.getElementById("languageFilter");
+    const topicFilter    = document.getElementById("topicFilter");
+    const sortFilter     = document.getElementById("sortFilter");
+
+    // 1) Load data.json, init filters, initial render, kick off summary fetch
     fetch('data.json')
-      .then(r => r.json())
+      .then(res => res.json())
       .then(data => {
         screenshots = data;
         initFilters();
-        render();               // immediate render with data.json
-        fetchUsageSummary();    // background fetch
+        render();               // immediate paint
+        fetchUsageSummary();    // background
       })
       .catch(console.error);
 
+    // 2) Fetch summary; re-render if currently sorted by views/clicks/recent
     function fetchUsageSummary() {
       fetch(`${TRACKING_URL}?action=summary`)
         .then(r => r.json())
@@ -278,22 +282,36 @@
         .catch(console.error);
     }
 
+    // 3) Set up filter controls
     function initFilters() {
-      const langs  = new Set(), tops = new Set();
+      const langs = new Set(), tops = new Set();
       screenshots.forEach(s => {
         langs.add(s.language);
         if (s.topic) tops.add(s.topic);
       });
 
       languageFilter.innerHTML = `<option value="All">All Languages</option>` +
-        [...langs].sort().map(l => `<option>${l}</option>`).join('');
+        [...langs].sort().map(l => `<option value="${l}">${l}</option>`).join('');
       topicFilter.innerHTML = `<option value="All">All Topics</option>` +
-        [...tops].sort().map(t => `<option>${t}</option>`).join('');
+        [...tops].sort().map(t => `<option value="${t}">${t}</option>`).join('');
 
-      [searchInput, languageFilter, topicFilter, sortFilter]
-        .forEach(el => el.addEventListener("change", render));
+      // Wire up events
+      searchInput.addEventListener("input", render);
+      languageFilter.addEventListener("change", render);
+      topicFilter.addEventListener("change", render);
+
+      // Sort needs special handling if summary isn't yet loaded
+      sortFilter.addEventListener("change", () => {
+        if (sortFilter.value !== 'default' && Object.keys(usageSummary).length === 0) {
+          // we haven't got summary yet → fetch and then render
+          fetchUsageSummary();
+        } else {
+          render();
+        }
+      });
     }
 
+    // 4) Main render: filter → sort → batch‐append
     function render() {
       const q    = searchInput.value.toLowerCase();
       const lang = languageFilter.value;
@@ -301,26 +319,26 @@
       const sort = sortFilter.value;
 
       // filter
-      let list = screenshots.filter(s => {
-        return s.title.toLowerCase().includes(q) &&
-               (lang==='All'  || s.language===lang) &&
-               (top==='All'   || s.topic===top);
-      });
+      let list = screenshots.filter(s =>
+        s.title.toLowerCase().includes(q) &&
+        (lang === 'All' || s.language === lang) &&
+        (top  === 'All' || s.topic    === top)
+      );
 
       // sort
       if (sort === 'views') {
-        list.sort((a,b) => (usageSummary[b.title]?.views || 0) - (usageSummary[a.title]?.views || 0));
+        list.sort((a,b) => (usageSummary[b.title]?.views  || 0)
+                         - (usageSummary[a.title]?.views  || 0));
       } else if (sort === 'clicks') {
-        list.sort((a,b) => (usageSummary[b.title]?.clicks||0) - (usageSummary[a.title]?.clicks||0));
+        list.sort((a,b) => (usageSummary[b.title]?.clicks || 0)
+                         - (usageSummary[a.title]?.clicks || 0));
       } else if (sort === 'recent') {
-        list.sort((a,b) =>
-          new Date(usageSummary[b.title]?.lastUsed||0) -
-          new Date(usageSummary[a.title]?.lastUsed||0)
-        );
+        list.sort((a,b) => new Date(usageSummary[b.title]?.lastUsed || 0)
+                         - new Date(usageSummary[a.title]?.lastUsed || 0));
       }
-      // default = data.json order
+      // default = original data.json order
 
-      // batch append
+      // build DOM in one shot
       gallery.innerHTML = '';
       const frag = document.createDocumentFragment();
 
@@ -328,32 +346,35 @@
         const item = document.createElement("div");
         item.className = "item";
 
-        // image with lazy loading & onload logging
+        // title/meta
+        const lbl = document.createElement("div");
+        lbl.className = "label";
+        lbl.textContent = shot.title;
+        item.appendChild(lbl);
+
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.textContent = "Language: " + shot.language;
+        item.appendChild(meta);
+
+        // image (lazy + onload logging)
         const img = document.createElement("img");
         img.loading = "lazy";
         img.alt     = shot.title;
-        img.dataset.lang  = shot.language;
-        img.dataset.topic = shot.topic || "";
         img.src     = shot.image;
-        img.addEventListener("click", () => showLightbox(shot.image));
         img.addEventListener("load",  () => logUsage("image_load", shot));
+        img.addEventListener("click", () => showLightbox(shot.image));
         img.addEventListener("contextmenu", () => logUsage("right_click", shot));
-
-        // tag styling
-        const topicClass = "tag-" + (shot.topic||"Uncategorized").replace(/[^a-zA-Z0-9]/g,"");
-
-        item.innerHTML = `
-          <div class="label">${shot.title}</div>
-          <div class="meta">Language: ${shot.language}</div>
-        `;
-        // assemble
         item.appendChild(img);
-        const tagEl = document.createElement("div");
-        tagEl.className = `tag ${topicClass}`;
-        tagEl.textContent = shot.topic || "Uncategorized";
-        item.appendChild(tagEl);
 
-        // buttons + preview area
+        // topic tag
+        const tag = document.createElement("div");
+        const clean = (shot.topic||"Uncategorized").replace(/[^a-zA-Z0-9]/g,'');
+        tag.className = `tag tag-${clean}`;
+        tag.textContent = shot.topic || "Uncategorized";
+        item.appendChild(tag);
+
+        // buttons + hidden preview
         const btns = document.createElement("div");
         btns.className = "btn-group";
         btns.innerHTML = `
@@ -381,77 +402,95 @@
       gallery.appendChild(frag);
     }
 
-    // logging, lightbox, feedback, copy/preview, back‑to‑top (unchanged)
+    // 5) Utilities (logging, lightbox, feedback, copy/preview)
     function logUsage(evt, shot) {
-      fetch(`${TRACKING_URL}?event=${evt}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic||'')}`)
-        .catch(()=>{});
+      fetch(`${TRACKING_URL}?event=${evt}`
+            + `&title=${encodeURIComponent(shot.title)}`
+            + `&lang=${encodeURIComponent(shot.language)}`
+            + `&topic=${encodeURIComponent(shot.topic||'')}`)
+      .catch(()=>{});
     }
     function showLightbox(src) {
+      const over = document.getElementById('lightboxOverlay');
       document.getElementById('lightboxImage').src = src;
-      document.getElementById('lightboxOverlay').classList.add('show');
+      over.classList.add('show');
     }
     function hideLightbox(e) {
-      if (e.target.id==="lightboxOverlay"||e.target.id==="lightboxClose")
+      if (e.target.id === "lightboxOverlay" || e.target.id === "lightboxClose") {
         document.getElementById('lightboxOverlay').classList.remove('show');
+      }
     }
     let feedbackContext = {};
-    function showFeedbackModal(t,l,tp){
-      feedbackContext={title:t,lang:l,topic:tp};
+    function showFeedbackModal(t,l,tp) {
+      feedbackContext = { title: t, lang: l, topic: tp };
       document.getElementById("feedbackModal").classList.add("show");
-      document.getElementById("feedbackSuccess").style.display="none";
-      document.getElementById("feedbackError").style.display="none";
+      document.getElementById("feedbackSuccess").style.display = "none";
+      document.getElementById("feedbackError").style.display   = "none";
     }
-    function closeFeedbackModal(){
+    function closeFeedbackModal() {
       document.getElementById("feedbackModal").classList.remove("show");
-      document.getElementById("feedbackName").value="";
-      document.getElementById("feedbackComment").value="";
+      document.getElementById("feedbackName").value    = "";
+      document.getElementById("feedbackComment").value = "";
     }
-    function closeModalOutside(e){ if(e.target.id==="feedbackModal") closeFeedbackModal(); }
+    function closeModalOutside(e) {
+      if (e.target.id === "feedbackModal") closeFeedbackModal();
+    }
     function submitFeedback(){
-      const name = document.getElementById("feedbackName").value.trim();
+      const name    = document.getElementById("feedbackName").value.trim();
       const comment = document.getElementById("feedbackComment").value.trim();
-      const succ = document.getElementById("feedbackSuccess"),
-            err  = document.getElementById("feedbackError");
-      if(!name||!comment){ succ.style.display="none"; err.style.display="block"; return; }
+      const succ    = document.getElementById("feedbackSuccess");
+      const err     = document.getElementById("feedbackError");
+      if (!name || !comment) {
+        succ.style.display = "none";
+        err.style.display  = "block";
+        return;
+      }
       const p = new URLSearchParams({
         event:'feedback', name, comment,
-        title:feedbackContext.title, lang:feedbackContext.lang, topic:feedbackContext.topic
+        title:feedbackContext.title,
+        lang:feedbackContext.lang,
+        topic:feedbackContext.topic
       });
       fetch(`${TRACKING_URL}?${p}`)
         .then(()=>{
-          err.style.display="none"; succ.style.display="block";
-          setTimeout(closeFeedbackModal,1500);
+          err.style.display = "none";
+          succ.style.display= "block";
+          setTimeout(closeFeedbackModal, 1500);
         })
         .catch(()=>{
-          err.textContent="❌ Failed to send feedback."; err.style.display="block";
+          err.textContent   = "❌ Failed to send feedback.";
+          err.style.display = "block";
         });
     }
-    function copyText(id,btn){
+    function copyText(id, btn) {
       const ta = document.getElementById(id);
-      ta.style.display='block'; ta.select();
+      ta.style.display = 'block';
+      ta.select();
       document.execCommand('copy');
-      ta.style.display='none';
+      ta.style.display = 'none';
       const orig = btn.textContent;
-      btn.textContent='✅ Copied!';
-      btn.style.backgroundColor='#28a745'; btn.style.color='#fff';
+      btn.textContent  = '✅ Copied!';
+      btn.style.backgroundColor = '#28a745';
+      btn.style.color           = '#fff';
       setTimeout(()=>{
-        btn.textContent=orig;
-        btn.style.backgroundColor='#FCD535'; btn.style.color='#000';
-      },2000);
+        btn.textContent          = orig;
+        btn.style.backgroundColor= '#FCD535';
+        btn.style.color          = '#000';
+      }, 2000);
     }
-    function togglePreview(id,btn){
+    function togglePreview(id, btn) {
       const pv = document.getElementById(id);
       const vis = !pv.classList.contains("hidden");
       pv.classList.toggle("hidden");
       btn.textContent = vis ? "👁️" : "🙈";
     }
     document.body.addEventListener("keydown", e => {
-      if (e.key==="Escape") {
+      if (e.key === "Escape") {
         closeFeedbackModal();
         document.getElementById('lightboxOverlay').classList.remove('show');
       }
     });
-    window.addEventListener('scroll',()=>{
+    window.addEventListener('scroll', () => {
       document.getElementById("backToTop").style.display =
         window.scrollY > 400 ? 'block' : 'none';
     });
