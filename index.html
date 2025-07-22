@@ -108,9 +108,7 @@
     .btn:hover {
       background-color: #e6c200;
     }
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
     .text-preview {
       background: #f0f0f0;
       border: 1px solid #ccc;
@@ -140,98 +138,66 @@
       color: #888;
     }
 
+    /* lightbox */
     .lightbox-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
+      position: fixed; top:0; left:0;
+      width:100vw; height:100vh;
+      background: rgba(0,0,0,0.85);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 9999;
     }
-    .lightbox-overlay.show {
-      display: flex;
-    }
+    .lightbox-overlay.show { display:flex; }
     .lightbox-overlay img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 8px;
+      max-width:90%; max-height:90%; border-radius:8px;
     }
     .lightbox-overlay button {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      background: #FCD535;
-      color: #000;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      position:absolute; top:20px; right:30px;
+      background:#FCD535; color:#000; border:none;
+      padding:6px 12px; border-radius:6px;
+      font-size:18px; font-weight:bold;
+      cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.3);
     }
 
+    /* feedback modal */
     #feedbackModal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      position: fixed; top:0; left:0;
+      width:100vw; height:100vh;
       background: rgba(0,0,0,0.6);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 10000;
     }
-    #feedbackModal.show {
-      display: flex;
-    }
+    #feedbackModal.show { display:flex; }
     #feedbackModal .modal-content {
-      background: #fff;
-      padding: 25px 20px 20px;
-      border-radius: 8px;
-      width: 320px;
-      text-align: center;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.15);
-      position: relative;
+      background:#fff; padding:25px 20px 20px;
+      border-radius:8px; width:320px; text-align:center;
+      box-shadow:0 4px 18px rgba(0,0,0,0.15);
+      position:relative;
     }
     #feedbackModal .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      background: none;
-      border: none;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #999;
+      position:absolute; top:10px; right:15px;
+      background:none; border:none; font-size:20px;
+      font-weight:bold; cursor:pointer; color:#999;
     }
-    #feedbackModal .modal-close:hover {
-      color: #000;
-    }
+    #feedbackModal .modal-close:hover { color:#000; }
     #feedbackModal input, #feedbackModal textarea {
-      width: 100%;
-      margin-top: 10px;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: inherit;
+      width:100%; margin-top:10px; padding:8px;
+      border:1px solid #ccc; border-radius:4px;
+      font-family:inherit;
     }
     #feedbackModal button.submit {
-      margin-top: 15px;
-      padding: 8px 14px;
-      background: #FCD535;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+      margin-top:15px; padding:8px 14px;
+      background:#FCD535; border:none;
+      border-radius:4px; cursor:pointer;
     }
     #feedbackSuccess, #feedbackError {
-      margin-top: 10px;
-      font-size: 13px;
-      display: none;
+      margin-top:10px; font-size:13px; display:none;
     }
-    #feedbackSuccess { color: green; }
-    #feedbackError { color: red; }
+    #feedbackSuccess { color:green; }
+    #feedbackError   { color:red; }
   </style>
 </head>
 <body>
@@ -243,10 +209,18 @@
     <input type="text" id="searchInput" placeholder="Search by keyword...">
     <select id="languageFilter"></select>
     <select id="topicFilter"></select>
+    <select id="sortFilter">
+      <option value="default">Default Order</option>
+      <option value="views">Most Views</option>
+      <option value="clicks">Most Clicks</option>
+      <option value="recent">Recently Used</option>
+    </select>
   </div>
 
   <div class="gallery" id="gallery"></div>
-  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆ Back to Top</button>
+  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ⬆ Back to Top
+  </button>
 
   <footer>
     FD Screenshot Assistant – Internal Use Only<br>
@@ -273,177 +247,202 @@
   <script>
     const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxTGoQvac7i9KNNkwuVCaLz0tRk-KH1jSjHAsgV97og_4RPIhockUCHA1BlmTqJsyg/exec";
     let feedbackContext = {};
+    let usageSummaryMap = {};
 
-    function logUsage(eventType, shot) {
-      const url = `${TRACKING_URL}?event=${eventType}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic || '')}`;
-      fetch(url).catch(() => {});
+    // 1) Fetch summary JSON once
+    function fetchUsageSummary() {
+      return fetch(`${TRACKING_URL}?action=summary`)
+        .then(r => r.json())
+        .then(data => {
+          usageSummaryMap = {};
+          data.forEach(item => {
+            usageSummaryMap[item.title] = item;
+          });
+        })
+        .catch(err => console.error("Error fetching usage summary:", err));
     }
 
-    function showLightbox(src) {
+    // 2) Existing logUsage, lightbox, feedback, copy, preview, etc.
+    function logUsage(eventType, shot) {
+      const url = `${TRACKING_URL}?event=${eventType}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic||'')}`;
+      fetch(url).catch(()=>{});
+    }
+    function showLightbox(src) { /* unchanged */ 
       document.getElementById('lightboxImage').src = src;
       document.getElementById('lightboxOverlay').classList.add('show');
     }
-
-    function hideLightbox(event) {
-      if (event.target.id === "lightboxOverlay" || event.target.id === "lightboxClose") {
+    function hideLightbox(e) {
+      if (e.target.id==="lightboxOverlay"||e.target.id==="lightboxClose")
         document.getElementById('lightboxOverlay').classList.remove('show');
-      }
     }
-
-    function showFeedbackModal(title, lang, topic) {
-      feedbackContext = { title, lang, topic };
+    function showFeedbackModal(title,lang,topic){
+      feedbackContext={title,lang,topic};
       document.getElementById("feedbackModal").classList.add("show");
-      document.getElementById("feedbackSuccess").style.display = "none";
-      document.getElementById("feedbackError").style.display = "none";
+      document.getElementById("feedbackSuccess").style.display="none";
+      document.getElementById("feedbackError").style.display="none";
     }
-
-    function closeFeedbackModal() {
+    function closeFeedbackModal(){
       document.getElementById("feedbackModal").classList.remove("show");
-      document.getElementById("feedbackName").value = "";
-      document.getElementById("feedbackComment").value = "";
+      document.getElementById("feedbackName").value="";
+      document.getElementById("feedbackComment").value="";
     }
-
-    function closeModalOutside(event) {
-      if (event.target.id === "feedbackModal") closeFeedbackModal();
-    }
-
-    function submitFeedback() {
+    function closeModalOutside(e){ if(e.target.id==="feedbackModal") closeFeedbackModal(); }
+    function submitFeedback(){
       const name = document.getElementById("feedbackName").value.trim();
       const comment = document.getElementById("feedbackComment").value.trim();
-      const success = document.getElementById("feedbackSuccess");
-      const error = document.getElementById("feedbackError");
-
-      if (!name || !comment) {
-        success.style.display = "none";
-        error.style.display = "block";
-        return;
+      const succ = document.getElementById("feedbackSuccess");
+      const err  = document.getElementById("feedbackError");
+      if(!name||!comment){
+        succ.style.display="none"; err.style.display="block"; return;
       }
-
       const params = new URLSearchParams({
-        event: 'feedback',
-        name,
-        comment,
-        title: feedbackContext.title || '',
-        lang: feedbackContext.lang || '',
-        topic: feedbackContext.topic || ''
+        event:'feedback', name, comment,
+        title:feedbackContext.title||'',
+        lang:feedbackContext.lang||'',
+        topic:feedbackContext.topic||''
       });
-
-      fetch(`${TRACKING_URL}?${params.toString()}`)
-        .then(() => {
-          error.style.display = "none";
-          success.style.display = "block";
-          document.getElementById("feedbackName").value = "";
-          document.getElementById("feedbackComment").value = "";
-          setTimeout(closeFeedbackModal, 1500);
+      fetch(`${TRACKING_URL}?${params}`)
+        .then(()=>{
+          err.style.display="none";
+          succ.style.display="block";
+          document.getElementById("feedbackName").value="";
+          document.getElementById("feedbackComment").value="";
+          setTimeout(closeFeedbackModal,1500);
         })
-        .catch(() => {
-          error.textContent = "❌ Failed to send feedback.";
-          error.style.display = "block";
+        .catch(()=>{
+          err.textContent="❌ Failed to send feedback.";
+          err.style.display="block";
         });
     }
-
-    document.body.addEventListener("keydown", e => {
-      if (e.key === "Escape") {
+    function copyText(id,button){
+      const ta = document.getElementById(id);
+      ta.style.display='block'; ta.select();
+      document.execCommand('copy');
+      ta.style.display='none';
+      const orig=button.textContent;
+      button.textContent='✅ Copied!';
+      button.style.backgroundColor='#28a745'; button.style.color='#fff';
+      setTimeout(()=>{
+        button.textContent=orig;
+        button.style.backgroundColor='#FCD535';
+        button.style.color='#000';
+      },2000);
+    }
+    function togglePreview(id,button){
+      const pv=document.getElementById(id);
+      const vis=!pv.classList.contains("hidden");
+      pv.classList.toggle("hidden");
+      button.textContent = vis ? "👁️" : "🙈";
+    }
+    document.body.addEventListener("keydown",e=>{
+      if(e.key==="Escape"){
         closeFeedbackModal();
         document.getElementById("lightboxOverlay").classList.remove("show");
       }
     });
 
+    // 3) Fetch data.json, then usage summary, then render()
     fetch('data.json')
-      .then(response => response.json())
-      .then(screenshots => {
+      .then(r=>r.json())
+      .then(screenshots=>{
         const gallery = document.getElementById("gallery");
         const languages = new Set();
-        const topics = new Set();
+        const topics    = new Set();
 
-        screenshots.forEach(shot => {
-          languages.add(shot.language);
-          if (shot.topic) topics.add(shot.topic);
-        });
+        screenshots.forEach(s=>{ languages.add(s.language); if(s.topic) topics.add(s.topic); });
 
         const languageFilter = document.getElementById("languageFilter");
-        const topicFilter = document.getElementById("topicFilter");
-        languageFilter.innerHTML = `<option value="All">All Languages</option>` +
-          Array.from(languages).sort().map(lang => `<option value="${lang}">${lang}</option>`).join("");
-        topicFilter.innerHTML = `<option value="All">All Topics</option>` +
-          Array.from(topics).sort().map(topic => `<option value="${topic}">${topic}</option>`).join("");
+        const topicFilter    = document.getElementById("topicFilter");
+        const searchInput    = document.getElementById("searchInput");
+        const sortFilter     = document.getElementById("sortFilter");
 
-        const searchInput = document.getElementById("searchInput");
-        searchInput.addEventListener("input", render);
-        languageFilter.addEventListener("change", render);
-        topicFilter.addEventListener("change", render);
+        languageFilter.innerHTML = `<option value="All">All Languages</option>`
+          + Array.from(languages).sort()
+              .map(l=>`<option value="${l}">${l}</option>`).join("");
+        topicFilter.innerHTML = `<option value="All">All Topics</option>`
+          + Array.from(topics).sort()
+              .map(t=>`<option value="${t}">${t}</option>`).join("");
 
-        function sanitizeTopicClass(topic) {
-          return "tag-" + (topic || "Uncategorized").replace(/[^a-zA-Z0-9]/g, "");
+        [searchInput, languageFilter, topicFilter, sortFilter]
+          .forEach(el => el.addEventListener("change", render));
+
+        function sanitizeTopicClass(t) {
+          return "tag-"+(t||"Uncategorized").replace(/[^a-zA-Z0-9]/g,"");
         }
 
-        function render() {
-          const search = searchInput.value.toLowerCase();
-          const language = languageFilter.value;
-          const topicFilterVal = topicFilter.value;
+        function render(){
+          const search    = searchInput.value.toLowerCase();
+          const langVal   = languageFilter.value;
+          const topVal    = topicFilter.value;
+          const sortValue = sortFilter.value;
+
+          // 1) filter
+          let filtered = screenshots.filter(s=>{
+            const mS = s.title.toLowerCase().includes(search);
+            const mL = (langVal==="All"||s.language===langVal);
+            const mT = (topVal==="All"||s.topic===topVal);
+            return mS && mL && mT;
+          });
+
+          // 2) sort
+          if(sortValue==="views"){
+            filtered.sort((a,b)=>
+              (usageSummaryMap[b.title]?.views||0)
+              -
+              (usageSummaryMap[a.title]?.views||0)
+            );
+          } else if(sortValue==="clicks"){
+            filtered.sort((a,b)=>
+              (usageSummaryMap[b.title]?.clicks||0)
+              -
+              (usageSummaryMap[a.title]?.clicks||0)
+            );
+          } else if(sortValue==="recent"){
+            filtered.sort((a,b)=>
+              new Date(usageSummaryMap[b.title]?.lastUsed||0)
+              -
+              new Date(usageSummaryMap[a.title]?.lastUsed||0)
+            );
+          }
+          // else default = original order
+
           gallery.innerHTML = "";
-
-          screenshots.forEach((shot, index) => {
-            const matchSearch = shot.title.toLowerCase().includes(search);
-            const matchLang = language === "All" || shot.language === language;
-            const matchTopic = topicFilterVal === "All" || shot.topic === topicFilterVal;
-
-            if (matchSearch && matchLang && matchTopic) {
-              const item = document.createElement("div");
-              item.className = "item";
-              const topicClass = sanitizeTopicClass(shot.topic);
-              item.innerHTML = `
-                <img src="${shot.image}" alt="${shot.title}" onclick="showLightbox('${shot.image}')">
-                <div class="label">${shot.title}</div>
-                <div class="meta">Language: ${shot.language}</div>
-                <div class="tag ${topicClass}">${shot.topic || "Uncategorized"}</div>
-                <div class="btn-group">
-                  <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
-                  <button class="btn" onclick="togglePreview('preview${index}', this)">👁️</button>
-                  <button class="btn" onclick="showFeedbackModal('${shot.title}', '${shot.language}', '${shot.topic || ''}')">💬</button>
-                </div>
-                <textarea id="text${index}" class="hidden">${shot.text}</textarea>
-                <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
-              `;
-              gallery.appendChild(item);
-              logUsage("image_load", shot);
-              item.querySelector("img").addEventListener("contextmenu", () => {
-                logUsage("right_click", shot);
-              });
-            }
+          filtered.forEach((shot,i)=>{
+            const item = document.createElement("div");
+            item.className = "item";
+            const tClass = sanitizeTopicClass(shot.topic);
+            item.innerHTML = `
+              <img src="${shot.image}" alt="${shot.title}"
+                   onclick="showLightbox('${shot.image}')">
+              <div class="label">${shot.title}</div>
+              <div class="meta">Language: ${shot.language}</div>
+              <div class="tag ${tClass}">${shot.topic||"Uncategorized"}</div>
+              <div class="btn-group">
+                <button class="btn" onclick="copyText('text${i}',this)">Copy Text</button>
+                <button class="btn" onclick="togglePreview('preview${i}',this)">👁️</button>
+                <button class="btn"
+                  onclick="showFeedbackModal('${shot.title}','${shot.language}','${shot.topic||''}')">
+                  💬
+                </button>
+              </div>
+              <textarea id="text${i}" class="hidden">${shot.text}</textarea>
+              <div id="preview${i}" class="text-preview hidden">${shot.text}</div>
+            `;
+            gallery.appendChild(item);
+            logUsage("image_load", shot);
+            item.querySelector("img").addEventListener("contextmenu",()=> {
+              logUsage("right_click", shot);
+            });
           });
         }
 
-        render();
+        // initial fetch summary & render
+        fetchUsageSummary().then(render);
       });
 
-    function copyText(id, button) {
-      const textArea = document.getElementById(id);
-      textArea.style.display = 'block';
-      textArea.select();
-      document.execCommand('copy');
-      textArea.style.display = 'none';
-      const original = button.textContent;
-      button.textContent = '✅ Copied!';
-      button.style.backgroundColor = '#28a745';
-      button.style.color = '#fff';
-      setTimeout(() => {
-        button.textContent = original;
-        button.style.backgroundColor = '#FCD535';
-        button.style.color = '#000';
-      }, 2000);
-    }
-
-    function togglePreview(id, button) {
-      const preview = document.getElementById(id);
-      const isVisible = !preview.classList.contains("hidden");
-      preview.classList.toggle("hidden");
-      button.textContent = isVisible ? "👁️" : "🙈";
-    }
-
-    window.addEventListener('scroll', () => {
-      const scrollTopBtn = document.getElementById("backToTop");
-      scrollTopBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
+    window.addEventListener('scroll',()=>{
+      const btn = document.getElementById("backToTop");
+      btn.style.display = window.scrollY > 400 ? 'block' : 'none';
     });
   </script>
 </body>
