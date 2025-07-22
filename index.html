@@ -139,8 +139,6 @@
       font-size: 12px;
       color: #888;
     }
-
-    /* Lightbox */
     .lightbox-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -177,7 +175,6 @@
       background-color: #e6c200;
     }
 
-    /* Feedback Modal */
     #feedbackModal {
       position: fixed;
       top: 0; left: 0;
@@ -231,13 +228,11 @@
     For any feedback or detected issues, DM the project owner.
   </footer>
 
-  <!-- Lightbox -->
   <div class="lightbox-overlay" id="lightboxOverlay" onclick="hideLightbox(event)">
     <button id="lightboxClose">✖</button>
     <img id="lightboxImage" src="" alt="Preview">
   </div>
 
-  <!-- Feedback Modal -->
   <div id="feedbackModal">
     <div class="modal-content">
       <h3>Submit Feedback</h3>
@@ -249,6 +244,7 @@
 
   <script>
     const TRACKING_URL = "https://script.google.com/macros/s/AKfycby8WRPsdB6-dg0WYu2b6O09fhBuZemWnoQDle1F72siMf0UXTyhXwfZQP3WVoq5oQw/exec";
+    let feedbackContext = {};
 
     function logUsage(eventType, shot) {
       const url = `${TRACKING_URL}?event=${eventType}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic || '')}`;
@@ -256,10 +252,8 @@
     }
 
     function showLightbox(src) {
-      const overlay = document.getElementById('lightboxOverlay');
-      const image = document.getElementById('lightboxImage');
-      image.src = src;
-      overlay.classList.add('show');
+      document.getElementById('lightboxImage').src = src;
+      document.getElementById('lightboxOverlay').classList.add('show');
     }
 
     function hideLightbox(event) {
@@ -268,20 +262,33 @@
       }
     }
 
-    function showFeedbackModal() {
+    function showFeedbackModal(title, lang, topic) {
+      feedbackContext = { title, lang, topic };
       document.getElementById('feedbackModal').style.display = 'flex';
     }
 
     function submitFeedback() {
-      const name = document.getElementById("feedbackName").value;
-      const comment = document.getElementById("feedbackComment").value;
+      const name = document.getElementById("feedbackName").value.trim();
+      const comment = document.getElementById("feedbackComment").value.trim();
+
       if (!name || !comment) return alert("Please fill both fields.");
-      const url = `${TRACKING_URL}?event=feedback&name=${encodeURIComponent(name)}&comment=${encodeURIComponent(comment)}`;
-      fetch(url).then(() => {
+
+      const params = new URLSearchParams({
+        event: 'feedback',
+        name,
+        comment,
+        title: feedbackContext.title || '',
+        lang: feedbackContext.lang || '',
+        topic: feedbackContext.topic || ''
+      });
+
+      fetch(`${TRACKING_URL}?${params.toString()}`).then(() => {
         alert("✅ Feedback submitted!");
         document.getElementById("feedbackModal").style.display = "none";
         document.getElementById("feedbackName").value = "";
         document.getElementById("feedbackComment").value = "";
+      }).catch(() => {
+        alert("❌ Failed to submit feedback.");
       });
     }
 
@@ -343,7 +350,7 @@
                 <div class="btn-group">
                   <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
                   <button class="btn" onclick="togglePreview('preview${index}', this)">👁️</button>
-                  <button class="btn" onclick="showFeedbackModal()">💬</button>
+                  <button class="btn" onclick="showFeedbackModal('${shot.title}', '${shot.language}', '${shot.topic || ''}')">💬</button>
                 </div>
                 <textarea id="text${index}" class="hidden">${shot.text}</textarea>
                 <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
