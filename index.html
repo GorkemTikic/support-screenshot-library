@@ -176,6 +176,40 @@
     .lightbox-overlay button:hover {
       background-color: #e6c200;
     }
+
+    /* Feedback Modal */
+    #feedbackModal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+    #feedbackModal .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 6px;
+      width: 300px;
+      text-align: center;
+    }
+    #feedbackModal input, #feedbackModal textarea {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #feedbackModal button {
+      margin-top: 15px;
+      padding: 8px 14px;
+      background: #FCD535;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -203,6 +237,16 @@
     <img id="lightboxImage" src="" alt="Preview">
   </div>
 
+  <!-- Feedback Modal -->
+  <div id="feedbackModal">
+    <div class="modal-content">
+      <h3>Submit Feedback</h3>
+      <input type="text" id="feedbackName" placeholder="Your name">
+      <textarea id="feedbackComment" rows="4" placeholder="Your comment..."></textarea>
+      <button onclick="submitFeedback()">Send</button>
+    </div>
+  </div>
+
   <script>
     const TRACKING_URL = "https://script.google.com/macros/s/AKfycby8WRPsdB6-dg0WYu2b6O09fhBuZemWnoQDle1F72siMf0UXTyhXwfZQP3WVoq5oQw/exec";
 
@@ -223,6 +267,30 @@
         document.getElementById('lightboxOverlay').classList.remove('show');
       }
     }
+
+    function showFeedbackModal() {
+      document.getElementById('feedbackModal').style.display = 'flex';
+    }
+
+    function submitFeedback() {
+      const name = document.getElementById("feedbackName").value;
+      const comment = document.getElementById("feedbackComment").value;
+      if (!name || !comment) return alert("Please fill both fields.");
+      const url = `${TRACKING_URL}?event=feedback&name=${encodeURIComponent(name)}&comment=${encodeURIComponent(comment)}`;
+      fetch(url).then(() => {
+        alert("✅ Feedback submitted!");
+        document.getElementById("feedbackModal").style.display = "none";
+        document.getElementById("feedbackName").value = "";
+        document.getElementById("feedbackComment").value = "";
+      });
+    }
+
+    document.body.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        document.getElementById("feedbackModal").style.display = "none";
+        document.getElementById("lightboxOverlay").classList.remove("show");
+      }
+    });
 
     fetch('data.json')
       .then(response => response.json())
@@ -256,7 +324,6 @@
           const search = searchInput.value.toLowerCase();
           const language = languageFilter.value;
           const topicFilterVal = topicFilter.value;
-
           gallery.innerHTML = "";
 
           screenshots.forEach((shot, index) => {
@@ -276,6 +343,7 @@
                 <div class="btn-group">
                   <button class="btn" onclick="copyText('text${index}', this)">Copy Text</button>
                   <button class="btn" onclick="togglePreview('preview${index}', this)">👁️</button>
+                  <button class="btn" onclick="showFeedbackModal()">💬</button>
                 </div>
                 <textarea id="text${index}" class="hidden">${shot.text}</textarea>
                 <div id="preview${index}" class="text-preview hidden">${shot.text}</div>
