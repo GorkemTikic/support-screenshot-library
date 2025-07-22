@@ -140,7 +140,7 @@
       color: #888;
     }
 
-    /* Lightbox styles */
+    /* Lightbox */
     .lightbox-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -163,13 +163,18 @@
       position: absolute;
       top: 20px;
       right: 30px;
-      background: #fff;
+      background: #FCD535;
+      color: #000;
       border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
+      padding: 6px 12px;
+      border-radius: 6px;
       font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
-      z-index: 10001;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .lightbox-overlay button:hover {
+      background-color: #e6c200;
     }
   </style>
 </head>
@@ -185,7 +190,6 @@
   </div>
 
   <div class="gallery" id="gallery"></div>
-
   <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆ Back to Top</button>
 
   <footer>
@@ -194,8 +198,8 @@
   </footer>
 
   <!-- Lightbox -->
-  <div class="lightbox-overlay" id="lightboxOverlay">
-    <button onclick="document.getElementById('lightboxOverlay').classList.remove('show')">✖</button>
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="hideLightbox(event)">
+    <button id="lightboxClose">✖</button>
     <img id="lightboxImage" src="" alt="Preview">
   </div>
 
@@ -212,6 +216,12 @@
       const image = document.getElementById('lightboxImage');
       image.src = src;
       overlay.classList.add('show');
+    }
+
+    function hideLightbox(event) {
+      if (event.target.id === "lightboxOverlay" || event.target.id === "lightboxClose") {
+        document.getElementById('lightboxOverlay').classList.remove('show');
+      }
     }
 
     fetch('data.json')
