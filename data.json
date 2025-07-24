@@ -201,5 +201,19 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/BNB_Discount_(Futures%2CMargin_Interest)_-_EN.jpg",
     "text": "To Enable BNB Discount on Futures or Margin Interest, please follow the steps in the screenshot: \n\n1 -) Click on the Home \n\n2 -) Click on the Menu \n\n3 -) Click on the Settings\n\n4 -) Click on ''Using BNB'' button \n\n5 -) You can enable the BNB discount on for Futures and Margin interests in this page",
     "topic": "General"
+  },
+  {
+    "title": "SWAP LDUSDT to USDT - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/SWAP_LDUSDT_to_USDT_-_EN.jpg",
+    "text": "To Swap your LDUSDT to USDT and sent it back to Earn wallet, please follow the steps in the screenshot: \n\n1 -) Click on Assets\n2 -) Click on Futures \n3 -) Click on USDS-M Futures\n4 -) Click on LDUSDT Earning button\n5 -) Click on SWAP on new page\n\n6 -) Click on the arrow icon to change the path. \n\n7 -) The correct path as in this step on the screenshot:\n \nFrom: USDS-M Futures (LDUSDT)\nTo: Earn (USDT)\n\nInput the amount and click on Confirm. \n\nYou will see the USDT in your Earn wallet after you confirm. \n\nWhat is LDUSDT and How to Use it as Margin in Futures Trading?\nhttps://www.binance.com/en/support/faq/detail/a3e0a836380f4ef08ea46f9e2e67b4fd",
+    "topic": "Futures Trading"
+  },
+  {
+    "title": "SWAP USDT to LDUSDT - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/SWAP_USDT_to_LDUSDT_-_EN.jpg",
+    "text": "By swapping your USDT to LDUSDT, you can use your USDT balance in Earn wallet as a margin in USDS-M Futures, to do this - please follow the steps in the screenshot: \n\n1 -) Click on Assets\n2 -) Click on Futures \n3 -) Click on USDS-M Futures\n4 -) Click on LDUSDT Earning button\n5 -) Click on SWAP on new page\n\n6 -) In this page make sure the path is the same in the screenshot: \n\nFrom: Earn (USDT)\nTo: USDS-M Futures (LDUSDT)\n\nInput the amount and click on Confirm. \n\nYou will see the LDUSDT as balance on Futures after you confirm.\n\nWhat is LDUSDT and How to Use it as Margin in Futures Trading?\nhttps://www.binance.com/en/support/faq/detail/a3e0a836380f4ef08ea46f9e2e67b4fd",
+    "topic": "Futures Trading"
   }
 ]
