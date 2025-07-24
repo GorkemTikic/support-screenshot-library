@@ -187,5 +187,12 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/How_To_Close_The_Grid_Position_When_The_Grid_is_Stop.jpg",
     "text": "To Close the open position in a stopped grid, please follow the steps in the screenshot: \n\n1 -) Click on Futures button\n\n2 -) Click on Bots button\n\n3 -) Click on ''All Orders'' on the right corner\n\n4 -) You will see ''Position'' button on your stopped grid. \n\n5 -) Then you will see a second ''Position'' button on running order detail page. \n\n6 -) In this page you can see the open positions to close by clicking Close buttons.",
     "topic": "Grid Bot"
+  },
+  {
+    "title": "Cross Margin Adjusted Entry Price - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Cross_Margin_Adjusted_Entry_Price_-_EN.jpg",
+    "text": "To Switch Between Entry Price & Adjusted Entry Price on Cross Margin, please follow the steps in the screenshot: \n\n1 -) Click on Asset\n2 -) Click on Margin\n3 -) Click on Entry Price\n4 -) In the pop-up menu click on Adjusted Entry Price \n\nThis is how you change between Entry and Adjusted Entry Price on Cross Margin Trading.",
+    "topic": "Margin Trading"
   }
 ]
