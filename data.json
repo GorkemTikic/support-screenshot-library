@@ -217,7 +217,7 @@
     "topic": "Futures Trading"
   },
   {
-    "title": "What Is Funding Rate?",
+    "title": "What Is Funding Rate? - EN",
     "language": "English",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/What_Is_Funding_Rate.jpg",
     "text": "The Funding Rate determines which traders pay or receive Funding Fees and what percentage of their positions is involved.\n\nOn Binance Futures, Funding Fees are exchanged regularly to keep the perpetual futures prices aligned with the spot price. Typically, funding occurs every 8 hours, precisely at 00:00 UTC, 08:00 UTC, and 16:00 UTC. However, during periods of significant price divergence between the spot market and the perpetual futures contract, Binance may adjust funding intervals to shorter periods, such as every 4 hours, 2 hours, or even 1 hour, to better manage market stability.\n\nWhen the market is in a state of contango, meaning that the futures prices are higher than the spot price, the Funding Rate will be positive. In this scenario, traders holding long positions in perpetual futures contracts will pay Funding Fees to traders holding short positions.\n\nOn the other hand, when the market is in a state of backwardation, meaning that the futures prices are lower than the spot price, the Funding Rate will be negative. In this scenario, traders holding short positions in perpetual futures contracts will pay Funding Fees to traders holding long positions.\n\nWhat Are Funding Fees in Binance Futures?\nhttps://www.binance.com/en/blog/futures/6595842576313788144\n\nIntroduction to Binance Futures Funding Rates\nhttps://www.binance.com/en/support/faq/detail/360033525031\n\nFor Further details you can refer to above articles as well.",
