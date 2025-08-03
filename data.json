@@ -222,5 +222,19 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/What_Is_Funding_Rate.jpg",
     "text": "The Funding Rate determines which traders pay or receive Funding Fees and what percentage of their positions is involved.\n\nOn Binance Futures, Funding Fees are exchanged regularly to keep the perpetual futures prices aligned with the spot price. Typically, funding occurs every 8 hours, precisely at 00:00 UTC, 08:00 UTC, and 16:00 UTC. However, during periods of significant price divergence between the spot market and the perpetual futures contract, Binance may adjust funding intervals to shorter periods, such as every 4 hours, 2 hours, or even 1 hour, to better manage market stability.\n\nWhen the market is in a state of contango, meaning that the futures prices are higher than the spot price, the Funding Rate will be positive. In this scenario, traders holding long positions in perpetual futures contracts will pay Funding Fees to traders holding short positions.\n\nOn the other hand, when the market is in a state of backwardation, meaning that the futures prices are lower than the spot price, the Funding Rate will be negative. In this scenario, traders holding short positions in perpetual futures contracts will pay Funding Fees to traders holding long positions.\n\nWhat Are Funding Fees in Binance Futures?\nhttps://www.binance.com/en/blog/futures/6595842576313788144\n\nIntroduction to Binance Futures Funding Rates\nhttps://www.binance.com/en/support/faq/detail/360033525031\n\nFor Further details you can refer to above articles as well.",
     "topic": "Futures Trading"
+  },
+  {
+    "title": "Webhook Failed Signals WEB - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Webhook_Failed_Signals_WEB_-_EN.jpeg",
+    "text": "To check the failed signals of the Webhook Signal, please follow the steps in the screenshot: \n\n1 -) Click on ''Bots''\n\n2 -) Click on ''Webhook Signal Trading'' \n\n3 -) Click on the ''History Icon'' next to trash and pause button. \n\n4 -) On this page, you will see ''Failed Signals'' tab, you can see the reason of failed signals in here. \n\nHow to Set up Signal Trading With TradingView?\nhttps://www.binance.com/en/support/faq/detail/3f57291b56474f5e900cc4b754f61ff3",
+    "topic": "Futures Trading"
+  },
+  {
+    "title": "Check For Updates - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/WhatsApp_Image_2025-08-04_at_00.05.57.jpeg",
+    "text": "To update your app to the latest version, please follow the steps in the screenshot: \n\n1 -) Click on the Home \n\n2 -) Click on the Menu \n\n3 -) Click on the Settings\n\n4 -) Click on ''Check For Updates'' tab \n\nThis way, you can check if your app is up to date or not.",
+    "topic": "General"
   }
 ]
