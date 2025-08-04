@@ -242,6 +242,12 @@
     }
     #feedbackSuccess { color: green; }
     #feedbackError { color: red; }
+
+    /* highlight matches */
+    .highlight {
+      background-color: #ffeb3b;
+      border-radius: 2px;
+    }
   </style>
 </head>
 <body>
@@ -286,7 +292,7 @@
   </div>
 
   <script>
-    const TRACKING_URL = "https://script.google.com/macros/s/AKfycbyC_FMQV5B7Q8xarTKSyaZ8spPZJZZvgIBrzWDdyhxocrtV660RBKchpJa0w53lLiQ/exec";
+    const TRACKING_URL = "https://script.google.com/macros/s/AKfycbzGfDRuf-VWrTbZA63yXnTjVx8iH5ObkfRuC_rL4ZCyTOk9utIEe1eI8pVMlBG6wMw/exec";
     let feedbackContext = {};
 
     function logUsage(eventType, shot) {
@@ -305,7 +311,6 @@
       }
     }
 
-    // Now accepts an image URL too
     function showFeedbackModal(title, lang, topic, image) {
       feedbackContext = { title, lang, topic, image };
       document.getElementById('feedbackModal').classList.add('show');
@@ -338,7 +343,7 @@
 
       const params = new URLSearchParams({
         event: 'feedback',
-        name, 
+        name,
         comment,
         title: feedbackContext.title,
         lang: feedbackContext.lang,
@@ -369,6 +374,18 @@
       }
     });
 
+    // Escape special chars for RegExp
+    function escapeRegExp(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Wrap matches of `q` in <span class="highlight">
+    function highlight(text, q) {
+      if (!q) return text;
+      const pattern = new RegExp(`(${escapeRegExp(q)})`, 'gi');
+      return text.replace(pattern, '<span class="highlight">$1</span>');
+    }
+
     fetch('data.json')
       .then(r => r.json())
       .then(screenshots => {
@@ -397,16 +414,16 @@
         }
 
         function render() {
-          const q       = document.getElementById('searchInput').value.toLowerCase();
+          const q       = document.getElementById('searchInput').value.trim().toLowerCase();
           const lang    = document.getElementById('languageFilter').value;
           const topicF  = document.getElementById('topicFilter').value;
           gallery.innerHTML = '';
 
-          screenshots.forEach((shot,i) => {
+          screenshots.forEach((shot, i) => {
             if (
               shot.title.toLowerCase().includes(q) &&
-              (lang==='All'||shot.language===lang) &&
-              (topicF==='All'||shot.topic===topicF)
+              (lang === 'All' || shot.language === lang) &&
+              (topicF === 'All' || shot.topic === topicF)
             ) {
               const div = document.createElement('div');
               div.className = 'item';
@@ -414,7 +431,7 @@
 
               div.innerHTML = `
                 <img src="${shot.image}" alt="${shot.title}" onclick="showLightbox('${shot.image}')">
-                <div class="label">${shot.title}</div>
+                <div class="label">${highlight(shot.title, q)}</div>
                 <div class="meta">Language: ${shot.language}</div>
                 <div class="tag ${topicClass}">${shot.topic||'Uncategorized'}</div>
                 <div class="btn-group">
@@ -429,7 +446,7 @@
                   </button>
                 </div>
                 <textarea id="text${i}" class="hidden">${shot.text}</textarea>
-                <div id="preview${i}" class="text-preview hidden">${shot.text}</div>
+                <div id="preview${i}" class="text-preview hidden">${highlight(shot.text, q)}</div>
               `;
               gallery.appendChild(div);
               logUsage('image_load', shot);
@@ -464,7 +481,6 @@
       const prev = document.getElementById(id);
       const showing = !prev.classList.contains('hidden');
       prev.classList.toggle('hidden');
-
       button.innerHTML = showing
         ? `<i class="fa-regular fa-eye"></i>`
         : `<i class="fa-regular fa-eye-slash"></i>`;
