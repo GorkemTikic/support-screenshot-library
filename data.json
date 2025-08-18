@@ -257,5 +257,12 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/DeviceID_-_EN.jpeg",
     "text": "To Create and Share the Device ID, please folow the steps in the screenshot above\n\n1 -) Click on Home\n2 -) Click on Menu\n3 -) Click on Settings\n4 -) Click on ''About Us'' \n\n5 -) In this page, **rapidly click on the Binance Logo 5 times** back to back. \n\n6 -) After that you will see the Device ID appeared like the screenshot click on the copy button and copy the Device ID. \n\nPlease **paste the Device ID to the chat to** share with us so we can share it with our tech team.",
     "topic": "General"
+  },
+  {
+    "title": "PNL Analysis Page (To see Fees) - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/PNL_Analysis_Page_(Fees)_-_EN.jpeg",
+    "text": "To see your Futures PNL Analysis to check your Fees, please follow the steps in the screenshot: \n\n1 -) Tap \"Assets\".\n2 -) Tap \"Futures\".\n3 -) Select \"USDⓈ-M\".\n4 -) Tap the \"Today's Realized PnL\" button to open the Futures PnL Analysis page.\n5 -) Go to the \"Funding & Transaction\" tab.\n6 -) Enable \"Show Transaction Fee\".\n\n--What you’ll see:**\nYour total transaction fees and the funding fees you paid/received.\n\n**Tip:**\nUse the date filter to choose a custom range or quick options: 7D, 1M, 3M, or 1Y.",
+    "topic": "Futures Trading"
   }
 ]
