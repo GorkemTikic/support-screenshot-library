@@ -278,5 +278,26 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/How_To_Enable%3ADisable_AUTO_Borrow%3ARepay_-_EN.jpeg",
     "text": "To Enable & Disable the AUTO Borrow/Repay Function on Margin Trading, please follow the steps on the above screenshot: \n\n1 -) Click on ''TRADE''\n\n2 -) Click on ''MARGIN''\n\n3 -) Click on 'AUTO''\n\n4 -) In this new tab, you can Enable & Disable the AUTO Borrow/Repay.",
     "topic": "Margin Trading"
+  },
+  {
+    "title": "Clear Cache - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Clear_Cache_-_AR.png",
+    "text": "1 -) اضغط على الصفحة الرئيسية  \n2 -) اضغط على القائمة  \n3 -) اضغط على الإعدادات  \n4 -) اضغط على زر مسح الذاكرة المؤقتة  \n\nهذا يساعد على إزالة الملفات المؤقتة وقد يجعل تطبيقك يعمل بشكل أسرع وأكثر سلاسة!",
+    "topic": "General"
+  },
+  {
+    "title": "Copy Order History - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Copy_Order_History_-_AR_.png",
+    "text": "1 -) اضغط على \" عقود الآجلة\"\n\n2 -) اضغط على زر \"نسخ\"\n\n3 -) اضغط على \"نسخ\" في الزاوية السفلية اليمنى\n\n4 -) تقدر تشوف \"المحافظ المنسوخة - المغلقة\" في الصفحة دي",
+    "topic": "Copy Trading"
+  },
+  {
+    "title": "Futures Transaction History (Export) - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Futures_Transaction_History_(Export)_-_AR.png",
+    "text": "يرجى الضغط على \"عقود الآجلة\" ثم أيقونة \"التاريخ\" مثلما حددت. \n\nبعدها، اذهب إلى علامة \"سجل المعاملات\" واضغط على زر \"تصدير\" في الزاوية العليا اليمنى. \n\nسترى علامة التصدير، وهنا: \n\nاختر: كل الوقت \nيمكنك تصدير سنة بسنة، مثلاً إذا تبغى تصدر بيانات 3 سنوات \nممكن تصدر من 2020-01-01 إلى 2020-12-31 \nلين توصل للسنة اللي تبيها",
+    "topic": "Futures Trading"
   }
 ]
