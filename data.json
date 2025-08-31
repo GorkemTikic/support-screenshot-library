@@ -306,5 +306,82 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Clear_Cache_CN.png",
     "text": "1 -) 点击【首页】\n2 -) 左上角点击【三条杠】\n3 -) 右上角点击【设置（⚙️）】\n4 -) 点击清除缓存\n\n这有助于清理临时文件，使您的应用运行得更快、更流畅！",
     "topic": "General"
+  },
+  {
+    "title": "System Feedback - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/System_Feedback_-_AR.png",
+    "text": "لإرسال ملاحظات النظام من تطبيق Binance للهاتف المحمول، يرجى اتباع الخطوات الموضحة في الصورة:\n\n1 -) انقر على الصفحة الرئيسية\n2 -) انقر على القائمة\n3 -) انقر على الإعدادات\n4 -) انقر على علامة التبويب ''المساعدة والدعم''\n5 -) انقر على ''ملاحظات النظام''\n6 -) انقر على ''إرسال''\n7 -) انتظر حتى تظهر إشعار النجاح.\n\nبعد أن تتبع الخطوات المتعلقة التي قدمتها أيضاً في الصورة، يرجى إخباري لأتمكن من إعلام الفريق الفني بأنك اكملت ملاحظات النظام.",
+    "topic": "General"
+  },
+  {
+    "title": "PNL Analysis Page (To see Fees) - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/PNL_Analysis_Page_(To_see_Fees)_-_AR.png",
+    "text": "لرؤية تحليل الربح والخسارة الخاص بعقود المستقبلية للتحقق من الرسوم الخاصة بك، يرجى اتباع الخطوات الموضحة في لقطة الشاشة:\n\n1 -) اضغط على \"الأصول\".\n2 -) اضغط على \"عقود المستقبل\".\n3 -) اختر \"USDⓈ-M\".\n4 -) اضغط على زر \"الربح والخسارة المحققة اليوم\" لفتح صفحة تحليل الربح والخسارة لعقود المستقبل.\n5 -) انتقل إلى علامة التبويب \"التمويل والمعاملات\".\n6 -) قم بتمكين \"عرض رسوم المعاملات\".\n\n--ماذا سترى:**\nإجمالي رسوم المعاملات ورسوم التمويل التي دفعتها/استلمتها.\n\n**نصيحة:**\nاستخدم فلتر التاريخ لاختيار نطاق مخصص أو الخيارات السريعة: 7 أيام، 1 شهر، 3 أشهر، أو 1 سنة.",
+    "topic": "Futures Trading"
+  },
+  {
+    "title": "BNB Discount (Futures,Margin Interest) - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/BNB_Discount_(Futures%2CMargin_Interest)_-_AR.png",
+    "text": "لتمكين خصم BNB على العقود الآجلة أو فوائد الهامش، يُرجى اتباع الخطوات المعروضة في لقطة الشاشة:\n\n1 -) انقر على الصفحة الرئيسية\n\n2 -) انقر على القائمة\n\n3 -) انقر على الإعدادات\n\n4 -) انقر على زر \"استخدام BNB\"\n\n5 -) يمكنك تمكين خصم BNB على العقود الآجلة وفوائد الهامش في هذه الصفحة.",
+    "topic": "General"
+  },
+  {
+    "title": "Transfer From Futures USDS-M To Spot Wallet - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Futures_USDS-M_To_Spot_Wallet_-_AR.png",
+    "text": "لتحويل الأصول من محفظة العقود الآجلة USDS-M إلى محفظة التداول الفوري، يرجى اتباع الخطوات الموضحة في لقطة الشاشة:\n\n1 -) انقر على \"الأصول\"\n\n2 -) انقر على \"العقود الآجلة\"\n\n3 -) انقر على \"زر USDS-M\"\n\n4 -) انقر على \"تحويل\"\n\n5 -) انقر على الأسهم لتغيير المسار، المسار الصحيح كما في الخطوة التالية:\n\n6 -) المسار الصحيح:\n\nمن: USDS-M العقود الآجلة\nإلى: محفظة التداول الفوري\n\n7 -) اختر الأصل/العملة\n\nأدخل كمية الأصول التي ترغب في تحويلها وبارك التحويل.\n\nهكذا تقوم بإجراء التحويلات من USDS-M العقود الآجلة إلى محفظة التداول الفوري.",
+    "topic": "Futures Trading"
+  },
+  {
+    "title": "Change Button Settings in Positions - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Change_Button_Settings_in_Positions_-_AR.png",
+    "text": "لتغيير وضع الأصول، يرجى اتباع الخطوات الموضحة في لقطة الشاشة:\n\n1 -) انقر على \"العقود الآجلة\"\n\n2 -) انقر على أيقونة \"...\" في الزاوية العلوية اليمنى.\n\n3 -) انقر على \"التفضيلات\" من القائمة المنبثقة.\n\n4 -) انقر على إعدادات الأزرار في الصفقات المفتوحة.\n\n5 -) في هذه الصفحة يمكنك تغيير إعدادات الأزرار الخاصة بك على الصفقات المفتوحة. يمكنك تفعيل أو تعطيل الخيارات التي تفضلها.",
+    "topic": "Futures Trading"
+  },
+  {
+    "title": "Change Position Mode (One-Way,Hedge) - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Change_Position_Mode_(One-Way%2CHedge)_-_AR.png",
+    "text": "1 -) انقر على \"عقود المستقبل\".\n\n2 -) انقر على أيقونة ''...'' في الزاوية العليا اليمنى.\n\n3 -) انقر على ''التفضيلات'' في القائمة المنبثقة.\n\n4 -) انقر على زر \"وضعية المركز\".\n\n5 -) في هذه الصفحة يمكنك تغيير وضعية مركزك.",
+    "topic": "Futures Trading"
+  },
+  {
+    "title": "Transfer From Spot Wallet to USDS-M Futures - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Spot_Wallet_to_USDS-M_Futures_-_AR.png",
+    "text": "لتحويل الأصول من محفظة \"سبوت\" إلى محفظة \"فيوتشرز\"، يُرجى اتباع الخطوات الموضحة في لقطة الشاشة:\n\n1 -) اضغط على \"الأصول\"\n\n2 -) اضغط على \"فيوتشرز\"\n\n3 -) اضغط على زر \"USDS-M\"\n\n4 -) اضغط على \"تحويل\"\n\n5 -) تأكد أن المسار هو:\n\nمن: محفظة سبوت\nإلى: محفظة فيوتشرز USDS-M\n\n6 -) اختر الأصل/العملة\n\nادخل كمية الأصول التي ترغب في تحويلها ووافق على عملية التحويل.\n\nهذه هي الطريقة التي يمكنك من خلالها إجراء التحويلات من محفظة \"سبوت\" إلى محفظة \"فيوتشرز\" USDS-M.",
+    "topic": "Futures Trading"
+  },
+  {
+    "title": "Transfer From Isolated Margin to Spot Wallet - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Transfer_From_Isolated_Margin_to_Spot_Wallet_-_AR.png",
+    "text": "لنقل الأصول من الاقتراض المعزول إلى المحفظة الفورية، يرجى اتباع الخطوات في لقطة الشاشة أعلاه:\n\n1 -) انقر على \"الأصول\"\n2 -) انقر على \"الفورية\"\n3 -) انقر على \"الاقتراض المعزول\"\n4 -) انقر على \"نقل\"\n5 -) انقر على الأسهم لتغيير المسار، المسار الصحيح هو:\n\nمن: الاقتراض المعزول\nإلى: المحفظة الفورية\n\n6 -) اختر الزوج الذي ترغب في النقل إليه عن طريق النقر على اسم الزوج.\n\n7 -) انقر على الأصل الذي ترغب في نقله\n\nحدد المبلغ وقدم تأكيد النقل.\n\nهذه هي طريقة النقل من الاقتراض المعزول إلى المحفظة الفورية.",
+    "topic": "Margin Trading"
+  },
+  {
+    "title": "Futures Notification for TP/SL/Funding - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Futures_Notification_for_TP%3ASL%3AFunding_-_AR.png",
+    "text": "لضبط إعدادات إشعارات العقود الآجلة، يرجى اتباع الخطوات الموضحة في لقطات الشاشة:\n\n1 -) انقر على \"العقود الآجلة\"\n\n2 -) انقر على أيقونة \"...\" في الزاوية العلوية اليمنى.\n\n3 -) انقر على \"التفضيلات\" في القائمة المنبثقة.\n\n4 -) انقر على زر \"الإشعارات\"\n\n5 -) في هذه الصفحة يمكنك تفعيل أو تعطيل الإشعارات لـ:\n\n**تنبيه TP/SL:** استقبل إشعارًا عند تفعيل أي مستوى جني ربح أو وقف خسارة. الحد الأقصى: 25 إشعارًا في اليوم.\n\n**تنبيه رسوم التمويل:** حدد حدًا لمعدل التمويل؛ ستتلقى تنبيهًا إذا تجاوز معدل التمويل المتوقع لأي مركز مفتوح هذا النسبة.\n\n**تداول العقود الآجلة:** احصل على إشعار عند تنفيذ أمر عقود آجلة.\n\n**تنبيه استدعاء الهامش:** الحد الافتراضي هو 80%. اضغط على \"تحرير\" لتعيين نسبة هامش مختلفة؛ ستتلقى إشعارًا عندما يصل مركزك إلى هذه النسبة.",
+    "topic": "Futures Trading"
+  },
+  {
+    "title": "Futures Notification for TP/SL/Funding - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Loan_Repayment_(Borrowed_Coin)_-_AR.png",
+    "text": "لذا إذا كنت ترغب في سداد قرض جاري باستخدام العملة المقترضة، يرجى اتباع الخطوات في لقطة الشاشة:\n\n1 -) انقر على \"الطلبات الجارية\" في صفحة طلبات القرض\n2 -) انقر على \"سداد\"\n3 -) انقر على \"العملة المقترضة\" في القائمة العلوية\n\nأدخل المبلغ الذي ترغب في سداده وسترى نسبة القرض إلى القيمة بعد السداد وسيرجع مبلغ الضمان بعد السداد ضمن التفاصيل أيضًا.\n\nهذه هي الطريقة التي تسدد بها قرضًا جاريًا باستخدام العملة المقترضة.",
+    "topic": "Binance LOAN"
+  },
+  {
+    "title": "LOAN HISTORY (ONGOING LOANS) - AR",
+    "language": "Arabic",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/LOAN_HISTORY_(ONGOING_LOANS)_-_AR.png",
+    "text": "للاطلاع على طلبات القروض الجارية الخاصة بك أو تاريخ قرضك، يمكنك اتباع الخطوات الموضحة في لقطة الشاشة:\n\n1 -) انقر على صفحة الكسب\n\n2 -) انقر على زر الاقتراض\n\n3 -) ثم انقر على رمز التاريخ في الأعلى\n\nفي تلك الصفحة، يمكنك رؤية قروضك الجارية وتاريخ قروضك.\n\nLoans history - on going",
+    "topic": "Binance LOAN"
   }
 ]
