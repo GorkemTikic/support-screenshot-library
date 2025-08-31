@@ -383,5 +383,12 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/LOAN_HISTORY_(ONGOING_LOANS)_-_AR.png",
     "text": "للاطلاع على طلبات القروض الجارية الخاصة بك أو تاريخ قرضك، يمكنك اتباع الخطوات الموضحة في لقطة الشاشة:\n\n1 -) انقر على صفحة الكسب\n\n2 -) انقر على زر الاقتراض\n\n3 -) ثم انقر على رمز التاريخ في الأعلى\n\nفي تلك الصفحة، يمكنك رؤية قروضك الجارية وتاريخ قروضك.\n\nLoans history - on going",
     "topic": "Binance LOAN"
+  },
+  {
+    "title": "Margin Interest History - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Margin_Interest_History_-_EN.jpeg",
+    "text": "To see the Margin Interest History, please follow the steps in the screenshot: \n\n1 -) Click on ''**Trade**''\n2 -) Click on ''**Margin**''\n3 -) Click on ''**History Icon**''\n\n4 -) Choose Cross Or Isolated Margin \n5 -) Click on ''**Debt History**''\n6 -) Click on ''**Interest**'' \n\nYou can see how much interest you were charged on this page for Margin Trading.",
+    "topic": "Margin Trading"
   }
 ]
