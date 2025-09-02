@@ -411,5 +411,12 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Mark_Price_-_CN.png",
     "text": "要查看标记价格K线图，请根据截图中的步骤进行操作：\n\n\n1 -) 点击图表图标\n\n2 -) 点击图表上方的“最新价格”按钮\n\n3 -) 选择“标记价格”\n\n这样您就可以查看实时标记价格K线图。\n\n要了解更多关于标记价格和最新价格之间的区别，您也可以查看以下官方指南：\n\n合约合约的最新价格和标记价格有什么区别？\nhttps://www.binance.com/zh-CN/blog/%E5%90%88%E7%BA%A6/5704082076024731087",
     "topic": "Futures Trading"
+  },
+  {
+    "title": "Change Position Mode (One-Way,Hedge) - CN",
+    "language": "Chinese",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Change_Position_Mode_(One-Way%2CHedge)_-_CN.png",
+    "text": "要切换仓位模式，请按照截图中的步骤操作：\n\n1 -) 点击右上角的“...”图标。\n\n2 -) 点击弹出菜单中的“偏好设置”。\n\n3 -) 点击“仓位模式”按钮。\n\n4 -) 您可以在此页面切换仓位模式。",
+    "topic": "Futures Trading"
   }
 ]
