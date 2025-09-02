@@ -392,13 +392,6 @@
     "topic": "Margin Trading"
   },
   {
-    "title": "Cooling Off Period - CN",
-    "language": "Chinese",
-    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Cooling_Off_Period_-_CN.png",
-    "text": "如果您想要开启事件合约冷静期。您可以通过以下方式进行操作：\n\n1 -) 请点击合约交易页面上的“...”图标\n\n2 -) 点击“冷静期”\n\n3 -) 点击“启用”按钮。\n\n4 -) 然后，您可以选择冷静期，例如：\n\n1 天\n1 周\n1 个月\n无限期\n\n5 -) 点击【确认】",
-    "topic": "Futures Trading"
-  },
-  {
     "title": "Cooling Off Period Futures - CN",
     "language": "Chinese",
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Cooling_Off_Period_Futures_-_CN.png",
