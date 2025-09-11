@@ -418,5 +418,12 @@
     "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/How_To_Add_Margin_to_Isolated_Position_-_EN.jpeg",
     "text": "To Add or Remove Margin on your Futures Isolated Positions, you can follow the steps in the screenshot: \n\n\n1 -) Click on the **(+)** icon on next the margin. \n\n2 -) Select Add Margin or Remove Margin \n\n3 -) Enter the Amount\n\n4 -) Click on Confirm to proceed. \n\n\n**Currently Assigned Margin:** This is the amount of margin in your current position. \n\n\n**Max Addable:** This is the maximum amount you can add. \n\n\n**Est. Liq.Price after increase:** This is the **estimated** liquidation price after you add the margin.\n\n\nIf you want to learn more details, you can refer to official guide as well: \n\n**How to Adjust Margin Balance in Cross/Isolated Margin Mode?** https://www.binance.com/en/support/faq/detail/360038447311",
     "topic": "Futures Trading"
+  },
+  {
+    "title": "Buy/Sell Tab Setting - EN",
+    "language": "English",
+    "image": "https://raw.githubusercontent.com/GorkemTikic/support-screenshot-library/main/images/Buy%3ASell_Tab_Setting_-_EN.jpeg",
+    "text": "To Change Buy/Sell Tab Setting, please follow the steps in the screenshot: \n\n1 -) Click on Futures\n\n2 -) Click on the ''...'' Icon on top right corner.\n\n3 -) Click on ''Preferences'' on the pop-up menu.\n\n4 -) Click on ''Buy/Sell Tab Setting\n\n5 -) In this page you can either display or hide the Buy/Sell Tab \n\n - If you Display the Buy/Sell will be visible on top of the trading page. \n\n - If you Hide Buy/Sell will be visible on the bottom of the trading page.",
+    "topic": "Futures Trading"
   }
 ]
