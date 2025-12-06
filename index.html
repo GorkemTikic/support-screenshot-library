@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>FD Screenshot Assistant</title>
-  <!-- Font Awesome for crisp, styleable icons -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -62,6 +61,9 @@
       text-align: center;
       padding: 10px;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .item img {
       width: 100%;
@@ -75,12 +77,33 @@
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 5px;
+      width: 100%;
     }
     .meta {
       font-size: 13px;
       color: #555;
       margin-bottom: 5px;
     }
+    .lang-switch {
+      margin-bottom: 8px;
+      font-size: 13px;
+      background: #f0f0f0;
+      border-radius: 12px;
+      padding: 2px 8px;
+      display: inline-block;
+    }
+    .lang-btn {
+      cursor: pointer;
+      padding: 2px 4px;
+      font-weight: 600;
+      color: #888;
+    }
+    .lang-btn.active {
+      color: #d97706; /* Koyu sarı/turuncu ton */
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    
     .tag {
       font-size: 12px;
       display: inline-block;
@@ -103,6 +126,7 @@
       display: flex;
       justify-content: center;
       gap: 6px;
+      margin-top: auto; /* Butonları en alta it */
     }
     .btn {
       padding: 6px 10px;
@@ -129,6 +153,7 @@
       font-size: 13px;
       white-space: pre-wrap;
       text-align: left;
+      width: 90%;
     }
     #backToTop {
       position: fixed;
@@ -272,13 +297,11 @@
     For any feedback or detected issues, DM the project owner.
   </footer>
 
-  <!-- Lightbox -->
   <div class="lightbox-overlay" id="lightboxOverlay" onclick="hideLightbox(event)">
     <button id="lightboxClose">×</button>
     <img id="lightboxImage" src="" alt="Preview">
   </div>
 
-  <!-- Feedback Modal -->
   <div id="feedbackModal" onclick="closeModalOutside(event)">
     <div class="modal-content">
       <button class="modal-close" onclick="closeFeedbackModal()">×</button>
@@ -294,6 +317,7 @@
   <script>
     const TRACKING_URL = "https://script.google.com/macros/s/AKfycbzGfDRuf-VWrTbZA63yXnTjVx8iH5ObkfRuC_rL4ZCyTOk9utIEe1eI8pVMlBG6wMw/exec";
     let feedbackContext = {};
+    let globalScreenshots = []; // Global variable to access data
 
     function logUsage(eventType, shot) {
       const url = `${TRACKING_URL}?event=${eventType}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic||'')}`;
@@ -386,9 +410,35 @@
       return text.replace(pattern, '<span class="highlight">$1</span>');
     }
 
+    // --- LANGUAGE SWITCH LOGIC ---
+    function switchLang(index, lang) {
+      const shot = globalScreenshots[index];
+      const textArea = document.getElementById(`text${index}`);
+      const previewDiv = document.getElementById(`preview${index}`);
+      const btnEn = document.getElementById(`btnEn${index}`);
+      const btnTr = document.getElementById(`btnTr${index}`);
+      
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+
+      if (lang === 'tr' && shot.text_tr) {
+        textArea.value = shot.text_tr;
+        previewDiv.innerHTML = highlight(shot.text_tr, q);
+        
+        btnTr.classList.add('active');
+        btnEn.classList.remove('active');
+      } else {
+        textArea.value = shot.text;
+        previewDiv.innerHTML = highlight(shot.text, q);
+        
+        btnEn.classList.add('active');
+        btnTr.classList.remove('active');
+      }
+    }
+
     fetch('data.json')
       .then(r => r.json())
       .then(screenshots => {
+        globalScreenshots = screenshots; // Store globally
         const gallery   = document.getElementById('gallery');
         const languages = new Set();
         const topics    = new Set();
@@ -419,20 +469,35 @@
           const topicF  = document.getElementById('topicFilter').value;
           gallery.innerHTML = '';
 
-          screenshots.forEach((shot, i) => {
+          globalScreenshots.forEach((shot, i) => {
+            // Search in Title, English Text AND Turkish Text
+            const matchText = shot.text.toLowerCase().includes(q) || (shot.text_tr && shot.text_tr.toLowerCase().includes(q));
+
             if (
-              shot.title.toLowerCase().includes(q) &&
+              (shot.title.toLowerCase().includes(q) || matchText) &&
               (lang === 'All' || shot.language === lang) &&
               (topicF === 'All' || shot.topic === topicF)
             ) {
               const div = document.createElement('div');
               div.className = 'item';
               const topicClass = sanitizeTopicClass(shot.topic);
+              
+              // Check if TR text exists to show the switch
+              const hasTR = shot.text_tr && shot.text_tr.trim().length > 0;
+              const langSwitchHTML = hasTR 
+                ? `<div class="lang-switch">
+                     <span class="lang-btn active" id="btnEn${i}" onclick="switchLang(${i}, 'en')">EN</span>
+                     <span style="color:#ccc">|</span>
+                     <span class="lang-btn" id="btnTr${i}" onclick="switchLang(${i}, 'tr')">TR</span>
+                   </div>`
+                : '';
 
               div.innerHTML = `
                 <img src="${shot.image}" alt="${shot.title}" onclick="showLightbox('${shot.image}')">
                 <div class="label">${highlight(shot.title, q)}</div>
-                <div class="meta">Language: ${shot.language}</div>
+                
+                ${langSwitchHTML}
+                
                 <div class="tag ${topicClass}">${shot.topic||'Uncategorized'}</div>
                 <div class="btn-group">
                   <button class="btn" title="Copy Macro Text" onclick="copyText('text${i}', this)">
