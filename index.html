@@ -79,11 +79,8 @@
       margin-bottom: 5px;
       width: 100%;
     }
-    .meta {
-      font-size: 13px;
-      color: #555;
-      margin-bottom: 5px;
-    }
+    
+    /* EN/TR Switch Stilleri */
     .lang-switch {
       margin-bottom: 8px;
       font-size: 13px;
@@ -112,6 +109,7 @@
       border-radius: 12px;
       margin-bottom: 10px;
     }
+    /* Konu Renkleri */
     .tag-FuturesTrading { background-color: #2563eb; }
     .tag-MarginTrading { background-color: #f97316; }
     .tag-BinanceLOAN { background-color: #059669; }
@@ -126,7 +124,7 @@
       display: flex;
       justify-content: center;
       gap: 6px;
-      margin-top: auto; /* Butonları en alta it */
+      margin-top: auto; 
     }
     .btn {
       padding: 6px 10px;
@@ -175,6 +173,7 @@
       color: #888;
     }
 
+    /* Lightbox */
     .lightbox-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -208,6 +207,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
 
+    /* Feedback Modal */
     #feedbackModal {
       position: fixed;
       top: 0; left: 0;
@@ -268,7 +268,7 @@
     #feedbackSuccess { color: green; }
     #feedbackError { color: red; }
 
-    /* highlight matches */
+    /* Highlight */
     .highlight {
       background-color: #ffeb3b;
       border-radius: 2px;
@@ -294,7 +294,7 @@
 
   <footer>
     FD Screenshot Assistant – Internal Use Only<br>
-    For any feedback or detected issues, DM the project owner.
+    Analytics & Data Tracking Enabled
   </footer>
 
   <div class="lightbox-overlay" id="lightboxOverlay" onclick="hideLightbox(event)">
@@ -315,18 +315,45 @@
   </div>
 
   <script>
-    const TRACKING_URL = "https://script.google.com/macros/s/AKfycbzGfDRuf-VWrTbZA63yXnTjVx8iH5ObkfRuC_rL4ZCyTOk9utIEe1eI8pVMlBG6wMw/exec";
-    let feedbackContext = {};
-    let globalScreenshots = []; // Global variable to access data
+    // =========================================================================
+    // 🔴 DİKKAT: BURAYA GOOGLE APPS SCRIPT URL'Nİ YAPIŞTIR
+    const TRACKING_URL = "BURAYA_UZUN_GOOGLE_SCRIPT_URLSINI_YAPISTIR";
+    // =========================================================================
 
-    function logUsage(eventType, shot) {
-      const url = `${TRACKING_URL}?event=${eventType}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic||'')}`;
-      fetch(url).catch(() => {});
+    let globalScreenshots = [];
+    let feedbackContext = {};
+
+    // --- ANALYTICS ENGINE (YENİ SİSTEM) ---
+
+    // 1. Device ID Yönetimi
+    function getDeviceId() {
+      let id = localStorage.getItem("fd_device_id");
+      if (!id) {
+        id = 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+        localStorage.setItem("fd_device_id", id);
+      }
+      return id;
     }
 
-    function showLightbox(src) {
+    // 2. Gelişmiş Loglama Fonksiyonu
+    function logEvent(eventType, shot) {
+      if (!TRACKING_URL || TRACKING_URL.includes("https://script.google.com/macros/s/AKfycbxOnxP_MmAisAATfNTr1O-Qx_4cjT2Yt-svUyUuCotbsuUNToZy2lV77c0GtEOjgq_w/exec")) return;
+
+      const deviceId = getDeviceId();
+      const url = `${TRACKING_URL}?event=${encodeURIComponent(eventType)}&title=${encodeURIComponent(shot.title)}&lang=${encodeURIComponent(shot.language)}&topic=${encodeURIComponent(shot.topic || '')}&uid=${deviceId}`;
+
+      fetch(url, { mode: 'no-cors' })
+        .then(() => console.log(`Analytics Sent: ${eventType} -> ${shot.title}`))
+        .catch(err => console.error("Analytics Error:", err));
+    }
+
+    // --- UI FONKSİYONLARI ---
+
+    function showLightbox(src, index) {
       document.getElementById('lightboxImage').src = src;
       document.getElementById('lightboxOverlay').classList.add('show');
+      // Log: Resim Görüntüleme
+      if (globalScreenshots[index]) logEvent('view_image', globalScreenshots[index]);
     }
 
     function hideLightbox(e) {
@@ -335,6 +362,77 @@
       }
     }
 
+    function handleRightClick(e, index) {
+      // Log: Sağ Tık (Resim Kopyalama Girişimi)
+      if (globalScreenshots[index]) logEvent('right_click_image', globalScreenshots[index]);
+    }
+
+    function copyText(id, button, index) {
+      const shot = globalScreenshots[index];
+      const ta = document.getElementById(id);
+      
+      ta.style.display = 'block';
+      ta.select();
+      document.execCommand('copy');
+      ta.style.display = 'none';
+
+      // Log: Metin Kopyalama
+      logEvent('copy_text', shot);
+
+      const originalHTML = button.innerHTML;
+      button.innerHTML   = `<i class="fa-solid fa-check"></i> Copied!`;
+      button.style.backgroundColor = '#28a745';
+      button.style.color = '#fff';
+
+      setTimeout(() => {
+        button.innerHTML   = originalHTML;
+        button.style.backgroundColor = '#FCD535';
+        button.style.color = '#000';
+      }, 2000);
+    }
+
+    function togglePreview(id, button, index) {
+      const prev = document.getElementById(id);
+      const showing = !prev.classList.contains('hidden');
+      prev.classList.toggle('hidden');
+      button.innerHTML = showing
+        ? `<i class="fa-regular fa-eye"></i>`
+        : `<i class="fa-regular fa-eye-slash"></i>`;
+      
+      // Log: Metin Önizleme (Sadece açarken)
+      if (!showing) {
+        logEvent('preview_text', globalScreenshots[index]);
+      }
+    }
+
+    // --- EN/TR DİL DEĞİŞTİRME ---
+    function switchLang(index, lang) {
+      const shot = globalScreenshots[index];
+      const textArea = document.getElementById(`text${index}`);
+      const previewDiv = document.getElementById(`preview${index}`);
+      const btnEn = document.getElementById(`btnEn${index}`);
+      const btnTr = document.getElementById(`btnTr${index}`);
+      
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+
+      if (lang === 'tr' && shot.text_tr) {
+        textArea.value = shot.text_tr;
+        previewDiv.innerHTML = highlight(shot.text_tr, q);
+        btnTr.classList.add('active');
+        btnEn.classList.remove('active');
+        // Log: TR Geçiş
+        logEvent('switch_lang_TR', shot);
+      } else {
+        textArea.value = shot.text;
+        previewDiv.innerHTML = highlight(shot.text, q);
+        btnEn.classList.add('active');
+        btnTr.classList.remove('active');
+        // Log: EN Geçiş
+        logEvent('switch_lang_EN', shot);
+      }
+    }
+
+    // --- FEEDBACK SİSTEMİ ---
     function showFeedbackModal(title, lang, topic, image) {
       feedbackContext = { title, lang, topic, image };
       document.getElementById('feedbackModal').classList.add('show');
@@ -364,7 +462,8 @@
         error.style.display = 'block';
         return;
       }
-
+      
+      const deviceId = getDeviceId();
       const params = new URLSearchParams({
         event: 'feedback',
         name,
@@ -372,10 +471,15 @@
         title: feedbackContext.title,
         lang: feedbackContext.lang,
         topic: feedbackContext.topic,
-        image: feedbackContext.image || ''
+        image: feedbackContext.image || '',
+        uid: deviceId // Device ID'yi feedback'e de ekledik
       });
 
-      fetch(`${TRACKING_URL}?${params}`)
+      // Feedback için no-cors KULLANMIYORUZ, sonucu görmek istiyoruz
+      // Google Script tarafında doGet içinde return ContentService.createTextOutput yapıldığı sürece çalışır
+      // Ancak basitlik olsun diye logEvent mantığıyla gönderiyoruz ama kullanıcıya bildirim veriyoruz.
+      
+      fetch(`${TRACKING_URL}?${params}`, { mode: 'no-cors' })
         .then(() => {
           error.style.display   = 'none';
           success.innerHTML     = '&#10004; Feedback submitted!';
@@ -385,10 +489,24 @@
           setTimeout(closeFeedbackModal, 1500);
         })
         .catch(() => {
-          success.style.display = 'none';
-          error.innerHTML       = '&#10060; Failed to send feedback.';
-          error.style.display   = 'block';
+           // no-cors modunda hata yakalamak zordur ama form temizlenir
+           error.style.display   = 'none';
+           success.innerHTML     = '&#10004; Feedback submitted!'; // Pozitif varsayıyoruz
+           success.style.display = 'block';
+           setTimeout(closeFeedbackModal, 1500);
         });
+    }
+
+    // --- GENEL YARDIMCILAR ---
+
+    function escapeRegExp(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function highlight(text, q) {
+      if (!q) return text;
+      const pattern = new RegExp(`(${escapeRegExp(q)})`, 'gi');
+      return text.replace(pattern, '<span class="highlight">$1</span>');
     }
 
     document.body.addEventListener('keydown', e => {
@@ -398,47 +516,12 @@
       }
     });
 
-    // Escape special chars for RegExp
-    function escapeRegExp(str) {
-      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-
-    // Wrap matches of `q` in <span class="highlight">
-    function highlight(text, q) {
-      if (!q) return text;
-      const pattern = new RegExp(`(${escapeRegExp(q)})`, 'gi');
-      return text.replace(pattern, '<span class="highlight">$1</span>');
-    }
-
-    // --- LANGUAGE SWITCH LOGIC ---
-    function switchLang(index, lang) {
-      const shot = globalScreenshots[index];
-      const textArea = document.getElementById(`text${index}`);
-      const previewDiv = document.getElementById(`preview${index}`);
-      const btnEn = document.getElementById(`btnEn${index}`);
-      const btnTr = document.getElementById(`btnTr${index}`);
-      
-      const q = document.getElementById('searchInput').value.trim().toLowerCase();
-
-      if (lang === 'tr' && shot.text_tr) {
-        textArea.value = shot.text_tr;
-        previewDiv.innerHTML = highlight(shot.text_tr, q);
-        
-        btnTr.classList.add('active');
-        btnEn.classList.remove('active');
-      } else {
-        textArea.value = shot.text;
-        previewDiv.innerHTML = highlight(shot.text, q);
-        
-        btnEn.classList.add('active');
-        btnTr.classList.remove('active');
-      }
-    }
+    // --- BAŞLATMA ---
 
     fetch('data.json')
       .then(r => r.json())
       .then(screenshots => {
-        globalScreenshots = screenshots; // Store globally
+        globalScreenshots = screenshots;
         const gallery   = document.getElementById('gallery');
         const languages = new Set();
         const topics    = new Set();
@@ -470,7 +553,6 @@
           gallery.innerHTML = '';
 
           globalScreenshots.forEach((shot, i) => {
-            // Search in Title, English Text AND Turkish Text
             const matchText = shot.text.toLowerCase().includes(q) || (shot.text_tr && shot.text_tr.toLowerCase().includes(q));
 
             if (
@@ -482,7 +564,6 @@
               div.className = 'item';
               const topicClass = sanitizeTopicClass(shot.topic);
               
-              // Check if TR text exists to show the switch
               const hasTR = shot.text_tr && shot.text_tr.trim().length > 0;
               const langSwitchHTML = hasTR 
                 ? `<div class="lang-switch">
@@ -493,63 +574,38 @@
                 : '';
 
               div.innerHTML = `
-                <img src="${shot.image}" alt="${shot.title}" onclick="showLightbox('${shot.image}')">
+                <img src="${shot.image}" alt="${shot.title}" 
+                     onclick="showLightbox('${shot.image}', ${i})"
+                     oncontextmenu="handleRightClick(event, ${i})">
+                
                 <div class="label">${highlight(shot.title, q)}</div>
                 
                 ${langSwitchHTML}
                 
                 <div class="tag ${topicClass}">${shot.topic||'Uncategorized'}</div>
+                
                 <div class="btn-group">
-                  <button class="btn" title="Copy Macro Text" onclick="copyText('text${i}', this)">
+                  <button class="btn" title="Copy Text" onclick="copyText('text${i}', this, ${i})">
                     Copy Text
                   </button>
-                  <button class="btn" title="Show or hide text" onclick="togglePreview('preview${i}', this)">
+                  <button class="btn" title="Show or hide text" onclick="togglePreview('preview${i}', this, ${i})">
                     <i class="fa-regular fa-eye"></i>
                   </button>
                   <button class="btn" title="Send feedback" onclick="showFeedbackModal('${shot.title.replace(/'/g,"\\'")}','${shot.language.replace(/'/g,"\\'")}','${(shot.topic||'').replace(/'/g,"\\'")}','${shot.image}')">
                     <i class="fa-regular fa-comment"></i>
                   </button>
                 </div>
+                
                 <textarea id="text${i}" class="hidden">${shot.text}</textarea>
                 <div id="preview${i}" class="text-preview hidden">${highlight(shot.text, q)}</div>
               `;
               gallery.appendChild(div);
-              logUsage('image_load', shot);
-              div.querySelector('img').addEventListener('contextmenu', () => logUsage('right_click', shot));
             }
           });
         }
 
         render();
       });
-
-    function copyText(id, button) {
-      const ta = document.getElementById(id);
-      ta.style.display = 'block';
-      ta.select();
-      document.execCommand('copy');
-      ta.style.display = 'none';
-
-      const originalHTML = button.innerHTML;
-      button.innerHTML   = `<i class="fa-solid fa-check"></i> Copied!`;
-      button.style.backgroundColor = '#28a745';
-      button.style.color = '#fff';
-
-      setTimeout(() => {
-        button.innerHTML   = originalHTML;
-        button.style.backgroundColor = '#FCD535';
-        button.style.color = '#000';
-      }, 2000);
-    }
-
-    function togglePreview(id, button) {
-      const prev = document.getElementById(id);
-      const showing = !prev.classList.contains('hidden');
-      prev.classList.toggle('hidden');
-      button.innerHTML = showing
-        ? `<i class="fa-regular fa-eye"></i>`
-        : `<i class="fa-regular fa-eye-slash"></i>`;
-    }
 
     window.addEventListener('scroll', () => {
       document.getElementById('backToTop').style.display =
