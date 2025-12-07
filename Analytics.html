@@ -6,109 +6,189 @@
     <title>FD Analytics Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #FCD535;
+            --dark: #1e2329;
+            --light: #f7f8fa;
+            --sidebar-width: 250px;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             margin: 0;
-            padding: 20px;
+            background-color: #f0f2f5;
+            display: flex;
             height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--dark);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .sidebar h2 { margin-top: 0; font-size: 20px; color: var(--primary); margin-bottom: 40px;}
+        .sidebar a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--primary);
+        }
+        .sidebar .footer-note {
+            margin-top: auto;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .card-info h3 { margin: 0; font-size: 32px; color: var(--dark); }
+        .card-info p { margin: 5px 0 0; color: #888; font-size: 14px; }
+        .card-icon {
+            font-size: 30px;
+            color: var(--primary);
+            background: rgba(252, 213, 53, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-sizing: border-box;
         }
-        .dashboard-card {
-            background: white;
-            width: 100%;
-            max-width: 550px;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        h1 { color: #2d3748; margin-bottom: 10px; font-size: 28px; }
-        p { color: #718096; margin-bottom: 35px; line-height: 1.6; font-size: 16px; }
-        
-        /* Main Button Style */
-        .btn-sheet {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #0f9d58; /* Google Sheets Green */
-            color: white;
-            text-decoration: none;
-            padding: 18px 35px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(15, 157, 88, 0.2);
-            width: 80%;
-        }
-        .btn-sheet:hover {
-            background-color: #0b8043;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(15, 157, 88, 0.3);
-        }
-        .btn-sheet i { margin-right: 12px; font-size: 22px; }
 
-        /* Tips Section Style */
-        .tips-box {
-            margin-top: 50px;
-            background: #f0fff4;
-            border: 1px solid #c6f6d5;
-            border-radius: 10px;
-            padding: 25px;
-            text-align: left;
+        /* Iframe Container */
+        .report-container {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            min-height: 500px;
         }
-        .tips-box h3 { 
-            margin-top: 0; 
-            color: #276749; 
-            font-size: 16px; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid #9ae6b4;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+        .report-header {
+            padding: 10px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .tips-box ul { padding-left: 20px; margin-bottom: 0; }
-        .tips-box li { margin-bottom: 10px; color: #4a5568; font-size: 14px; line-height: 1.5; }
-        .highlight { color: #2f855a; font-weight: 700; }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="dashboard-card">
-        <div style="font-size: 60px; color: #0f9d58; margin-bottom: 20px;">
-            <i class="fa-solid fa-chart-line"></i>
-        </div>
-        <h1>FD Analytics Dashboard</h1>
-        <p>
-            All user interactions, image views, and copy events are securely tracked and stored in the database. Access the full dataset below to generate reports.
-        </p>
-
-        <a href="https://docs.google.com/spreadsheets/d/1YmwQeGtO2-y6FVbyYFM8Moq0xuvVlZ4_IQPZb-CG6HQ/edit?gid=0#gid=0" target="_blank" class="btn-sheet">
-            <i class="fa-solid fa-table"></i> Open Database
+    <div class="sidebar">
+        <h2><i class="fa-solid fa-chart-pie"></i> FD Analytics</h2>
+        <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to App</a>
+        <a href="#" class="active"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+        <a href="https://docs.google.com/spreadsheets/d/1YmwQeGtO2-y6FVbyYFM8Moq0xuvVlZ4_IQPZb-CG6HQ/edit?gid=0#gid=0" target="_blank">
+            <i class="fa-solid fa-external-link-alt"></i> Open in Sheets
         </a>
-
-        <div class="tips-box">
-            <h3><i class="fa-solid fa-lightbulb"></i> &nbsp;Analyst Pro Tips</h3>
-            <ul>
-                <li>
-                    <span class="highlight">Top Content:</span> 
-                    In Sheets, go to <em>Insert > Pivot Table</em>. Set 'Title' as Rows and 'COUNTA of Title' as Values to see the most used screenshots.
-                </li>
-                <li>
-                    <span class="highlight">User Count:</span> 
-                    Select the 'User Device ID' column and use the "Count Unique" function to see the actual number of agents.
-                </li>
-                <li>
-                    <span class="highlight">Export Report:</span> 
-                    Go to <em>File > Download > PDF</em> to generate a clean report for weekly presentations.
-                </li>
-            </ul>
+        
+        <div class="footer-note">
+            FD Screenshot Assistant v2.0<br>
+            Internal Use Only
         </div>
     </div>
 
+    <div class="main-content">
+        
+        <div class="stats-grid">
+            <div class="card">
+                <div class="card-info">
+                    <h3 id="totalItems">-</h3>
+                    <p>Total Screenshots</p>
+                </div>
+                <div class="card-icon"><i class="fa-regular fa-image"></i></div>
+            </div>
+            <div class="card">
+                <div class="card-info">
+                    <h3 id="totalTopics">-</h3>
+                    <p>Active Topics</p>
+                </div>
+                <div class="card-icon"><i class="fa-solid fa-tags"></i></div>
+            </div>
+            <div class="card">
+                <div class="card-info">
+                    <h3 id="totalLangs">-</h3>
+                    <p>Languages</p>
+                </div>
+                <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+            </div>
+        </div>
+
+        <div class="report-container">
+            <div class="report-header">
+                <strong><i class="fa-brands fa-google-drive"></i> Live Activity Feed</strong>
+                <span style="font-size: 12px; color: #888;">Data synced via Google Apps Script</span>
+            </div>
+            <iframe src="https://docs.google.com/spreadsheets/d/1YmwQeGtO2-y6FVbyYFM8Moq0xuvVlZ4_IQPZb-CG6HQ/htmlembed?gid=0&widget=true&chrome=false"></iframe>
+        </div>
+
+    </div>
+
+    <script>
+        // data.json dosyasından istatistikleri çek
+        fetch('data.json')
+            .then(res => res.json())
+            .then(data => {
+                // Toplam Resim Sayısı
+                document.getElementById('totalItems').innerText = data.length;
+
+                // Benzersiz Konu Sayısı
+                const topics = new Set(data.map(item => item.topic).filter(t => t));
+                document.getElementById('totalTopics').innerText = topics.size;
+
+                // Benzersiz Dil Sayısı
+                const langs = new Set(data.map(item => item.language));
+                document.getElementById('totalLangs').innerText = langs.size;
+            })
+            .catch(err => console.error("Veri okunamadı:", err));
+    </script>
 </body>
 </html>
